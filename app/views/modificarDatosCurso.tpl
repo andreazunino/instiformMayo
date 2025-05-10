@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    {include file='templates/head.tpl'}
+</head>
+<body>
+
+<!-- Botón cerrar sesión -->
+<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
+
+<!-- Encabezado -->
+<div class="container-fluid text-center welcome-section">
+    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <h1 class="welcome-heading">Modificar Datos del Curso</h1>
+</div>
+
+<!-- Menú navegación -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto d-flex">
+            <li class="nav-item">
+                <a class="nav-link" href="menuAdministrador.php">Volver al Menú Administrador</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Contenido principal -->
+<div class="container text-center">
+    <h2 class="mt-3">Formulario para Modificar Datos del Curso</h2>
+
+    <!-- Mensaje -->
+    {if isset($mensaje)}
+        <div class="alert alert-{$mensaje_tipo} mt-3" role="alert">
+            {$mensaje}
+        </div>
+    {/if}
+
+    <!-- Formulario -->
+    <form action="modificarDatosCurso.php" method="POST">
+        <input type="hidden" name="accion" value="modificar">
+
+        <div class="form-group">
+            <label for="curso">Seleccionar Curso:</label>
+            <select class="form-control" id="curso" name="curso" required>
+                <option value="">-- Selecciona un curso --</option>
+                {foreach from=$cursos item=curso}
+                    <option value="{$curso.id}" {if $cursoSeleccionado == $curso.id}selected{/if}>
+                        {$curso.nombre}
+                    </option>
+                {/foreach}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="nombreCurso">Nuevo Nombre del Curso:</label>
+            <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" required maxlength="100" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+            <label for="cupo">Nuevo Cupo:</label>
+            <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Modificar Curso</button>
+    </form>
+</div>
+
+<!-- Footer -->
+{include file='templates/footer.tpl'}
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
