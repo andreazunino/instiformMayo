@@ -1,4 +1,28 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-05-13 20:50:56
+  from 'file:index.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_682394909b5454_17878750',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '2a1736d6204912ee81c4ec9d3b9f31d5f683d272' => 
+    array (
+      0 => 'index.tpl',
+      1 => 1747162252,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+))) {
+function content_682394909b5454_17878750 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -81,8 +105,11 @@
 </div>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
     function toggleAdminForm() {
         const form = document.getElementById('admin-login-form');
         form.style.display = form.style.display === 'none' ? 'block' : 'none';
@@ -99,7 +126,10 @@
             document.getElementById('login-error').innerText = 'Contraseña incorrecta. Intentá nuevamente.';
         }
     });
-</script>
+<?php echo '</script'; ?>
+>
 
 </body>
 </html>
+<?php }
+}
