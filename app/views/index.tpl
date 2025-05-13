@@ -61,11 +61,11 @@
 <body>
 
 <div class="container-fluid text-center container-welcome">
-    <img src="public\img\Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-large">
+    <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-large">
     <h1 class="welcome-heading">Bienvenido a Instiform</h1>
 
     <!-- Botones -->
-    <button onclick="window.location.href='menuEstudiante.php'" class="btn btn-custom">Soy Estudiante</button>
+    <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn btn-custom">Soy Estudiante</button>
     <button onclick="toggleAdminForm()" class="btn btn-custom">Soy Administrador</button>
 
     <!-- Formulario de login admin -->
@@ -94,7 +94,7 @@
 
         // Validación simple
         if (password === 'admin123') {
-            window.location.href = 'menuAdministrador.php';
+            window.location.href = 'app/controllers/menuAdministrador.php';
         } else {
             document.getElementById('login-error').innerText = 'Contraseña incorrecta. Intentá nuevamente.';
         }
