@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-25 15:14:15
-  from 'file:menuEstudiante.tpl' */
+/* Smarty version 5.4.0, created on 2025-05-25 15:17:11
+  from 'file:C:\xampp\htdocs\InstiformMayo\app\views\menuEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_683317a728b6c8_87008287',
+  'unifunc' => 'content_683318572d50b3_56329714',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    '899b5689ca086acaa6beb1785234f53c529c6eb4' => 
+    '705b3d7bab7aa0fa2102a8851abf1b205e91c3bf' => 
     array (
-      0 => 'menuEstudiante.tpl',
+      0 => 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views\\menuEstudiante.tpl',
       1 => 1748178847,
       2 => 'file',
     ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_683317a728b6c8_87008287 (\Smarty\Template $_smarty_tpl) {
+function content_683318572d50b3_56329714 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <!DOCTYPE html>

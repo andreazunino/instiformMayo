@@ -1,4 +1,28 @@
-<head>
+<?php
+/* Smarty version 5.4.0, created on 2025-05-25 15:14:15
+  from 'file:head.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_683317a743d752_92752671',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '993d7954a893681d6c2a0222a01d0182623b90d3' => 
+    array (
+      0 => 'head.tpl',
+      1 => 1748178799,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+))) {
+function content_683317a743d752_92752671 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><head>
     <meta charset="UTF-8">
     <title>Instiform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,3 +82,5 @@
         }
     </style>
 </head>
+<?php }
+}

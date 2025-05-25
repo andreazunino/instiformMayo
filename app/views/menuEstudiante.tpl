@@ -1,17 +1,32 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='templates/head.tpl'}
+    {include file='head.tpl'}
+    <style>
+        .main-content {
+            min-height: calc(100vh - 160px); /* Altura restante sin navbar y footer */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="../../public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 
@@ -38,14 +53,14 @@
     </div>
 </nav>
 
-<!-- Bienvenida -->
-<div class="container text-center mt-4">
+<!-- Contenido centrado -->
+<div class="container text-center main-content">
     <h2 class="text-dark">Bienvenido/a Estudiante</h2>
     <p class="text-muted">Seleccioná una opción del menú para comenzar.</p>
 </div>
 
 <!-- Footer -->
-{include file='templates/footer.tpl'}
+{include file='footer.tpl'}
 
 <!-- Scripts necesarios para Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
