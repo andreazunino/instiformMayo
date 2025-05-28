@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-05-28 22:21:41
+  from 'file:altaEstudiante.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_68377055ea87a4_03380242',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '602cb0974b041b8e586986d9840f1c52299a8a93' => 
+    array (
+      0 => 'altaEstudiante.tpl',
+      1 => 1748463697,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_68377055ea87a4_03380242 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-       {include file='head.tpl'}
+       <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
    
     <style>
         .logo-small {
@@ -43,14 +70,16 @@
 
 <div class="container text-center">
 
-    {if $mensaje}
-        <div class="alert alert-{$mensaje_tipo} alert-dismissible fade show" role="alert">
-            {$mensaje}
+    <?php if ($_smarty_tpl->getValue('mensaje')) {?>
+        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+ alert-dismissible fade show" role="alert">
+            <?php echo $_smarty_tpl->getValue('mensaje');?>
+
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
-    {/if}
+    <?php }?>
 
     <form action="../controllers/altaEstudiante.php" method="POST">
         <div class="form-group">
@@ -74,11 +103,20 @@
 
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
 
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 </body>
 </html>
+<?php }
+}

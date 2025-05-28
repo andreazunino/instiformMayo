@@ -9,10 +9,6 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-.logo-small {
-    max-width: 50px;
-    margin-top: 10px;
-}
 
 .navbar {
     margin-bottom: 20px;
@@ -81,20 +77,6 @@ footer {
     border-radius: 15px;
 }
 
-body {
-    background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-    min-height: 100vh;
-    margin: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-.logo-small {
-    max-width: 50px;
-    margin-top: 10px;
-}
 
 .navbar {
     margin-bottom: 20px;

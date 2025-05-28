@@ -1,10 +1,13 @@
 <?php
-require_once '../../sql/db.php';
-require_once '../../models/Estudiante.php';
-require_once '../../lib/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../../sql/db.php';
+require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../models/Inscripcion.php';
+require_once __DIR__ . '/../models/Estudiante.php'; // ✅ Agregado
 
 $smarty = new Smarty\Smarty;
 $estudianteModel = new Estudiante($pdo);
+$smarty->setTemplateDir(__DIR__ . '/../views/');
+$smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dni = $_POST['dni'];
@@ -27,4 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$smarty->display('../../templates/altaEstudiante.tpl');
+$smarty->display('altaEstudiante.tpl');
