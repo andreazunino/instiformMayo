@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-25 15:14:15
+/* Smarty version 5.4.0, created on 2025-05-28 13:35:16
   from 'file:menuEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_683317a728b6c8_87008287',
+  'unifunc' => 'content_6836f4f4437e12_27170750',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '899b5689ca086acaa6beb1785234f53c529c6eb4' => 
     array (
       0 => 'menuEstudiante.tpl',
-      1 => 1748178847,
+      1 => 1748432107,
       2 => 'file',
     ),
   ),
@@ -22,10 +22,9 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_683317a728b6c8_87008287 (\Smarty\Template $_smarty_tpl) {
+function content_6836f4f4437e12_27170750 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +32,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?>
     <style>
         .main-content {
-            min-height: calc(100vh - 160px); /* Altura restante sin navbar y footer */
+            min-height: calc(80vh - 160px);  /*Altura restante sin navbar y footer */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -44,6 +43,12 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             bottom: 0;
             width: 100%;
         }
+
+        .logo-small {
+             max-width: 80px;
+            margin-top: 10px;
+}
+
     </style>
 </head>
 <body>
@@ -53,7 +58,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="../../public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 

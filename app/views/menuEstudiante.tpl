@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     {include file='head.tpl'}
     <style>
         .main-content {
-            min-height: calc(100vh - 160px); /* Altura restante sin navbar y footer */
+            min-height: calc(80vh - 160px);  /*Altura restante sin navbar y footer */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -17,6 +16,12 @@
             bottom: 0;
             width: 100%;
         }
+
+        .logo-small {
+             max-width: 80px;
+            margin-top: 10px;
+}
+
     </style>
 </head>
 <body>
@@ -26,7 +31,7 @@
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="../../public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 
