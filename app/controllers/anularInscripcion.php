@@ -5,7 +5,8 @@ require_once __DIR__ . '/../models/Inscripcion.php';
 
 $smarty = new Smarty\Smarty;
 $inscripcionModel = new Inscripcion($pdo);
-
+$smarty->setTemplateDir(__DIR__ . '/../views/');
+$smarty->setCompileDir(__DIR__ . '/../templates_c/');
 $dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? null;
 
 // Si se quiere anular una inscripción
@@ -41,4 +42,4 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dni'])) {
     $smarty->assign('dniEstudiante', $dniEstudiante);
 }
 
-$smarty->display('../../templates/anularInscripcion.tpl');
+$smarty->display('anularInscripcion.tpl');
