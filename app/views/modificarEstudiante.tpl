@@ -2,17 +2,25 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='templates/head.tpl'}
+    {include 'head.tpl'}
+<style>
+    .logo-small {
+             max-width: 80px;
+            margin-top: 10px;
+ }
+</style>        
+
 </head>
 <body>
 
-<!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
 
-<!-- Encabezado -->
+<!-- Botón de cerrar sesión -->
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
+
+<!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
-    <h1 class="welcome-heading">Modificar Estudiante</h1>
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
+    <h1 class="welcome-heading">Instiform</h1>
 </div>
 
 <!-- Navegación -->
@@ -76,7 +84,7 @@
 </div>
 
 <!-- Footer -->
-{include file='templates/footer.tpl'}
+{include file='footer.tpl'}
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

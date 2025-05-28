@@ -1,10 +1,12 @@
 <?php
-require_once '../../sql/db.php';
-require_once '../../models/Estudiante.php';
-require_once '../../lib/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../../sql/db.php';
+require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../models/Estudiante.php';
 
 $smarty = new Smarty\Smarty;
 $estudianteModel = new Estudiante($pdo);
+$smarty->setTemplateDir(__DIR__ . '/../views/');
+$smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 // Si se está modificando
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['apellido'], $_POST['email'], $_POST['dni'])) {
@@ -36,4 +38,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['ape
     }
 }
 
-$smarty->display('../../templates/modificarEstudiante.tpl');
+$smarty->display('modificarEstudiante.tpl');
