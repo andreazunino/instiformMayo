@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-28 20:48:39
+/* Smarty version 5.4.0, created on 2025-05-28 21:10:34
   from 'file:anularInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68375a873160a6_79355341',
+  'unifunc' => 'content_68375faa290b87_83918128',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cd2d5f2e0f252f15e00d15880b36d787e703d107' => 
     array (
       0 => 'anularInscripcion.tpl',
-      1 => 1748457933,
+      1 => 1748459427,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68375a873160a6_79355341 (\Smarty\Template $_smarty_tpl) {
+function content_68375faa290b87_83918128 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -69,6 +69,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 
 <!-- Contenido principal -->
 <div class="container text-center">
+<h3>Anular Inscripción</h3>
     <!-- Mensaje de éxito o error -->
     <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
         <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>

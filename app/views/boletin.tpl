@@ -2,17 +2,24 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include 'templates/head.tpl'}
+    <title>Boletín - Instiform</title>
+    {include file='head.tpl'}
+    <style>
+        .logo-small {
+            max-width: 80px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
-<!-- Botón de cierre de sesión -->
-<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
+<!-- Botón de cerrar sesión -->
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
 
-<!-- Encabezado -->
+<!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
-    <h1 class="welcome-heading">Consultar Boletín de Calificaciones</h1>
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
+    <h1 class="welcome-heading">Instiform</h1>
 </div>
 
 <!-- Menú de navegación -->
@@ -33,20 +40,26 @@
 <!-- Contenido principal -->
 <div class="container text-center">
     <!-- Formulario para buscar boletín -->
+    <h3>Consultar Boletín</h3>
     <form method="POST" action="">
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group">
-            <label for="dni">Ingrese el DNI del estudiante:</label>
-            <input type="text" class="form-control" id="dni" name="dni" required pattern="\d+" title="Solo se permiten números" autocomplete="off">
+            <label for="dni">DNI del Estudiante:</label>
+            <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-custom">Buscar</button>
+        <button type="submit" class="btn btn-custom mt-3">Buscar</button>
     </form>
 
-    <!-- Mostrar tabla o mensaje según los resultados -->
+    <!-- Mostrar mensaje -->
+    {if $mensaje}
+        <div class="alert alert-{$mensaje_tipo} mt-3">{$mensaje}</div>
+    {/if}
+
+    <!-- Mostrar tabla de notas -->
     {if isset($notas)}
         {if $notas|@count > 0}
-            <h2>Calificaciones</h2>
-            <table class="table table-striped">
+            <h3 class="mt-4">Calificaciones</h3>
+            <table class="table table-striped mt-3">
                 <thead>
                     <tr>
                         <th>Materia</th>
@@ -57,27 +70,23 @@
                     {foreach from=$notas item=nota}
                         <tr>
                             <td>{$nota.materia}</td>
-                            <td>
-                                {foreach from=$nota.calificacion item=cal}
-                                    {$cal}<br>
-                                {/foreach}
-                            </td>
+                            <td>{$nota.calificacion}</td>
                         </tr>
                     {/foreach}
                 </tbody>
             </table>
         {else}
-            <p>No se encontraron calificaciones para el DNI ingresado.</p>
+            <p class="mt-3">No se encontraron calificaciones para el DNI ingresado.</p>
         {/if}
     {/if}
 </div>
 
-<!-- Scripts -->
+<!-- Footer -->
+{include file='footer.tpl'}
+
+<!-- Scripts necesarios -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-{include file='templates/footer.tpl'}
 </body>
 </html>
-

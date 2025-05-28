@@ -42,6 +42,7 @@
 
 <!-- Contenido principal -->
 <div class="container text-center">
+<h3>Anular Inscripción</h3>
     <!-- Mensaje de éxito o error -->
     {if isset($mensaje)}
         <div class="alert alert-{$mensaje_tipo}" role="alert">
