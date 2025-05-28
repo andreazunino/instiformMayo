@@ -39,49 +39,62 @@
             transition: background-color 0.3s ease;
             margin: 10px;
         }
-        .btn-custom:hover { background-color: #357abd; }
-        #admin-login-form { display: none; margin-top: 20px; }
-        .logo-large { max-width: 400px; margin: 20px; }
+        .btn-custom:hover {
+            background-color: #357abd;
+        }
+        .logo-large {
+            max-width: 400px;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
 
 <div class="container-fluid text-center container-welcome">
-    <!-- Ruta con slashes -->
     <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-large">
     <h1 class="welcome-heading">Bienvenido a Instiform</h1>
 
-    <!-- Apuntan a los PHP que están en app/controllers/ -->
     <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn btn-custom">
         Soy Estudiante
     </button>
-    <button onclick="toggleAdminForm()" class="btn btn-custom">
+
+    <button class="btn btn-custom" data-toggle="modal" data-target="#adminModal">
         Soy Administrador
     </button>
-
-    <div id="admin-login-form" class="col-md-4 offset-md-4">
-        <form id="admin-form">
-            <div class="form-group">
-                <input type="password" id="admin-password" class="form-control"
-                       placeholder="Contraseña del administrador" required>
-            </div>
-            <button type="submit" class="btn btn-custom btn-block">Ingresar</button>
-        </form>
-        <div id="login-error" style="color: red; margin-top: 10px;"></div>
-    </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-function toggleAdminForm() {
-    const f = document.getElementById('admin-login-form');
-    f.style.display = (f.style.display === 'none' ? 'block' : 'none');
-}
+<!-- Modal para administrador -->
+<div class="modal fade" id="adminModal" tabindex="-1" role="dialog" aria-labelledby="adminModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <form id="admin-form">
+        <div class="modal-header">
+          <h5 class="modal-title" id="adminModalLabel">Contraseña del administrador</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input type="password" class="form-control" id="admin-password" placeholder="Ingrese contraseña" required>
+          <div id="login-error" class="text-danger mt-2"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-custom">Ingresar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
-document.getElementById('admin-form').addEventListener('submit', e => {
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById('admin-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    if (document.getElementById('admin-password').value === 'admin123') {
-        location.href = 'app/controllers/menuAdministrador.php';
+    const password = document.getElementById('admin-password').value;
+    if (password === 'admin123') {
+        window.location.href = 'app/controllers/menuAdministrador.php';
     } else {
         document.getElementById('login-error').innerText = 'Contraseña incorrecta.';
     }

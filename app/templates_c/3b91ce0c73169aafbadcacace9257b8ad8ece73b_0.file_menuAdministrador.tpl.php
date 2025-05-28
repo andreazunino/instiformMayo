@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-28 21:31:19
+/* Smarty version 5.4.0, created on 2025-05-28 21:52:22
   from 'file:menuAdministrador.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_683764874b7036_57831708',
+  'unifunc' => 'content_68376976a17599_76089888',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '3b91ce0c73169aafbadcacace9257b8ad8ece73b' => 
     array (
       0 => 'menuAdministrador.tpl',
-      1 => 1748460674,
+      1 => 1748460855,
       2 => 'file',
     ),
   ),
@@ -21,7 +21,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:head.tpl' => 1,
   ),
 ))) {
-function content_683764874b7036_57831708 (\Smarty\Template $_smarty_tpl) {
+function content_68376976a17599_76089888 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <head>
@@ -30,20 +30,14 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?>
 
 <style>
-   
-
     .logo-small {
         max-width: 80px;
         margin-top: 10px;
     }
-
 </style>
-
-       
-
 </head>
-<body>
 
+<body>
 
 <!-- Botón de cerrar sesión -->
 <button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
