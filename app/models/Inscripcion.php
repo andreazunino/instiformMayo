@@ -1,7 +1,5 @@
 <?php
 
-<?php
-
 class Inscripcion
 {
     private $pdo;

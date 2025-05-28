@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-25 15:07:20
+/* Smarty version 5.4.0, created on 2025-05-28 14:19:12
   from 'file:footer.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68331608260275_69189252',
+  'unifunc' => 'content_6836ff40bdcf89_55463743',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_68331608260275_69189252 (\Smarty\Template $_smarty_tpl) {
+function content_6836ff40bdcf89_55463743 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><footer class="bg-light text-center text-lg-start mt-5 py-3 border-top">
     <div class="container text-center">

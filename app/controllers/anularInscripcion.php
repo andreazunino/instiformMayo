@@ -1,7 +1,7 @@
 <?php
-require_once '../../sql/db.php';
-require_once '../../models/Inscripcion.php';
-require_once '../../lib/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../../sql/db.php';
+require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../models/Inscripcion.php';
 
 $smarty = new Smarty\Smarty;
 $inscripcionModel = new Inscripcion($pdo);
