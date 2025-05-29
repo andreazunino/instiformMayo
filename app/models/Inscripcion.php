@@ -87,4 +87,19 @@ class Inscripcion
         ");
         return $stmt->execute([$nota, $dniEstudiante, $idCurso]);
     }
+    
+    public function obtenerBoletinCompleto($dniEstudiante)
+    {
+    $stmt = $this->pdo->prepare("
+        SELECT e.nombre, e.apellido, c.nombre AS materia, i.calificacion
+        FROM inscripcion i
+        INNER JOIN estudiante e ON e.dni = i.dni_estudiante
+        INNER JOIN curso c ON c.id = i.id_curso
+        WHERE i.dni_estudiante = ? AND i.calificacion IS NOT NULL
+        ORDER BY c.nombre
+    ");
+    $stmt->execute([$dniEstudiante]);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 }

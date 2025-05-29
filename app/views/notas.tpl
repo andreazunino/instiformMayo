@@ -2,7 +2,13 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='templates/head.tpl'}
+    {include file='head.tpl'}
+    <style>
+        .logo-small {
+            max-width: 80px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -11,7 +17,7 @@
 
 <!-- Encabezado -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
     <h1 class="welcome-heading">Notas de Estudiantes</h1>
 </div>
 
@@ -75,7 +81,7 @@
 </div>
 
 <!-- Footer -->
-{include file='templates/footer.tpl'}
+{include file='footer.tpl'}
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
