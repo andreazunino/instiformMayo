@@ -1,9 +1,12 @@
 <?php
-require_once '../../sql/db.php';
-require_once '../../models/Curso.php';
-require_once '../../lib/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../../sql/db.php';
+require_once __DIR__ . '/../models/Curso.php';
+require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
+
 
 $smarty = new Smarty\Smarty;
+$smarty->setTemplateDir(__DIR__ . '/../views/');
+$smarty->setCompileDir(__DIR__ . '/../templates_c/');
 $cursoModel = new Curso($pdo);
 
 // Obtener lista de cursos para el select
@@ -34,4 +37,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['curso'], $_POST['nomb
     $smarty->assign('cursoSeleccionado', $idCurso);
 }
 
-$smarty->display('../../templates/modificarDatosCurso.tpl');
+$smarty->display('modificarDatosCurso.tpl');

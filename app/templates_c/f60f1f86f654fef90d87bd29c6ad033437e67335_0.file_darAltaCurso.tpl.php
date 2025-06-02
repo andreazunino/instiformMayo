@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-06-02 22:28:57
+  from 'file:darAltaCurso.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_683e0989ddb272_99128091',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'f60f1f86f654fef90d87bd29c6ad033437e67335' => 
+    array (
+      0 => 'darAltaCurso.tpl',
+      1 => 1748896129,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_683e0989ddb272_99128091 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-{include file='head.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
     <style>
         .logo-small {
             max-width: 80px;
@@ -39,12 +66,14 @@
 <!-- Contenedor principal -->
 <div class="container text-center">
     <!-- Mostrar mensajes de éxito o error -->
-    {if isset($error)}
-        <div class="alert alert-danger mt-3">{$error}</div>
-    {/if}
-    {if isset($mensaje)}
-        <div class="alert alert-success mt-3">{$mensaje}</div>
-    {/if}
+    <?php if ((null !== ($_smarty_tpl->getValue('error') ?? null))) {?>
+        <div class="alert alert-danger mt-3"><?php echo $_smarty_tpl->getValue('error');?>
+</div>
+    <?php }?>
+    <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
+        <div class="alert alert-success mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+</div>
+    <?php }?>
 
     <!-- Formulario para dar de alta un curso -->
     <form action="darAltaCurso.php" method="POST">
@@ -63,11 +92,20 @@
 </div>
 
 <!-- Footer -->
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 </body>
 </html>
+<?php }
+}

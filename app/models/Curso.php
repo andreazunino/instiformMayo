@@ -9,11 +9,13 @@ class Curso
         $this->pdo = $conexion;
     }
 
-    public function crear($id, $nombre, $cupo)
-    {
-        $stmt = $this->pdo->prepare("INSERT INTO curso (id, nombre, cupo) VALUES (?, ?, ?)");
-        return $stmt->execute([$id, $nombre, $cupo]);
-    }
+ public function crear($nombre, $cupo)
+{
+    $stmt = $this->pdo->prepare("INSERT INTO curso (nombre, cupo) VALUES (?, ?)");
+    return $stmt->execute([$nombre, $cupo]);
+}
+
+
 
     public function listarTodos()
     {
@@ -39,4 +41,14 @@ class Curso
         $stmt = $this->pdo->prepare("UPDATE curso SET nombre = ?, cupo = ? WHERE id = ?");
         return $stmt->execute([$nombre, $cupo, $id]);
     }
+
+    // Buscar cursos por nombre
+    public function buscarPorNombre($nombre)
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM curso WHERE LOWER(nombre) LIKE LOWER(?)");
+        $stmt->execute(["%$nombre%"]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
+
+

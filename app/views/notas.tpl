@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='head.tpl'}
+   {include file='head.tpl'}
     <style>
         .logo-small {
             max-width: 80px;
@@ -13,12 +13,12 @@
 <body>
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
 
-<!-- Encabezado -->
+<!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
-    <h1 class="welcome-heading">Notas de Estudiantes</h1>
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
+    <h1 class="welcome-heading">Instiform</h1>
 </div>
 
 <!-- Menú de navegación -->

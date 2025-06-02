@@ -2,17 +2,23 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include 'templates/head.tpl'}
+ {include file='head.tpl'}
+    <style>
+        .logo-small {
+            max-width: 80px;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
 
-<!-- Encabezado con logo y título -->
+<!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
-    <img src="public/img/logo-instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
-    <h1 class="welcome-heading">Dar de Baja Curso</h1>
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
+    <h1 class="welcome-heading">Instiform</h1>
 </div>
 
 <!-- Menú de navegación -->
@@ -58,7 +64,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-{include file='templates/footer.tpl'}
+{include file='footer.tpl'}
 </body>
 </html>
 

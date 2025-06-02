@@ -81,6 +81,8 @@
     <h2>Bienvenido Administrador</h2>
 </div>
 
+<!-- Footer -->
+{include file='footer.tpl'}
 <!-- Scripts Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

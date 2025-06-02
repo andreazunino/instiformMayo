@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-06-02 22:57:54
+  from 'file:inscribirEstudiante.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_683e1052a17530_34566918',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'd19101d5f9ec30e77a469d789f21be8859c6af37' => 
+    array (
+      0 => 'inscribirEstudiante.tpl',
+      1 => 1748897793,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_683e1052a17530_34566918 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='head.tpl'}
+    <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
     <style>
         .logo-small {
             max-width: 80px;
@@ -48,12 +75,14 @@
     </form>
 
     <!-- Mostrar mensaje -->
-    {if $mensaje}
-        <div class="alert alert-{$mensaje_tipo} mt-3">{$mensaje}</div>
-    {/if}
+    <?php if ($_smarty_tpl->getValue('mensaje')) {?>
+        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+ mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+</div>
+    <?php }?>
 
     <!-- Mostrar cursos disponibles -->
-    {if $cursos}
+    <?php if ($_smarty_tpl->getValue('cursos')) {?>
         <h3 class="mt-4">Cursos Disponibles</h3>
         <table class="table table-striped mt-3">
             <thead>
@@ -64,32 +93,52 @@
                 </tr>
             </thead>
             <tbody>
-                {foreach from=$cursos item=curso}
+                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
+$foreach0DoElse = false;
+?>
                     <tr>
-                        <td>{$curso.nombre}</td>
-                        <td>{$curso.cupo}</td>
+                        <td><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('curso')['cupo'];?>
+</td>
                         <td>
                             <form method="POST" class="d-inline">
                                 <input type="hidden" name="accion" value="inscribir">
-                                <input type="hidden" name="idCurso" value="{$curso.id}">
-                                <input type="hidden" name="dniEstudiante" value="{$dniEstudiante}">
+                                <input type="hidden" name="idCurso" value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
+">
+                                <input type="hidden" name="dniEstudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
+">
                                 <button type="submit" class="btn btn-success btn-sm">Inscribir</button>
                             </form>
                         </td>
                     </tr>
-                {/foreach}
+                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </tbody>
         </table>
-    {/if}
+    <?php }?>
 </div>
 
 <!-- Footer -->
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 
 <!-- Scripts necesarios para Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
 </body>
 </html>
+<?php }
+}

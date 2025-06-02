@@ -1,9 +1,12 @@
 <?php
-require_once '../../sql/db.php';
-require_once '../../models/Inscripcion.php';
-require_once '../../lib/smarty/libs/Smarty.class.php';
+require_once __DIR__ . '/../../sql/db.php';
+require_once __DIR__ . '/../models/Inscripcion.php';
+require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 
-$smarty = new Smarty\Smarty;
+$smarty = new Smarty\Smarty();
+$smarty->setTemplateDir(__DIR__ . '/../views/');
+$smarty->setCompileDir(__DIR__ . '/../templates_c/');
+
 $inscripcionModel = new Inscripcion($pdo);
 
 // Obtener todas las inscripciones
@@ -16,4 +19,4 @@ if (count($inscripciones) > 0) {
     $smarty->assign('mensaje_tipo', 'info');
 }
 
-$smarty->display('../../templates/listarInscripciones.tpl');
+$smarty->display('listarInscripciones.tpl');
