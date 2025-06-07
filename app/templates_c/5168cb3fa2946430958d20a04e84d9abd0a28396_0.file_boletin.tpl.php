@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-08 00:11:02
+/* Smarty version 5.4.0, created on 2025-06-08 00:39:11
   from 'file:boletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844b8f6d7a962_07422088',
+  'unifunc' => 'content_6844bf8f4de723_52311592',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '5168cb3fa2946430958d20a04e84d9abd0a28396' => 
     array (
       0 => 'boletin.tpl',
-      1 => 1749334261,
+      1 => 1749334768,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844b8f6d7a962_07422088 (\Smarty\Template $_smarty_tpl) {
+function content_6844bf8f4de723_52311592 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">

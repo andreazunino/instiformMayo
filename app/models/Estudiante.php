@@ -30,9 +30,15 @@ class Estudiante
 
     public function eliminar($dni)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM estudiante WHERE dni = ?");
-        return $stmt->execute([$dni]);
+        // 1) Eliminar inscripciones relacionadas
+        $stmt1 = $this->pdo->prepare("DELETE FROM inscripcion WHERE dni_estudiante = ?");
+        $stmt1->execute([$dni]);
+    
+        // 2) Eliminar estudiante
+        $stmt2 = $this->pdo->prepare("DELETE FROM estudiante WHERE dni = ?");
+        return $stmt2->execute([$dni]);
     }
+    
 
     public function listarTodos()
     {

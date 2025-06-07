@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-07 23:52:06
+/* Smarty version 5.4.0, created on 2025-06-08 00:48:01
   from 'file:menuAdministrador.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844b4860fe0b2_72723572',
+  'unifunc' => 'content_6844c1a10b2a59_55251591',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e3bd6b399311afb84df8905870732c8b5ee6f709' => 
     array (
       0 => 'menuAdministrador.tpl',
-      1 => 1749328475,
+      1 => 1749336480,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844b4860fe0b2_72723572 (\Smarty\Template $_smarty_tpl) {
+function content_6844c1a10b2a59_55251591 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <head>
@@ -103,10 +103,11 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
     </div>
 </nav>
 
-<!-- Mensaje de bienvenida -->
-<div class="container text-center">
+<div class="container text-center mt-5">
     <h2>Bienvenido Administrador</h2>
 </div>
+
+
 
 <!-- Footer -->
 <?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);

@@ -76,10 +76,11 @@
     </div>
 </nav>
 
-<!-- Mensaje de bienvenida -->
-<div class="container text-center">
+<div class="container text-center mt-5">
     <h2>Bienvenido Administrador</h2>
 </div>
+
+
 
 <!-- Footer -->
 {include file='footer.tpl'}

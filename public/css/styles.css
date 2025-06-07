@@ -90,3 +90,11 @@ footer {
 .dropdown-item:hover {
     background-color: #e9ecef;
 }
+
+.center-table {
+    display: flex;
+    justify-content: center;   /* Centra horizontalmente */
+    align-items: center;       /* Centra verticalmente */
+    height: 100vh;             /* Ocupa el alto completo de la ventana */
+    text-align: center;        /* Alineación del texto dentro */
+}

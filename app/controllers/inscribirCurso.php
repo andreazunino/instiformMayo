@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if (!empty($cursos)) {
             $smarty->assign('cursos', $cursos);
-        } else {
+        } else {    
             $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripción.');
             $smarty->assign('mensaje_tipo', 'warning');
         }

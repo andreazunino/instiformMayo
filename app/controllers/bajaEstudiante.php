@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($accion === 'buscar' && !empty($_POST['documento'])) {
         $dni = $_POST['documento'];
-        $estudiante = $estudianteModel->buscarPorDNI($dni);
+        $estudiante = $estudianteModel->obtenerPorDNI($dni);
 
         if ($estudiante) {
             $smarty->assign('estudiante', $estudiante);
