@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-06-08 00:10:35
+  from 'file:anularInscripcion.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_6844b8dbaac053_97635652',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '7249aec2d4fbb78fbeced0f2d10d515e35016d87' => 
+    array (
+      0 => 'anularInscripcion.tpl',
+      1 => 1749334233,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_6844b8dbaac053_97635652 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include 'head.tpl'}
+    <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 <style>
     .logo-small {
              max-width: 80px;
@@ -44,11 +71,13 @@
 <div class="container text-center">
 <h3>Anular Inscripción</h3>
     <!-- Mensaje de éxito o error -->
-    {if isset($mensaje)}
-        <div class="alert alert-{$mensaje_tipo}" role="alert">
-            {$mensaje}
+    <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
+        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+" role="alert">
+            <?php echo $_smarty_tpl->getValue('mensaje');?>
+
         </div>
-    {/if}
+    <?php }?>
 
     <!-- Formulario para buscar boletín -->
     <form method="POST" action="">
@@ -61,8 +90,8 @@
     </form>
 
     <!-- Mostrar tabla o mensaje según los resultados -->
-    {if isset($cursos)}
-        {if $cursos|@count > 0}
+    <?php if ((null !== ($_smarty_tpl->getValue('cursos') ?? null))) {?>
+        <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('cursos')) > 0) {?>
             <h2>Cursos en los que estás inscrito</h2>
             <table class="table table-striped">
                 <thead>
@@ -72,33 +101,52 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from=$cursos item=curso}
+                    <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
+$foreach0DoElse = false;
+?>
                         <tr>
-                            <td>{$curso.nombre}</td>
+                            <td><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
+</td>
                             <td>
                                 <form method="POST" action="">
                                     <input type="hidden" name="accion" value="anular">
-                                    <input type="hidden" name="dniEstudiante" value="{$dniEstudiante}">
-                                    <input type="hidden" name="idCursoAnular" value="{$curso.id}">
+                                    <input type="hidden" name="dniEstudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
+">
+                                    <input type="hidden" name="idCursoAnular" value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
+">
                                     <button type="submit" class="btn btn-danger">Anular Inscripción</button>
                                 </form>
                             </td>
                         </tr>
-                    {/foreach}
+                    <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                 </tbody>
             </table>
-        {else}
+        <?php } else { ?>
             <p>No estás inscrito en ningún curso.</p>
-        {/if}
-    {/if}
+        <?php }?>
+    <?php }?>
 </div>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 </body>
 </html>
 
+<?php }
+}

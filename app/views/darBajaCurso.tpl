@@ -55,7 +55,7 @@
                 {/foreach}
             </select>
         </div>
-        <button type="submit" class="btn btn-custom">Dar de Baja</button>
+        <button type="submit" class="btn-custom">Dar de Baja</button>
     </form>
 </div>
 

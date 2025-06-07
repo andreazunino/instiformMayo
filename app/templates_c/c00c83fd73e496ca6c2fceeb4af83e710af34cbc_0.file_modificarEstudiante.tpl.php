@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-07 23:52:13
+/* Smarty version 5.4.0, created on 2025-06-08 00:14:21
   from 'file:modificarEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844b48de5f776_10102166',
+  'unifunc' => 'content_6844b9bda8d314_02666469',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'c00c83fd73e496ca6c2fceeb4af83e710af34cbc' => 
     array (
       0 => 'modificarEstudiante.tpl',
-      1 => 1749328475,
+      1 => 1749334458,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844b48de5f776_10102166 (\Smarty\Template $_smarty_tpl) {
+function content_6844b9bda8d314_02666469 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -102,7 +102,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
                 <input type="email" class="form-control" name="email" value="<?php echo $_smarty_tpl->getValue('estudiante')['email'];?>
 " required autocomplete="off">
             </div>
-            <button type="submit" class="btn btn-custom">Modificar</button>
+            <button type="submit" class="btn-custom">Modificar</button>
         </form>
 
     <?php } else { ?>
@@ -112,7 +112,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
                 <label for="dni">DNI:</label>
                 <input type="text" class="form-control" name="dni" required pattern="\d+" autocomplete="off">
             </div>
-            <button type="submit" class="btn btn-custom">Buscar</button>
+            <button type="submit" class="btn-custom">Buscar</button>
         </form>
     <?php }?>
 </div>

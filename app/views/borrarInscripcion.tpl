@@ -57,7 +57,7 @@
             <label for="nombreMateria">Nombre de la Materia:</label>
             <input type="text" class="form-control" id="nombreMateria" name="nombreMateria" placeholder="Ej: Matemática">
         </div>
-        <button type="submit" class="btn btn-custom">Buscar</button>
+        <button type="submit" class="btn-custom">Buscar</button>
     </form>
 
     <!-- Tabla de resultados -->

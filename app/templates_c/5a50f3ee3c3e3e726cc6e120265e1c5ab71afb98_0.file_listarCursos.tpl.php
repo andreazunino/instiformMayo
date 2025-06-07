@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-08 00:27:41
-  from 'file:darAltaCurso.tpl' */
+/* Smarty version 5.4.0, created on 2025-06-08 00:28:37
+  from 'file:listarCursos.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844bcdd7b1113_81405506',
+  'unifunc' => 'content_6844bd15639cc4_04449044',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'b3c9f2e347313e538a185034d24ac013ef90f09d' => 
+    '5a50f3ee3c3e3e726cc6e120265e1c5ab71afb98' => 
     array (
-      0 => 'darAltaCurso.tpl',
-      1 => 1749334347,
+      0 => 'listarCursos.tpl',
+      1 => 1749335315,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844bcdd7b1113_81405506 (\Smarty\Template $_smarty_tpl) {
+function content_6844bd15639cc4_04449044 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -48,14 +48,13 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 
-<!-- Menú de navegación -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto d-flex">
+        <ul class="navbar-nav mx-auto">
             <li class="nav-item">
                 <a class="nav-link" href="menuAdministrador.php">Volver al Menú Administrador</a>
             </li>
@@ -63,39 +62,66 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
     </div>
 </nav>
 
-<!-- Contenedor principal -->
 <div class="container text-center">
-    <!-- Mostrar mensajes de éxito o error -->
-    <?php if ((null !== ($_smarty_tpl->getValue('error') ?? null))) {?>
-        <div class="alert alert-danger mt-3"><?php echo $_smarty_tpl->getValue('error');?>
-</div>
-    <?php }?>
-    <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
-        <div class="alert alert-success mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+    <!-- Formulario de búsqueda por nombre -->
+    <h3>Buscar Cursos por Nombre</h3>
+    <form method="POST" class="mb-4">
+        <input type="hidden" name="accion" value="buscar">
+        <div class="form-group">
+            <input type="text" class="form-control" name="nombreCurso" placeholder="Ingrese el nombre del curso" value="<?php echo (($tmp = $_smarty_tpl->getValue('nombreCurso') ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+" autocomplete="off">
+        </div>
+        <button type="submit" class="btn-custom">Buscar</button>
+    </form>
+
+    <!-- Mostrar mensaje -->
+    <?php if ($_smarty_tpl->getValue('mensaje')) {?>
+        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+ mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
 </div>
     <?php }?>
 
-    <!-- Formulario para dar de alta un curso -->
-    <form action="darAltaCurso.php" method="POST">
-        <input type="hidden" name="accion" value="alta">
-       
-        <div class="form-group">
-            <label for="nombre">Nombre del Curso:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="100" autocomplete="off">
-        </div>
-        <div class="form-group">
-            <label for="cupo">Cupo:</label>
-            <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
-        </div>
-        <button type="submit" class="btn-custom">Dar de Alta</button>
-    </form>
+    <!-- Mostrar cursos -->
+    <?php if ($_smarty_tpl->getValue('cursos')) {?>
+        <h3 class="mt-4">Resultados</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre del Curso</th>
+                    <th>Cupo Disponible</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
+$foreach0DoElse = false;
+?>
+                    <tr>
+                        <td><?php echo $_smarty_tpl->getValue('curso')['id'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('curso')['cupo'];?>
+</td>
+                    </tr>
+                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+            </tbody>
+        </table>
+    <?php } else { ?>
+        <p class="mt-4">No se encontraron cursos.</p>
+    <?php }?>
 </div>
 
 <!-- Footer -->
 <?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
 
-<!-- Scripts -->
+<!-- Scripts necesarios para Bootstrap -->
 <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
 >
@@ -105,6 +131,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
 <?php echo '<script'; ?>
  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
+
 </body>
 </html>
 <?php }

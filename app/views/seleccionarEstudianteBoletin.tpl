@@ -17,7 +17,7 @@
 
 <!-- Encabezado -->
 <div class="container text-center welcome-section">
-    <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
     <h1 class="welcome-heading">Descargar Boletín de un Estudiante</h1>
 </div>
 
@@ -33,7 +33,7 @@
                 {/foreach}
             </select>
         </div>
-        <button type="submit" class="btn btn-custom mt-3">Descargar Boletín PDF</button>
+        <button type="submit" class="btn-custom">Descargar Boletín PDF</button>
     </form>
 </div>
 

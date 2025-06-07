@@ -53,7 +53,7 @@
             <input type="text" class="form-control" id="dni_estudiante" name="dni_estudiante"
                    value="{$dniEstudiante}" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscar_dni" class="btn btn-custom">Buscar</button>
+        <button type="submit" name="buscar_dni" class="btn-custom">Buscar</button>
     </form>
 
     <!-- Formulario para ingresar nota -->

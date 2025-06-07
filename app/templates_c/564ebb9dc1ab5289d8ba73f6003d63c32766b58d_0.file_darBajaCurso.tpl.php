@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-08 00:27:41
-  from 'file:darAltaCurso.tpl' */
+/* Smarty version 5.4.0, created on 2025-06-08 00:28:17
+  from 'file:darBajaCurso.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844bcdd7b1113_81405506',
+  'unifunc' => 'content_6844bd01a88282_83374772',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'b3c9f2e347313e538a185034d24ac013ef90f09d' => 
+    '564ebb9dc1ab5289d8ba73f6003d63c32766b58d' => 
     array (
-      0 => 'darAltaCurso.tpl',
-      1 => 1749334347,
+      0 => 'darBajaCurso.tpl',
+      1 => 1749335295,
       2 => 'file',
     ),
   ),
@@ -22,13 +22,13 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844bcdd7b1113_81405506 (\Smarty\Template $_smarty_tpl) {
+function content_6844bd01a88282_83374772 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-<?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+ <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
     <style>
         .logo-small {
@@ -66,34 +66,37 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
 <!-- Contenedor principal -->
 <div class="container text-center">
     <!-- Mostrar mensajes de éxito o error -->
-    <?php if ((null !== ($_smarty_tpl->getValue('error') ?? null))) {?>
-        <div class="alert alert-danger mt-3"><?php echo $_smarty_tpl->getValue('error');?>
-</div>
-    <?php }?>
     <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
-        <div class="alert alert-success mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+ mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
 </div>
     <?php }?>
 
-    <!-- Formulario para dar de alta un curso -->
-    <form action="darAltaCurso.php" method="POST">
-        <input type="hidden" name="accion" value="alta">
-       
+    <!-- Formulario para dar de baja un curso -->
+    <form action="darBajaCurso.php" method="POST">
+        <input type="hidden" name="accion" value="baja">
         <div class="form-group">
-            <label for="nombre">Nombre del Curso:</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="100" autocomplete="off">
+            <label for="curso">Selecciona el Curso:</label>
+            <select id="curso" name="curso" class="form-control" required>
+                <option value="">-- Selecciona un curso --</option>
+                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
+$foreach0DoElse = false;
+?>
+                    <option value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
+"><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
+ (Cupo: <?php echo $_smarty_tpl->getValue('curso')['cupo'];?>
+)</option>
+                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+            </select>
         </div>
-        <div class="form-group">
-            <label for="cupo">Cupo:</label>
-            <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
-        </div>
-        <button type="submit" class="btn-custom">Dar de Alta</button>
+        <button type="submit" class="btn-custom">Dar de Baja</button>
     </form>
 </div>
-
-<!-- Footer -->
-<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
-?>
 
 <!-- Scripts -->
 <?php echo '<script'; ?>
@@ -105,7 +108,12 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
 <?php echo '<script'; ?>
  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
+
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 </body>
 </html>
+
+
 <?php }
 }

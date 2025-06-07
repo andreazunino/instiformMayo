@@ -58,7 +58,7 @@
             <label for="cupo">Cupo:</label>
             <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
         </div>
-        <button type="submit" class="btn btn-custom">Dar de Alta</button>
+        <button type="submit" class="btn-custom">Dar de Alta</button>
     </form>
 </div>
 

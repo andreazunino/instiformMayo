@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-08 00:29:32
-  from 'file:inscribirEstudiante.tpl' */
+/* Smarty version 5.4.0, created on 2025-06-08 00:11:02
+  from 'file:boletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844bd4c7290b8_63334344',
+  'unifunc' => 'content_6844b8f6d7a962_07422088',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
-    'cec75e7e714a217be8f026e31315573adb7fb488' => 
+    '5168cb3fa2946430958d20a04e84d9abd0a28396' => 
     array (
-      0 => 'inscribirEstudiante.tpl',
-      1 => 1749335370,
+      0 => 'boletin.tpl',
+      1 => 1749334261,
       2 => 'file',
     ),
   ),
@@ -22,12 +22,13 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844bd4c7290b8_63334344 (\Smarty\Template $_smarty_tpl) {
+function content_6844b8f6d7a962_07422088 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <title>Boletín - Instiform</title>
     <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
     <style>
@@ -48,24 +49,26 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 
+<!-- Menú de navegación -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
+        <ul class="navbar-nav mx-auto d-flex">
             <li class="nav-item">
-                <a class="nav-link" href="menuAdministrador.php">Volver al Menú Administrador</a>
+                <a class="nav-link" href="menuEstudiante.php">Volver al Menú Estudiante</a>
             </li>
         </ul>
     </div>
 </nav>
 
+<!-- Contenido principal -->
 <div class="container text-center">
-    <!-- Formulario para buscar cursos por DNI -->
-    <h3>Buscar Cursos Disponibles</h3>
-    <form method="POST">
+    <!-- Formulario para buscar boletín -->
+    <h3>Consultar Boletín</h3>
+    <form method="POST" action="">
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group">
             <label for="dni">DNI del Estudiante:</label>
@@ -81,45 +84,38 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\vie
 </div>
     <?php }?>
 
-    <!-- Mostrar cursos disponibles -->
-    <?php if ($_smarty_tpl->getValue('cursos')) {?>
-        <h3 class="mt-4">Cursos Disponibles</h3>
-        <table class="table table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>Nombre del Curso</th>
-                    <th>Cupo Disponible</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
+    <!-- Mostrar tabla de notas -->
+    <?php if ((null !== ($_smarty_tpl->getValue('notas') ?? null))) {?>
+        <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('notas')) > 0) {?>
+            <h3 class="mt-4">Calificaciones</h3>
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+                        <th>Materia</th>
+                        <th>Calificación</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('notas'), 'nota');
 $foreach0DoElse = true;
-foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('nota')->value) {
 $foreach0DoElse = false;
 ?>
-                    <tr>
-                        <td><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
+                        <tr>
+                            <td><?php echo $_smarty_tpl->getValue('nota')['materia'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->getValue('curso')['cupo'];?>
+                            <td><?php echo $_smarty_tpl->getValue('nota')['calificacion'];?>
 </td>
-                        <td>
-                            <form method="POST" class="d-inline">
-                                <input type="hidden" name="accion" value="inscribir">
-                                <input type="hidden" name="idCurso" value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
-">
-                                <input type="hidden" name="dniEstudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
-">
-                                <button type="submit" class="btn btn-success btn-sm">Inscribir</button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php
+                        </tr>
+                    <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        <?php } else { ?>
+            <p class="mt-3">No se encontraron calificaciones para el DNI ingresado.</p>
+        <?php }?>
     <?php }?>
 </div>
 
@@ -127,7 +123,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 <?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
 ?>
 
-<!-- Scripts necesarios para Bootstrap -->
+<!-- Scripts necesarios -->
 <?php echo '<script'; ?>
  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
 >
@@ -137,7 +133,6 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
 <?php echo '<script'; ?>
  src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
 >
-
 </body>
 </html>
 <?php }
