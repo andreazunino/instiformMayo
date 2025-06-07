@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-08 00:29:55
+/* Smarty version 5.4.0, created on 2025-06-08 01:08:00
   from 'file:borrarInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6844bd633a3e39_06979360',
+  'unifunc' => 'content_6844c650107ae3_31176147',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '0cd80d74feeaaae6f96ffcccc44f6e7889b9ded5' => 
     array (
       0 => 'borrarInscripcion.tpl',
-      1 => 1749335393,
+      1 => 1749337676,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6844bd633a3e39_06979360 (\Smarty\Template $_smarty_tpl) {
+function content_6844c650107ae3_31176147 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiforMayo\\instiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -112,7 +112,7 @@ $foreach0DoElse = false;
                     <tr>
                         <td><?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->getValue('inscripcion')['dni_estudiante'];?>
+                        <td><?php echo (($tmp = $_smarty_tpl->getValue('inscripcion')['dni_estudiante'] ?? null)===null||$tmp==='' ? 'N/A' ?? null : $tmp);?>
 </td>
                         <td><?php echo $_smarty_tpl->getValue('inscripcion')['nombre'];?>
 </td>

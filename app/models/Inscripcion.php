@@ -88,6 +88,31 @@ class Inscripcion
         return $stmt->execute([$nota, $dniEstudiante, $idCurso]);
     }
     
+    public function buscarInscripciones($dni, $materia)
+{
+    $query = "
+        SELECT i.id, i.dni_estudiante as dni, e.nombre, e.apellido, c.nombre as curso
+        FROM inscripcion i
+        INNER JOIN estudiante e ON i.dni_estudiante = e.dni
+        INNER JOIN curso c ON i.id_curso = c.id
+        WHERE i.dni_estudiante = :dni
+    ";
+
+    $params = ['dni' => $dni];
+
+    if (!empty($materia)) {
+        $query .= " AND c.nombre ILIKE :materia";
+        $params['materia'] = "%$materia%";
+    }
+
+    $query .= " ORDER BY e.apellido, e.nombre";
+
+    $stmt = $this->pdo->prepare($query);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+    
     public function obtenerBoletinCompleto($dniEstudiante)
     {
     $stmt = $this->pdo->prepare("

@@ -77,7 +77,7 @@
                 {foreach $inscripciones as $inscripcion}
                     <tr>
                         <td>{$inscripcion.id}</td>
-                        <td>{$inscripcion.dni_estudiante}</td>
+                        <td>{$inscripcion.dni_estudiante|default:'N/A'}</td>
                         <td>{$inscripcion.nombre}</td>
                         <td>{$inscripcion.curso_nombre}</td>
                         <td>
