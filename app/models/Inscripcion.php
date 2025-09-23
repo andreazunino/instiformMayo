@@ -161,6 +161,7 @@ class Inscripcion
                         VALUES (?, ?, NOW())
                     ");
                     $insert->execute([$inscripcionId, $nota]);
+                    $this->actualizarCalificacionActualPorInscripcion($inscripcionId);
                 } catch (PDOException $e) {
                     if ($e->getCode() === '42P01') {
                         $this->tablaCalificacionesDisponible = false;
@@ -172,6 +173,72 @@ class Inscripcion
         }
 
         return true;
+    }
+
+    public function obtenerHistorialCalificaciones($dniEstudiante)
+    {
+        if (!$this->tieneTablaCalificaciones()) {
+            return [];
+        }
+
+        $stmt = $this->pdo->prepare("
+            SELECT
+                ic.id,
+                ic.calificacion,
+                ic.fecha_registro,
+                to_char(ic.fecha_registro, 'DD/MM/YYYY') AS fecha_formateada,
+                c.nombre AS materia,
+                ic.inscripcion_id
+            FROM inscripcion i
+            INNER JOIN curso c ON c.id = i.id_curso
+            INNER JOIN inscripcion_calificaciones ic ON ic.inscripcion_id = i.id
+            WHERE i.dni_estudiante = ?
+            ORDER BY c.nombre, ic.fecha_registro
+        ");
+        $stmt->execute([$dniEstudiante]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function editarCalificacion($calificacionId, $nuevoValor)
+    {
+        if (!$this->tieneTablaCalificaciones()) {
+            return false;
+        }
+
+        $inscripcionId = $this->obtenerInscripcionIdDesdeCalificacion($calificacionId);
+        if ($inscripcionId === null) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare('UPDATE inscripcion_calificaciones SET calificacion = ?, fecha_registro = NOW() WHERE id = ?');
+        $actualizado = $stmt->execute([$nuevoValor, $calificacionId]);
+
+        if ($actualizado) {
+            $this->actualizarCalificacionActualPorInscripcion($inscripcionId);
+        }
+
+        return $actualizado;
+    }
+
+    public function eliminarCalificacion($calificacionId)
+    {
+        if (!$this->tieneTablaCalificaciones()) {
+            return false;
+        }
+
+        $inscripcionId = $this->obtenerInscripcionIdDesdeCalificacion($calificacionId);
+        if ($inscripcionId === null) {
+            return false;
+        }
+
+        $stmt = $this->pdo->prepare('DELETE FROM inscripcion_calificaciones WHERE id = ?');
+        $borrado = $stmt->execute([$calificacionId]);
+
+        if ($borrado) {
+            $this->actualizarCalificacionActualPorInscripcion($inscripcionId);
+        }
+
+        return $borrado;
     }
 
     public function buscarInscripciones($dni, $materia)
@@ -230,6 +297,30 @@ class Inscripcion
         $resultado = $stmt->fetchColumn();
 
         return $resultado !== false ? (int) $resultado : null;
+    }
+
+    private function obtenerInscripcionIdDesdeCalificacion($calificacionId)
+    {
+        $stmt = $this->pdo->prepare('SELECT inscripcion_id FROM inscripcion_calificaciones WHERE id = ?');
+        $stmt->execute([$calificacionId]);
+        $inscripcionId = $stmt->fetchColumn();
+
+        return $inscripcionId !== false ? (int) $inscripcionId : null;
+    }
+
+    private function actualizarCalificacionActualPorInscripcion($inscripcionId)
+    {
+        $stmt = $this->pdo->prepare('SELECT calificacion, fecha_registro FROM inscripcion_calificaciones WHERE inscripcion_id = ? ORDER BY fecha_registro DESC LIMIT 1');
+        $stmt->execute([$inscripcionId]);
+        $registro = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($registro) {
+            $update = $this->pdo->prepare('UPDATE inscripcion SET calificacion = ?, fecha_calificacion = ? WHERE id = ?');
+            $update->execute([$registro['calificacion'], $registro['fecha_registro'], $inscripcionId]);
+        } else {
+            $update = $this->pdo->prepare('UPDATE inscripcion SET calificacion = NULL, fecha_calificacion = NULL WHERE id = ?');
+            $update->execute([$inscripcionId]);
+        }
     }
 
     private function formatearEntradaCalificacion($valor, $fecha)

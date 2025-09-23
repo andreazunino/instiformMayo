@@ -9,6 +9,14 @@
             max-width: 80px;
             margin-top: 10px;
         }
+        .lista-calificaciones {
+            margin: 0;
+            padding-left: 1rem;
+            text-align: left;
+        }
+        .lista-calificaciones li {
+            list-style-type: disc;
+        }
     </style>
 </head>
 <body>
@@ -51,26 +59,41 @@
     </form>
 
     <!-- Mostrar mensaje -->
-    {if $mensaje}
-        <div class="alert alert-{$mensaje_tipo} mt-3">{$mensaje}</div>
+    {if }
+        <div class="alert alert-{} mt-3">{}</div>
     {/if}
 
     <!-- Mostrar tabla de notas -->
-    {if isset($notas)}
-        {if $notas|@count > 0}
+    {if isset()}
+        {if |@count > 0}
             <h3 class="mt-4">Calificaciones</h3>
             <table class="table table-striped mt-3">
                 <thead>
                     <tr>
                         <th>Materia</th>
-                        <th>Calificación</th>
+                        <th>Calificaciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from=$notas item=nota}
+                    {foreach from= item=nota}
                         <tr>
-                            <td>{$nota.materia}</td>
-                            <td>{$nota.calificacion}</td>
+                            <td>{.materia}</td>
+                            <td>
+                                {if isset(.calificaciones) && .calificaciones|@count > 0}
+                                    <ul class="lista-calificaciones">
+                                        {foreach from=.calificaciones item=detalle}
+                                            <li>
+                                                {.valor}
+                                                {if .fecha_formateada}
+                                                    <span class="text-muted">({.fecha_formateada})</span>
+                                                {/if}
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                {else}
+                                    {.calificacion|default:'-'}
+                                {/if}
+                            </td>
                         </tr>
                     {/foreach}
                 </tbody>

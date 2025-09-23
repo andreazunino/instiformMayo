@@ -32,10 +32,15 @@
         .tabla th, .tabla td {
             border: 1px solid #ddd;
             padding: 10px;
+            vertical-align: top;
         }
         .tabla th {
             background-color: #4a90e2;
             color: white;
+        }
+        .lista-calificaciones {
+            margin: 0;
+            padding-left: 1rem;
         }
     </style>
 </head>
@@ -43,24 +48,39 @@
     <div class="boletin">
         <h1>Boletín de Calificaciones</h1>
         <div class="datos">
-            <p><strong>Estudiante:</strong> {$apellido}, {$nombre}</p>
-            <p><strong>DNI:</strong> {$dni}</p>
-            <p><strong>Fecha:</strong> {$fecha}</p>
+            <p><strong>Estudiante:</strong> {}, {}</p>
+            <p><strong>DNI:</strong> {}</p>
+            <p><strong>Fecha:</strong> {}</p>
         </div>
         <div class="tabla">
-            {if $notas|@count > 0}
+            {if |@count > 0}
                 <table>
                     <thead>
                         <tr>
                             <th>Materia</th>
-                            <th>Calificación</th>
+                            <th>Calificaciones</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {foreach from=$notas item=nota}
+                        {foreach from= item=nota}
                         <tr>
-                            <td>{$nota.materia}</td>
-                            <td>{$nota.calificacion}</td>
+                            <td>{.materia}</td>
+                            <td>
+                                {if isset(.calificaciones) && .calificaciones|@count > 0}
+                                    <ul class="lista-calificaciones">
+                                        {foreach from=.calificaciones item=detalle}
+                                            <li>
+                                                {.valor}
+                                                {if .fecha_formateada}
+                                                    <span>({.fecha_formateada})</span>
+                                                {/if}
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                {else}
+                                    {.calificacion|default:'-'}
+                                {/if}
+                            </td>
                         </tr>
                         {/foreach}
                     </tbody>

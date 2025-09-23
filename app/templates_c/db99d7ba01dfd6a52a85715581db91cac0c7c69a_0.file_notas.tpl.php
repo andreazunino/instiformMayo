@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-23 17:53:39
+/* Smarty version 5.4.0, created on 2025-09-23 23:49:29
   from 'file:notas.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d2c2832a2107_91315432',
+  'unifunc' => 'content_68d315e9273255_26467623',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db99d7ba01dfd6a52a85715581db91cac0c7c69a' => 
     array (
       0 => 'notas.tpl',
-      1 => 1749337190,
+      1 => 1758663700,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d2c2832a2107_91315432 (\Smarty\Template $_smarty_tpl) {
+function content_68d315e9273255_26467623 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -89,7 +89,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     <!-- Formulario para ingresar nota -->
     <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('cursos')) > 0) {?>
         <h2>Ingresar Nota</h2>
-        <form action="" method="POST">
+        <form action="" method="POST" class="mb-4">
             <div class="form-group">
                 <label for="id_curso">Curso:</label>
                 <select class="form-control" id="id_curso" name="id_curso" required>
@@ -117,6 +117,65 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
         </form>
     <?php } elseif ((null !== ($_smarty_tpl->getValue('dniEstudiante') ?? null))) {?>
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
+    <?php }?>
+
+    <!-- Historial de calificaciones -->
+    <?php if ((null !== ($_smarty_tpl->getValue('historial') ?? null))) {?>
+        <h2 class="mt-5">Historial de calificaciones</h2>
+        <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('historial')) > 0) {?>
+            <div class="table-responsive mt-3">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Materia</th>
+                            <th>Nota</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('historial'), 'registro');
+$foreach1DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('registro')->value) {
+$foreach1DoElse = false;
+?>
+                            <tr>
+                                <td><?php echo $_smarty_tpl->getValue('registro')['materia'];?>
+</td>
+                                <td><?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
+</td>
+                                <td><?php if ($_smarty_tpl->getValue('registro')['fecha_formateada']) {
+echo $_smarty_tpl->getValue('registro')['fecha_formateada'];
+} else { ?>-<?php }?></td>
+                                <td>
+                                    <form action="" method="POST" class="d-inline-flex align-items-center mb-2 mb-lg-0">
+                                        <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
+">
+                                        <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
+">
+                                        <input type="number" name="nota" class="form-control form-control-sm mr-2" value="<?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
+" min="1" max="10" required>
+                                        <button type="submit" name="editar_calificacion" class="btn btn-sm btn-primary">Actualizar</button>
+                                    </form>
+                                    <form action="" method="POST" class="d-inline">
+                                        <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
+">
+                                        <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
+">
+                                        <button type="submit" name="eliminar_calificacion" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                    </tbody>
+                </table>
+            </div>
+        <?php } else { ?>
+            <p class="mt-3">Este estudiante aún no tiene calificaciones registradas.</p>
+        <?php }?>
     <?php }?>
 </div>
 

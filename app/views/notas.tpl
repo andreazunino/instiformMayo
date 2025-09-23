@@ -59,7 +59,7 @@
     <!-- Formulario para ingresar nota -->
     {if $cursos|@count > 0}
         <h2>Ingresar Nota</h2>
-        <form action="" method="POST">
+        <form action="" method="POST" class="mb-4">
             <div class="form-group">
                 <label for="id_curso">Curso:</label>
                 <select class="form-control" id="id_curso" name="id_curso" required>
@@ -77,6 +77,49 @@
         </form>
     {elseif isset($dniEstudiante)}
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
+    {/if}
+
+    <!-- Historial de calificaciones -->
+    {if isset($historial)}
+        <h2 class="mt-5">Historial de calificaciones</h2>
+        {if $historial|@count > 0}
+            <div class="table-responsive mt-3">
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Materia</th>
+                            <th>Nota</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {foreach from=$historial item=registro}
+                            <tr>
+                                <td>{$registro.materia}</td>
+                                <td>{$registro.calificacion}</td>
+                                <td>{if $registro.fecha_formateada}{$registro.fecha_formateada}{else}-{/if}</td>
+                                <td>
+                                    <form action="" method="POST" class="d-inline-flex align-items-center mb-2 mb-lg-0">
+                                        <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
+                                        <input type="hidden" name="calificacion_id" value="{$registro.id}">
+                                        <input type="number" name="nota" class="form-control form-control-sm mr-2" value="{$registro.calificacion}" min="1" max="10" required>
+                                        <button type="submit" name="editar_calificacion" class="btn btn-sm btn-primary">Actualizar</button>
+                                    </form>
+                                    <form action="" method="POST" class="d-inline">
+                                        <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
+                                        <input type="hidden" name="calificacion_id" value="{$registro.id}">
+                                        <button type="submit" name="eliminar_calificacion" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        {/foreach}
+                    </tbody>
+                </table>
+            </div>
+        {else}
+            <p class="mt-3">Este estudiante aún no tiene calificaciones registradas.</p>
+        {/if}
     {/if}
 </div>
 
