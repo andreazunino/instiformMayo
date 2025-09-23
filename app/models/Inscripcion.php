@@ -3,6 +3,7 @@
 class Inscripcion
 {
     private $pdo;
+    private $tablaCalificacionesDisponible = null;
 
     public function __construct($conexion)
     {
@@ -64,17 +65,77 @@ class Inscripcion
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Obtener las notas del boletín de un estudiante
+    // Obtener las notas del boletín de un estudiante (todas las cargas registradas)
     public function obtenerNotasPorDNI($dniEstudiante)
     {
+        if ($this->tieneTablaCalificaciones()) {
+            $stmt = $this->pdo->prepare("
+                SELECT
+                    c.nombre AS materia,
+                    i.calificacion AS ultima_calificacion,
+                    i.fecha_calificacion,
+                    COALESCE(
+                        json_agg(
+                            json_build_object(
+                                'valor', ic.calificacion,
+                                'fecha', ic.fecha_registro
+                            ) ORDER BY ic.fecha_registro
+                        ) FILTER (WHERE ic.id IS NOT NULL),
+                        '[]'
+                    ) AS historial
+                FROM inscripcion i
+                INNER JOIN curso c ON i.id_curso = c.id
+                LEFT JOIN inscripcion_calificaciones ic ON ic.inscripcion_id = i.id
+                WHERE i.dni_estudiante = ?
+                  AND (i.calificacion IS NOT NULL OR ic.id IS NOT NULL)
+                GROUP BY c.nombre, i.calificacion, i.fecha_calificacion, i.id
+                ORDER BY c.nombre
+            ");
+            $stmt->execute([$dniEstudiante]);
+            $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return array_map(function (array $registro) {
+                $historial = json_decode($registro['historial'], true);
+                if (!is_array($historial)) {
+                    $historial = [];
+                }
+
+                $calificaciones = [];
+                foreach ($historial as $entrada) {
+                    if (!isset($entrada['valor'])) {
+                        continue;
+                    }
+                    $calificaciones[] = $this->formatearEntradaCalificacion($entrada['valor'], $entrada['fecha'] ?? null);
+                }
+
+                if (empty($calificaciones) && $registro['ultima_calificacion'] !== null) {
+                    $calificaciones[] = $this->formatearEntradaCalificacion($registro['ultima_calificacion'], $registro['fecha_calificacion'] ?? null);
+                }
+
+                $registro['calificaciones'] = $calificaciones;
+                $registro['calificacion'] = $this->unirValoresCalificaciones($calificaciones);
+                unset($registro['historial'], $registro['ultima_calificacion'], $registro['fecha_calificacion']);
+
+                return $registro;
+            }, $registros);
+        }
+
         $stmt = $this->pdo->prepare("
-            SELECT c.nombre AS materia, i.calificacion
+            SELECT c.nombre AS materia, i.calificacion, i.fecha_calificacion
             FROM inscripcion i
             INNER JOIN curso c ON i.id_curso = c.id
             WHERE i.dni_estudiante = ? AND i.calificacion IS NOT NULL
         ");
         $stmt->execute([$dniEstudiante]);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $registros = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return array_map(function (array $registro) {
+            $calificacion = $this->formatearEntradaCalificacion($registro['calificacion'], $registro['fecha_calificacion'] ?? null);
+            $registro['calificaciones'] = [$calificacion];
+            $registro['calificacion'] = $calificacion['valor'];
+            unset($registro['fecha_calificacion']);
+            return $registro;
+        }, $registros);
     }
 
     // Guardar o actualizar una nota
@@ -85,46 +146,126 @@ class Inscripcion
             SET calificacion = ?, fecha_calificacion = NOW()
             WHERE dni_estudiante = ? AND id_curso = ?
         ");
-        return $stmt->execute([$nota, $dniEstudiante, $idCurso]);
+        $resultado = $stmt->execute([$nota, $dniEstudiante, $idCurso]);
+
+        if (!$resultado || $stmt->rowCount() === 0) {
+            return false;
+        }
+
+        if ($this->tieneTablaCalificaciones()) {
+            $inscripcionId = $this->obtenerIdInscripcion($dniEstudiante, $idCurso);
+            if ($inscripcionId !== null) {
+                try {
+                    $insert = $this->pdo->prepare("
+                        INSERT INTO inscripcion_calificaciones (inscripcion_id, calificacion, fecha_registro)
+                        VALUES (?, ?, NOW())
+                    ");
+                    $insert->execute([$inscripcionId, $nota]);
+                } catch (PDOException $e) {
+                    if ($e->getCode() === '42P01') {
+                        $this->tablaCalificacionesDisponible = false;
+                    } else {
+                        throw $e;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
-    
+
     public function buscarInscripciones($dni, $materia)
-{
-    $query = "
-        SELECT i.id, i.dni_estudiante as dni, e.nombre, e.apellido, c.nombre as curso
-        FROM inscripcion i
-        INNER JOIN estudiante e ON i.dni_estudiante = e.dni
-        INNER JOIN curso c ON i.id_curso = c.id
-        WHERE i.dni_estudiante = :dni
-    ";
+    {
+        $query = "
+            SELECT i.id, i.dni_estudiante as dni, e.nombre, e.apellido, c.nombre as curso
+            FROM inscripcion i
+            INNER JOIN estudiante e ON i.dni_estudiante = e.dni
+            INNER JOIN curso c ON i.id_curso = c.id
+            WHERE i.dni_estudiante = :dni
+        ";
 
-    $params = ['dni' => $dni];
+        $params = ['dni' => $dni];
 
-    if (!empty($materia)) {
-        $query .= " AND c.nombre ILIKE :materia";
-        $params['materia'] = "%$materia%";
+        if (!empty($materia)) {
+            $query .= " AND c.nombre ILIKE :materia";
+            $params['materia'] = "%$materia%";
+        }
+
+        $query .= " ORDER BY e.apellido, e.nombre";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    $query .= " ORDER BY e.apellido, e.nombre";
-
-    $stmt = $this->pdo->prepare($query);
-    $stmt->execute($params);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-    
     public function obtenerBoletinCompleto($dniEstudiante)
     {
-    $stmt = $this->pdo->prepare("
-        SELECT e.nombre, e.apellido, c.nombre AS materia, i.calificacion
-        FROM inscripcion i
-        INNER JOIN estudiante e ON e.dni = i.dni_estudiante
-        INNER JOIN curso c ON c.id = i.id_curso
-        WHERE i.dni_estudiante = ? AND i.calificacion IS NOT NULL
-        ORDER BY c.nombre
-    ");
-    $stmt->execute([$dniEstudiante]);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+        return $this->obtenerNotasPorDNI($dniEstudiante);
+    }
 
+    private function tieneTablaCalificaciones(): bool
+    {
+        if ($this->tablaCalificacionesDisponible !== null) {
+            return $this->tablaCalificacionesDisponible;
+        }
+
+        try {
+            $this->pdo->query('SELECT 1 FROM inscripcion_calificaciones LIMIT 1');
+            $this->tablaCalificacionesDisponible = true;
+        } catch (PDOException $e) {
+            if ($e->getCode() === '42P01') {
+                $this->tablaCalificacionesDisponible = false;
+            } else {
+                throw $e;
+            }
+        }
+
+        return $this->tablaCalificacionesDisponible;
+    }
+
+    private function obtenerIdInscripcion($dniEstudiante, $idCurso)
+    {
+        $stmt = $this->pdo->prepare('SELECT id FROM inscripcion WHERE dni_estudiante = ? AND id_curso = ?');
+        $stmt->execute([$dniEstudiante, $idCurso]);
+        $resultado = $stmt->fetchColumn();
+
+        return $resultado !== false ? (int) $resultado : null;
+    }
+
+    private function formatearEntradaCalificacion($valor, $fecha)
+    {
+        $valorCadena = is_numeric($valor) ? rtrim(rtrim((string) $valor, '0'), '.') : (string) $valor;
+        $fechaOriginal = $fecha;
+        $fechaFormateada = null;
+
+        if (!empty($fechaOriginal)) {
+            try {
+                $fechaFormateada = (new DateTime($fechaOriginal))->format('d/m/Y');
+            } catch (Exception $e) {
+                $fechaFormateada = $fechaOriginal;
+            }
+        }
+
+        return [
+            'valor' => $valorCadena,
+            'fecha' => $fechaOriginal,
+            'fecha_formateada' => $fechaFormateada,
+        ];
+    }
+
+    private function unirValoresCalificaciones(array $calificaciones): string
+    {
+        if (empty($calificaciones)) {
+            return '';
+        }
+
+        $valores = array_map(function (array $entrada) {
+            if (!empty($entrada['fecha_formateada'])) {
+                return $entrada['valor'] . ' (' . $entrada['fecha_formateada'] . ')';
+            }
+            return $entrada['valor'];
+        }, $calificaciones);
+
+        return implode(' / ', $valores);
+    }
 }
