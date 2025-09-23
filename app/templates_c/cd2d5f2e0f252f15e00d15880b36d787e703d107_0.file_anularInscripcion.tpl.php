@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-28 21:10:34
+/* Smarty version 5.4.0, created on 2025-08-07 17:21:33
   from 'file:anularInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68375faa290b87_83918128',
+  'unifunc' => 'content_6894c47d4f1005_48526650',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cd2d5f2e0f252f15e00d15880b36d787e703d107' => 
     array (
       0 => 'anularInscripcion.tpl',
-      1 => 1748459427,
+      1 => 1749337190,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68375faa290b87_83918128 (\Smarty\Template $_smarty_tpl) {
+function content_6894c47d4f1005_48526650 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -86,7 +86,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="dni">Ingrese el DNI del estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" required pattern="\d+" title="Solo se permiten números" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-custom">Buscar</button>
+        <button type="submit" class="btn-custom">Buscar</button>
     </form>
 
     <!-- Mostrar tabla o mensaje según los resultados -->

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-29 22:23:39
+/* Smarty version 5.4.0, created on 2025-06-26 23:01:19
   from 'file:seleccionarEstudianteBoletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6838c24b1bd969_94314458',
+  'unifunc' => 'content_685db51fde5bc9_22760716',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '89cd0e9d3c48d9beb1e4aa8a3812995ea4fccaa0' => 
     array (
       0 => 'seleccionarEstudianteBoletin.tpl',
-      1 => 1748550199,
+      1 => 1749337190,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6838c24b1bd969_94314458 (\Smarty\Template $_smarty_tpl) {
+function content_685db51fde5bc9_22760716 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -44,7 +44,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 
 <!-- Encabezado -->
 <div class="container text-center welcome-section">
-    <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
+    <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
     <h1 class="welcome-heading">Descargar Boletín de un Estudiante</h1>
 </div>
 
@@ -71,7 +71,7 @@ $foreach0DoElse = false;
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </select>
         </div>
-        <button type="submit" class="btn btn-custom mt-3">Descargar Boletín PDF</button>
+        <button type="submit" class="btn-custom">Descargar Boletín PDF</button>
     </form>
 </div>
 

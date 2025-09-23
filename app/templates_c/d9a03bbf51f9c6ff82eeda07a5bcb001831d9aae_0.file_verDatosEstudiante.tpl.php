@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-05-29 14:44:09
+/* Smarty version 5.4.0, created on 2025-09-23 17:53:33
   from 'file:verDatosEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68385699a2b0d9_56986059',
+  'unifunc' => 'content_68d2c27d9e2554_36459318',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68385699a2b0d9_56986059 (\Smarty\Template $_smarty_tpl) {
+function content_68d2c27d9e2554_36459318 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">

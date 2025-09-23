@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-02 22:55:41
+/* Smarty version 5.4.0, created on 2025-09-23 17:53:39
   from 'file:notas.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_683e0fcd0b58f9_93144388',
+  'unifunc' => 'content_68d2c2832a2107_91315432',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db99d7ba01dfd6a52a85715581db91cac0c7c69a' => 
     array (
       0 => 'notas.tpl',
-      1 => 1748897735,
+      1 => 1749337190,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_683e0fcd0b58f9_93144388 (\Smarty\Template $_smarty_tpl) {
+function content_68d2c2832a2107_91315432 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -83,7 +83,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
                    value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 " required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscar_dni" class="btn btn-custom">Buscar</button>
+        <button type="submit" name="buscar_dni" class="btn-custom">Buscar</button>
     </form>
 
     <!-- Formulario para ingresar nota -->
