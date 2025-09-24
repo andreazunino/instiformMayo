@@ -12,14 +12,29 @@
 </head>
 <body>
 
-<!-- Botón para volver al menú -->
-<button class="btn btn-logout" onclick="window.location.href='menuAdministrador.php'">Volver al menú</button>
+<!-- Botón de cerrar sesión -->
+<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
 
-<!-- Encabezado -->
-<div class="container text-center welcome-section">
+<!-- Encabezado con logo -->
+<div class="container-fluid text-center welcome-section">
     <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-small">
     <h1 class="welcome-heading">Descargar Boletín de un Estudiante</h1>
 </div>
+
+<!-- Menú de navegación -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto d-flex">
+            <li class="nav-item">
+                <a class="nav-link" href="menuAdministrador.php">Volver al Menú Administrador</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 <!-- Formulario -->
 <div class="container text-center mt-4">
