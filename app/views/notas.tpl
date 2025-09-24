@@ -73,7 +73,7 @@
                 <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10">
             </div>
             <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
-            <button type="submit" name="ingresar_nota" class="btn btn-success">Guardar Nota</button>
+            <button type="submit" name="ingresar_nota" class="btn-custom">Guardar Nota</button>
         </form>
     {elseif isset($dniEstudiante)}
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
@@ -104,12 +104,12 @@
                                         <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
                                         <input type="hidden" name="calificacion_id" value="{$registro.id}">
                                         <input type="number" name="nota" class="form-control form-control-sm mr-2" value="{$registro.calificacion}" min="1" max="10" required>
-                                        <button type="submit" name="editar_calificacion" class="btn btn-sm btn-primary">Actualizar</button>
+                                        <button type="submit" name="editar_calificacion" class="btn-custom btn-sm">Actualizar</button>
                                     </form>
                                     <form action="" method="POST" class="d-inline">
                                         <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
                                         <input type="hidden" name="calificacion_id" value="{$registro.id}">
-                                        <button type="submit" name="eliminar_calificacion" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                        <button type="submit" name="eliminar_calificacion" class="btn-custom btn-custom-danger btn-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-23 20:33:50
+/* Smarty version 5.4.0, created on 2025-09-24 21:04:21
   from 'file:boletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d2e80e9c9ea9_11323233',
+  'unifunc' => 'content_68d440b5d79e41_27634859',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bd44bf459e10bf4f4968cbe4a58735a7916d0478' => 
     array (
       0 => 'boletin.tpl',
-      1 => 1758651829,
+      1 => 1758740552,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d2e80e9c9ea9_11323233 (\Smarty\Template $_smarty_tpl) {
+function content_68d440b5d79e41_27634859 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -35,6 +35,14 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         .logo-small {
             max-width: 80px;
             margin-top: 10px;
+        }
+        .lista-calificaciones {
+            margin: 0;
+            padding-left: 1rem;
+            text-align: left;
+        }
+        .lista-calificaciones li {
+            list-style-type: disc;
         }
     </style>
 </head>
@@ -78,8 +86,8 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     </form>
 
     <!-- Mostrar mensaje -->
-    <?php if ($_smarty_tpl->getValue('mensaje')) {?>
-        <div class="alert alert-<?php echo $_smarty_tpl->getValue('mensaje_tipo');?>
+    <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
+        <div class="alert alert-<?php echo (($tmp = $_smarty_tpl->getValue('mensaje_tipo') ?? null)===null||$tmp==='' ? 'info' ?? null : $tmp);?>
  mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
 </div>
     <?php }?>
@@ -92,7 +100,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
                 <thead>
                     <tr>
                         <th>Materia</th>
-                        <th>Calificación</th>
+                        <th>Calificaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,8 +113,32 @@ $foreach0DoElse = false;
                         <tr>
                             <td><?php echo $_smarty_tpl->getValue('nota')['materia'];?>
 </td>
-                            <td><?php echo $_smarty_tpl->getValue('nota')['calificacion'];?>
-</td>
+                            <td>
+                                <?php if ((null !== ($_smarty_tpl->getValue('nota')['calificaciones'] ?? null)) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('nota')['calificaciones']) > 0) {?>
+                                    <ul class="lista-calificaciones">
+                                        <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('nota')['calificaciones'], 'detalle');
+$foreach1DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('detalle')->value) {
+$foreach1DoElse = false;
+?>
+                                            <li>
+                                                <?php echo $_smarty_tpl->getValue('detalle')['valor'];?>
+
+                                                <?php if ($_smarty_tpl->getValue('detalle')['fecha_formateada']) {?>
+                                                    <span class="text-muted">(<?php echo $_smarty_tpl->getValue('detalle')['fecha_formateada'];?>
+)</span>
+                                                <?php }?>
+                                            </li>
+                                        <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                                    </ul>
+                                <?php } else { ?>
+                                    <?php echo (($tmp = $_smarty_tpl->getValue('nota')['calificacion'] ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
+
+                                <?php }?>
+                            </td>
                         </tr>
                     <?php
 }

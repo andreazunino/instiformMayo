@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-23 23:09:38
+/* Smarty version 5.4.0, created on 2025-09-24 20:59:42
   from 'file:bajaEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d30c922de487_40780766',
+  'unifunc' => 'content_68d43f9e11ef40_11173147',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'da2e51a250a592196e19197818bad3841086174b' => 
     array (
       0 => 'bajaEstudiante.tpl',
-      1 => 1748464547,
+      1 => 1758740163,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d30c922de487_40780766 (\Smarty\Template $_smarty_tpl) {
+function content_68d43f9e11ef40_11173147 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -72,7 +72,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="documento">Número de Documento:</label>
             <input type="text" class="form-control" id="documento" name="documento" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscarDocumento" class="btn btn-danger">Buscar Estudiante</button>
+        <button type="submit" name="buscarDocumento" class="btn-custom">Buscar Estudiante</button>
     </form>
 
     <!-- Mostrar mensaje -->
@@ -96,7 +96,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="dni_estudiante" value="<?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['dni'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
 ">
-            <button type="submit" class="btn btn-danger">Eliminar Estudiante</button>
+            <button type="submit" class="btn-custom btn-custom-danger">Eliminar Estudiante</button>
         </form>
     <?php }?>
 </div>

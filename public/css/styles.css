@@ -1,4 +1,3 @@
-
 body {
     background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
     background-repeat: no-repeat;
@@ -6,9 +5,8 @@ body {
     background-size: cover;
     min-height: 100vh;
     margin: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
 }
-
 
 .navbar {
     margin-bottom: 20px;
@@ -29,7 +27,9 @@ body {
     right: 20px;
 }
 
-
+.btn-logout:hover {
+    background-color: #b02a37;
+}
 
 .btn-custom {
     background-color: #4a90e2;
@@ -40,7 +40,41 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 50px;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-custom:hover,
+.btn-custom:focus {
+    background-color: #357abd;
+    transform: translateY(-1px);
+    color: #ffffff;
+}
+
+.btn-custom:focus {
+    outline: none;
+}
+
+.btn-custom.btn-sm,
+.btn-custom-sm {
+    padding: 8px 20px;
+    font-size: 16px;
+}
+
+.btn-custom.btn-custom-danger,
+.btn-custom.btn-custom-danger.btn-sm,
+.btn-custom-danger {
+    background-color: #d33f4d;
+}
+
+.btn-custom.btn-custom-danger:hover,
+.btn-custom.btn-custom-danger:focus,
+.btn-custom.btn-custom-danger.btn-sm:hover,
+.btn-custom.btn-custom-danger.btn-sm:focus,
+.btn-custom-danger:hover,
+.btn-custom-danger:focus {
+    background-color: #a72832;
+    color: #ffffff;
 }
 
 footer {
@@ -59,7 +93,7 @@ footer {
     margin-top: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-family: 'Arial', sans-serif;
+    font-family: "Arial", sans-serif;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -75,11 +109,6 @@ footer {
     border-radius: 15px;
 }
 
-
-.navbar {
-    margin-bottom: 20px;
-}
-
 .dropdown-menu {
     background-color: #f8f9fa;
     border: 1px solid #dee2e6;
@@ -91,8 +120,8 @@ footer {
 
 .center-table {
     display: flex;
-    justify-content: center;   /* Centra horizontalmente */
-    align-items: center;       /* Centra verticalmente */
-    height: 100vh;             /* Ocupa el alto completo de la ventana */
-    text-align: center;        /* Alineación del texto dentro */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
 }

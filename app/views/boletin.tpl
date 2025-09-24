@@ -59,13 +59,13 @@
     </form>
 
     <!-- Mostrar mensaje -->
-    {if }
-        <div class="alert alert-{} mt-3">{}</div>
+    {if isset($mensaje)}
+        <div class="alert alert-{$mensaje_tipo|default:'info'} mt-3">{$mensaje}</div>
     {/if}
 
     <!-- Mostrar tabla de notas -->
-    {if isset()}
-        {if |@count > 0}
+    {if isset($notas)}
+        {if $notas|@count > 0}
             <h3 class="mt-4">Calificaciones</h3>
             <table class="table table-striped mt-3">
                 <thead>
@@ -75,23 +75,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from= item=nota}
+                    {foreach from=$notas item=nota}
                         <tr>
-                            <td>{.materia}</td>
+                            <td>{$nota.materia}</td>
                             <td>
-                                {if isset(.calificaciones) && .calificaciones|@count > 0}
+                                {if isset($nota.calificaciones) && $nota.calificaciones|@count > 0}
                                     <ul class="lista-calificaciones">
-                                        {foreach from=.calificaciones item=detalle}
+                                        {foreach from=$nota.calificaciones item=detalle}
                                             <li>
-                                                {.valor}
-                                                {if .fecha_formateada}
-                                                    <span class="text-muted">({.fecha_formateada})</span>
+                                                {$detalle.valor}
+                                                {if $detalle.fecha_formateada}
+                                                    <span class="text-muted">({$detalle.fecha_formateada})</span>
                                                 {/if}
                                             </li>
                                         {/foreach}
                                     </ul>
                                 {else}
-                                    {.calificacion|default:'-'}
+                                    {$nota.calificacion|default:'-'}
                                 {/if}
                             </td>
                         </tr>

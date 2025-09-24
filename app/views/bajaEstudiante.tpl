@@ -45,7 +45,7 @@
             <label for="documento">Número de Documento:</label>
             <input type="text" class="form-control" id="documento" name="documento" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscarDocumento" class="btn btn-danger">Buscar Estudiante</button>
+        <button type="submit" name="buscarDocumento" class="btn-custom">Buscar Estudiante</button>
     </form>
 
     <!-- Mostrar mensaje -->
@@ -63,7 +63,7 @@
         <form action="bajaEstudiante.php" method="POST">
             <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="dni_estudiante" value="{$estudiante.dni|default:''}">
-            <button type="submit" class="btn btn-danger">Eliminar Estudiante</button>
+            <button type="submit" class="btn-custom btn-custom-danger">Eliminar Estudiante</button>
         </form>
     {/if}
 </div>
