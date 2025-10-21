@@ -44,7 +44,7 @@
             <label for="dni">DNI del Estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->
@@ -73,7 +73,7 @@
                                 <input type="hidden" name="accion" value="inscribir">
                                 <input type="hidden" name="idCurso" value="{$curso.id}">
                                 <input type="hidden" name="dniEstudiante" value="{$dniEstudiante}">
-                                <button type="submit" class="btn btn-success btn-sm">Inscribir</button>
+                                <button type="submit" class="btn-formal btn-formal-sm">Inscribir</button>
                             </form>
                         </td>
                     </tr>

@@ -55,7 +55,7 @@
             <label for="dni">DNI del Estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->

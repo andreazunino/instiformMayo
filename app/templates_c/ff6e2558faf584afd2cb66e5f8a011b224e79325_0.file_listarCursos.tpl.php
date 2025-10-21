@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 21:21:31
+/* Smarty version 5.4.0, created on 2025-10-22 00:30:10
   from 'file:listarCursos.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d444bb2b8e22_46442935',
+  'unifunc' => 'content_68f809725828a9_37935466',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ff6e2558faf584afd2cb66e5f8a011b224e79325' => 
     array (
       0 => 'listarCursos.tpl',
-      1 => 1749337190,
+      1 => 1761084625,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d444bb2b8e22_46442935 (\Smarty\Template $_smarty_tpl) {
+function content_68f809725828a9_37935466 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -71,7 +71,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <input type="text" class="form-control" name="nombreCurso" placeholder="Ingrese el nombre del curso" value="<?php echo (($tmp = $_smarty_tpl->getValue('nombreCurso') ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
 " autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->

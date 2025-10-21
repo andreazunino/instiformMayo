@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-08-07 17:22:06
+/* Smarty version 5.4.0, created on 2025-10-22 00:27:27
   from 'file:altaEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6894c49e6e0065_42972819',
+  'unifunc' => 'content_68f808cf51abd2_16114340',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '602cb0974b041b8e586986d9840f1c52299a8a93' => 
     array (
       0 => 'altaEstudiante.tpl',
-      1 => 1749337190,
+      1 => 1761084904,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6894c49e6e0065_42972819 (\Smarty\Template $_smarty_tpl) {
+function content_68f808cf51abd2_16114340 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -98,7 +98,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
-        <button type="submit" class="btn-custom">Dar de Alta</button>
+        <button type="submit" class="btn-formal">Dar de Alta</button>
     </form>
 
 </div>

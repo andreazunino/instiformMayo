@@ -48,7 +48,7 @@
                 {/foreach}
             </select>
         </div>
-        <button type="submit" class="btn-custom">Descargar Boletín PDF</button>
+        <button type="submit" class="btn-formal">Descargar Boletín PDF</button>
     </form>
 </div>
 

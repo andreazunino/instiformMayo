@@ -69,7 +69,7 @@
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
-        <button type="submit" class="btn-custom">Dar de Alta</button>
+        <button type="submit" class="btn-formal">Dar de Alta</button>
     </form>
 
 </div>

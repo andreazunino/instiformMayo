@@ -57,7 +57,7 @@
             <label for="dni">Ingrese el DNI del estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" required pattern="\d+" title="Solo se permiten números" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar tabla o mensaje según los resultados -->
@@ -80,7 +80,7 @@
                                     <input type="hidden" name="accion" value="anular">
                                     <input type="hidden" name="dniEstudiante" value="{$dniEstudiante}">
                                     <input type="hidden" name="idCursoAnular" value="{$curso.id}">
-                                    <button type="submit" class="btn btn-danger">Anular Inscripción</button>
+                                    <button type="submit" class="btn-formal btn-formal-danger">Anular Inscripción</button>
                                 </form>
                             </td>
                         </tr>

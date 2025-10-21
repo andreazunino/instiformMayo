@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Instiform</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
     <style>
         body {
             background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
@@ -27,20 +28,8 @@
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .btn-custom {
-            background-color: #4a90e2;
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
+        .btn-formal {
             margin: 10px;
-        }
-        .btn-custom:hover {
-            background-color: #357abd;
         }
         .logo-large {
             max-width: 400px;
@@ -54,11 +43,11 @@
     <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-large">
     <h1 class="welcome-heading">Bienvenido a Instiform</h1>
 
-    <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn btn-custom">
+    <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn-formal">
         Soy Estudiante
     </button>
 
-    <button class="btn btn-custom" data-toggle="modal" data-target="#adminModal">
+    <button class="btn-formal" data-toggle="modal" data-target="#adminModal">
         Soy Administrador
     </button>
 </div>
@@ -79,7 +68,7 @@
           <div id="login-error" class="text-danger mt-2"></div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-custom">Ingresar</button>
+          <button type="submit" class="btn-formal">Ingresar</button>
         </div>
       </form>
     </div>

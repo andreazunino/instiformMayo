@@ -68,7 +68,7 @@
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" name="email" value="{$estudiante.email}" required autocomplete="off">
             </div>
-            <button type="submit" class="btn-custom">Modificar</button>
+            <button type="submit" class="btn-formal">Modificar</button>
         </form>
 
     {else}
@@ -78,7 +78,7 @@
                 <label for="dni">DNI:</label>
                 <input type="text" class="form-control" name="dni" required pattern="\d+" autocomplete="off">
             </div>
-            <button type="submit" class="btn-custom">Buscar</button>
+            <button type="submit" class="btn-formal">Buscar</button>
         </form>
     {/if}
 </div>

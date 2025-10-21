@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-08-07 17:20:19
+/* Smarty version 5.4.0, created on 2025-10-22 00:28:34
   from 'file:inscribirCurso.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6894c43391e0c6_98800060',
+  'unifunc' => 'content_68f80912dc0630_20176875',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '73f36b626c0cfd6b699040b03b16ddf923cec4b4' => 
     array (
       0 => 'inscribirCurso.tpl',
-      1 => 1749337190,
+      1 => 1761085127,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6894c43391e0c6_98800060 (\Smarty\Template $_smarty_tpl) {
+function content_68f80912dc0630_20176875 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -73,7 +73,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="dni">DNI del Estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->
@@ -114,7 +114,7 @@ $foreach0DoElse = false;
 ">
                                 <input type="hidden" name="idCurso" value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
 ">
-                                <button type="submit" class="btn btn-success btn-sm">Inscribir</button>
+                                <button type="submit" class="btn-formal btn-formal-sm">Inscribir</button>
                             </form>
                         </td>
                     </tr>

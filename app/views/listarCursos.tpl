@@ -43,7 +43,7 @@
         <div class="form-group">
             <input type="text" class="form-control" name="nombreCurso" placeholder="Ingrese el nombre del curso" value="{$nombreCurso|default:''}" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->

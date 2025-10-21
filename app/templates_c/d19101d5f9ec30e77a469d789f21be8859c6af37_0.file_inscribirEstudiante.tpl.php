@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 20:55:08
+/* Smarty version 5.4.0, created on 2025-10-22 00:30:20
   from 'file:inscribirEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d43e8cef94e8_84747864',
+  'unifunc' => 'content_68f8097c18e7d7_34039721',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'd19101d5f9ec30e77a469d789f21be8859c6af37' => 
     array (
       0 => 'inscribirEstudiante.tpl',
-      1 => 1749337190,
+      1 => 1761085113,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d43e8cef94e8_84747864 (\Smarty\Template $_smarty_tpl) {
+function content_68f8097c18e7d7_34039721 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -71,7 +71,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="dni">DNI del Estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->
@@ -111,7 +111,7 @@ $foreach0DoElse = false;
 ">
                                 <input type="hidden" name="dniEstudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
-                                <button type="submit" class="btn btn-success btn-sm">Inscribir</button>
+                                <button type="submit" class="btn-formal btn-formal-sm">Inscribir</button>
                             </form>
                         </td>
                     </tr>

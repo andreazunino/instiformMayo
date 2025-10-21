@@ -73,7 +73,7 @@
             <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
         </div>
 
-        <button type="submit" class="btn btn-primary">Modificar Curso</button>
+        <button type="submit" class="btn-formal">Modificar Curso</button>
     </form>
 </div>
 

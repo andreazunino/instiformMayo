@@ -53,7 +53,7 @@
             <input type="text" class="form-control" id="dni_estudiante" name="dni_estudiante"
                    value="{$dniEstudiante}" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscar_dni" class="btn-custom">Buscar</button>
+        <button type="submit" name="buscar_dni" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Formulario para ingresar nota -->
@@ -73,7 +73,7 @@
                 <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10">
             </div>
             <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
-            <button type="submit" name="ingresar_nota" class="btn-custom">Guardar Nota</button>
+        <button type="submit" name="ingresar_nota" class="btn-formal">Guardar Nota</button>
         </form>
     {elseif isset($dniEstudiante)}
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
@@ -104,12 +104,12 @@
                                         <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
                                         <input type="hidden" name="calificacion_id" value="{$registro.id}">
                                         <input type="number" name="nota" class="form-control form-control-sm mr-2" value="{$registro.calificacion}" min="1" max="10" required>
-                                        <button type="submit" name="editar_calificacion" class="btn-custom btn-sm">Actualizar</button>
+                                        <button type="submit" name="editar_calificacion" class="btn-formal btn-formal-sm">Actualizar</button>
                                     </form>
                                     <form action="" method="POST" class="d-inline">
                                         <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
                                         <input type="hidden" name="calificacion_id" value="{$registro.id}">
-                                        <button type="submit" name="eliminar_calificacion" class="btn-custom btn-custom-danger btn-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                        <button type="submit" name="eliminar_calificacion" class="btn-formal btn-formal-danger btn-formal-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

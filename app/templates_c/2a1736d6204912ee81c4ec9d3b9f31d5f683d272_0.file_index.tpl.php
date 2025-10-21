@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-26 23:01:06
+/* Smarty version 5.4.0, created on 2025-10-22 00:28:04
   from 'file:index.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_685db512144157_50561672',
+  'unifunc' => 'content_68f808f450bf17_90229203',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a1736d6204912ee81c4ec9d3b9f31d5f683d272' => 
     array (
       0 => 'index.tpl',
-      1 => 1748461927,
+      1 => 1761085159,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_685db512144157_50561672 (\Smarty\Template $_smarty_tpl) {
+function content_68f808f450bf17_90229203 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -28,6 +28,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     <meta charset="UTF-8">
     <title>Instiform</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="public/css/styles.css">
     <style>
         body {
             background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
@@ -51,20 +52,8 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
-        .btn-custom {
-            background-color: #4a90e2;
-            color: #fff;
-            border: none;
-            padding: 15px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 50px;
-            transition: background-color 0.3s ease;
+        .btn-formal {
             margin: 10px;
-        }
-        .btn-custom:hover {
-            background-color: #357abd;
         }
         .logo-large {
             max-width: 400px;
@@ -78,11 +67,11 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     <img src="public/img/Logo Instiform.png" alt="Logo de Instiform" class="img-fluid logo-large">
     <h1 class="welcome-heading">Bienvenido a Instiform</h1>
 
-    <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn btn-custom">
+    <button onclick="window.location.href='app/controllers/menuEstudiante.php'" class="btn-formal">
         Soy Estudiante
     </button>
 
-    <button class="btn btn-custom" data-toggle="modal" data-target="#adminModal">
+    <button class="btn-formal" data-toggle="modal" data-target="#adminModal">
         Soy Administrador
     </button>
 </div>
@@ -103,7 +92,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
           <div id="login-error" class="text-danger mt-2"></div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-custom">Ingresar</button>
+          <button type="submit" class="btn-formal">Ingresar</button>
         </div>
       </form>
     </div>

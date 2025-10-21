@@ -31,49 +31,78 @@ body {
     background-color: #b02a37;
 }
 
-.btn-custom {
-    background-color: #4a90e2;
+.btn-formal,
+.btn-custom,
+a.btn-formal,
+a.btn-custom,
+button.btn-formal,
+button.btn-custom,
+input[type="submit"].btn-formal,
+input[type="submit"].btn-custom,
+input[type="button"].btn-formal,
+input[type="button"].btn-custom {
+    background-color: #2c3e50;
     color: #ffffff;
-    border: none;
-    padding: 15px 30px;
-    font-size: 25px;
-    font-weight: bold;
-    text-transform: uppercase;
-    border-radius: 50px;
-    font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    border: 1px solid #1f2a36;
+    padding: 12px 28px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: none;
+    border-radius: 6px;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+    text-decoration: none;
+    cursor: pointer;
 }
 
+.btn-formal:hover,
+.btn-formal:focus,
+.btn-formal:active,
 .btn-custom:hover,
-.btn-custom:focus {
-    background-color: #357abd;
-    transform: translateY(-1px);
+.btn-custom:focus,
+.btn-custom:active,
+a.btn-formal:hover,
+a.btn-formal:focus,
+a.btn-custom:hover,
+a.btn-custom:focus {
+    background-color: #1f2a36;
     color: #ffffff;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-1px);
+    text-decoration: none;
 }
 
+.btn-formal:focus,
 .btn-custom:focus {
     outline: none;
 }
 
+.btn-formal.btn-formal-sm,
+.btn-formal-sm,
 .btn-custom.btn-sm,
 .btn-custom-sm {
     padding: 8px 20px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
+.btn-formal.btn-formal-danger,
+.btn-formal-danger,
 .btn-custom.btn-custom-danger,
-.btn-custom.btn-custom-danger.btn-sm,
 .btn-custom-danger {
-    background-color: #d33f4d;
+    background-color: #c0392b;
+    border-color: #962d22;
 }
 
+.btn-formal.btn-formal-danger:hover,
+.btn-formal.btn-formal-danger:focus,
+.btn-formal-danger:hover,
+.btn-formal-danger:focus,
 .btn-custom.btn-custom-danger:hover,
 .btn-custom.btn-custom-danger:focus,
-.btn-custom.btn-custom-danger.btn-sm:hover,
-.btn-custom.btn-custom-danger.btn-sm:focus,
 .btn-custom-danger:hover,
 .btn-custom-danger:focus {
-    background-color: #a72832;
+    background-color: #962d22;
     color: #ffffff;
 }
 

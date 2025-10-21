@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-23 23:09:34
+/* Smarty version 5.4.0, created on 2025-10-22 00:29:40
   from 'file:darAltaCurso.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d30c8e476372_75290883',
+  'unifunc' => 'content_68f80954b43ab3_43313515',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'f60f1f86f654fef90d87bd29c6ad033437e67335' => 
     array (
       0 => 'darAltaCurso.tpl',
-      1 => 1749337190,
+      1 => 1761084929,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d30c8e476372_75290883 (\Smarty\Template $_smarty_tpl) {
+function content_68f80954b43ab3_43313515 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -87,7 +87,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="cupo">Cupo:</label>
             <input type="number" class="form-control" id="cupo" name="cupo" required min="1">
         </div>
-        <button type="submit" class="btn-custom">Dar de Alta</button>
+        <button type="submit" class="btn-formal">Dar de Alta</button>
     </form>
 </div>
 

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 21:21:03
+/* Smarty version 5.4.0, created on 2025-10-22 00:32:23
   from 'file:seleccionarEstudianteBoletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d4449fb5fad6_39314435',
+  'unifunc' => 'content_68f809f7790a50_92542694',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '89cd0e9d3c48d9beb1e4aa8a3812995ea4fccaa0' => 
     array (
       0 => 'seleccionarEstudianteBoletin.tpl',
-      1 => 1758741424,
+      1 => 1761085029,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d4449fb5fad6_39314435 (\Smarty\Template $_smarty_tpl) {
+function content_68f809f7790a50_92542694 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -86,7 +86,7 @@ $foreach0DoElse = false;
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </select>
         </div>
-        <button type="submit" class="btn-custom">Descargar Boletín PDF</button>
+        <button type="submit" class="btn-formal">Descargar Boletín PDF</button>
     </form>
 </div>
 

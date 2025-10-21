@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 20:53:35
+/* Smarty version 5.4.0, created on 2025-10-22 00:31:24
   from 'file:notas.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d43e2f48fd29_43422446',
+  'unifunc' => 'content_68f809bcb18a92_02502459',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db99d7ba01dfd6a52a85715581db91cac0c7c69a' => 
     array (
       0 => 'notas.tpl',
-      1 => 1758739352,
+      1 => 1761084999,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d43e2f48fd29_43422446 (\Smarty\Template $_smarty_tpl) {
+function content_68f809bcb18a92_02502459 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -83,7 +83,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
                    value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 " required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscar_dni" class="btn-custom">Buscar</button>
+        <button type="submit" name="buscar_dni" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Formulario para ingresar nota -->
@@ -113,7 +113,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </div>
             <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
-            <button type="submit" name="ingresar_nota" class="btn-custom">Guardar Nota</button>
+        <button type="submit" name="ingresar_nota" class="btn-formal">Guardar Nota</button>
         </form>
     <?php } elseif ((null !== ($_smarty_tpl->getValue('dniEstudiante') ?? null))) {?>
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
@@ -156,14 +156,14 @@ echo $_smarty_tpl->getValue('registro')['fecha_formateada'];
 ">
                                         <input type="number" name="nota" class="form-control form-control-sm mr-2" value="<?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
 " min="1" max="10" required>
-                                        <button type="submit" name="editar_calificacion" class="btn-custom btn-sm">Actualizar</button>
+                                        <button type="submit" name="editar_calificacion" class="btn-formal btn-formal-sm">Actualizar</button>
                                     </form>
                                     <form action="" method="POST" class="d-inline">
                                         <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
                                         <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
 ">
-                                        <button type="submit" name="eliminar_calificacion" class="btn-custom btn-custom-danger btn-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                        <button type="submit" name="eliminar_calificacion" class="btn-formal btn-formal-danger btn-formal-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
                                     </form>
                                 </td>
                             </tr>

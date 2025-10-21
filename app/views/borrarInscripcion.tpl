@@ -57,7 +57,7 @@
             <label for="nombreMateria">Nombre de la Materia:</label>
             <input type="text" class="form-control" id="nombreMateria" name="nombreMateria" placeholder="Ej: Matemática">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Tabla de resultados -->
@@ -82,7 +82,7 @@
                         <td>{$inscripcion.curso_nombre}</td>
                         <td>
                             <a href="borrarInscripcion.php?id={$inscripcion.id}" 
-                               class="btn btn-danger btn-sm" 
+                               class="btn-formal btn-formal-danger btn-formal-sm" 
                                onclick="return confirm('¿Estás seguro de que deseas eliminar esta inscripción?');">
                                 Borrar
                             </a>
