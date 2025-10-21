@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-06-26 23:01:15
+/* Smarty version 5.4.0, created on 2025-10-21 23:57:30
   from 'file:head.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_685db51bf3dbb8_11089996',
+  'unifunc' => 'content_68f801ca31ba66_70931931',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '993d7954a893681d6c2a0222a01d0182623b90d3' => 
     array (
       0 => 'head.tpl',
-      1 => 1748178799,
+      1 => 1761083790,
       2 => 'file',
     ),
   ),
@@ -20,14 +20,14 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_685db51bf3dbb8_11089996 (\Smarty\Template $_smarty_tpl) {
+function content_68f801ca31ba66_70931931 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><head>
     <meta charset="UTF-8">
     <title>Instiform</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="../../public/css/styles.css">
 
 
     <style>
