@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $smarty->assign('estudiante', $estudiante);
         } else {
             $smarty->assign('mensaje', 'No se encontró un estudiante con ese DNI.');
+            $smarty->assign('mensaje_tipo', 'warning');
         }
     }
 
@@ -29,8 +30,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($exito) {
             $smarty->assign('mensaje', 'El estudiante fue eliminado exitosamente.');
+            $smarty->assign('mensaje_tipo', 'success');
         } else {
             $smarty->assign('mensaje', 'No se pudo eliminar al estudiante.');
+            $smarty->assign('mensaje_tipo', 'danger');
         }
     }
 }

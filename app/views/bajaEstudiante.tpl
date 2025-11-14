@@ -8,6 +8,14 @@
             max-width: 80px;
             margin-top: 10px;
         }
+        .panel-form {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .panel-form .btn-formal {
+            display: block;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
@@ -37,33 +45,49 @@
 </nav>
 
 <div class="container text-center">
-    <!-- Formulario para buscar estudiante -->
-    <h3>Buscar por Número de Documento</h3>
-    <form action="bajaEstudiante.php" method="post">
+    <h3 class="mb-4">Buscar Estudiante por DNI</h3>
+    <form action="bajaEstudiante.php" method="post" class="panel-form text-left">
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group">
-            <label for="documento">Número de Documento:</label>
+            <label for="documento">DNI:</label>
             <input type="text" class="form-control" id="documento" name="documento" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscarDocumento" class="btn-formal">Buscar Estudiante</button>
+        <button type="submit" name="buscarDocumento" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->
     {if isset($mensaje)}
-        <div class="alert alert-warning mt-3">{$mensaje}</div>
+        <div class="alert alert-{$mensaje_tipo|default:'info'} mt-3 mb-0">{$mensaje}</div>
     {/if}
 
     <!-- Mostrar datos del estudiante encontrado -->
     {if isset($estudiante)}
-        <h3>Datos del Estudiante</h3>
-        <p><strong>DNI:</strong> {$estudiante.dni|default:''}</p>
-        <p><strong>Nombre:</strong> {$estudiante.nombre|default:''}</p>
-        <p><strong>Apellido:</strong> {$estudiante.apellido|default:''}</p>
-        <p><strong>Email:</strong> {$estudiante.email|default:''}</p>
-        <form action="bajaEstudiante.php" method="POST">
+        <h3 class="mt-4">Estudiantes Registrados</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{$estudiante.dni|default:''}</td>
+                    <td>{$estudiante.nombre|default:''}</td>
+                    <td>{$estudiante.apellido|default:''}</td>
+                    <td>{$estudiante.email|default:''}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning mt-3" role="alert">
+            Esta acción eliminará al estudiante y todas sus inscripciones asociadas.
+        </div>
+        <form action="bajaEstudiante.php" method="POST" class="text-center">
             <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="dni_estudiante" value="{$estudiante.dni|default:''}">
-            <button type="submit" class="btn-formal btn-formal-danger">Eliminar Estudiante</button>
+            <button type="submit" class="btn-formal">Confirmar Baja</button>
         </form>
     {/if}
 </div>

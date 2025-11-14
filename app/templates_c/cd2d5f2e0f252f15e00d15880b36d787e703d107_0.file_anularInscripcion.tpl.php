@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-08-07 17:21:33
+/* Smarty version 5.4.0, created on 2025-11-14 15:31:06
   from 'file:anularInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_6894c47d4f1005_48526650',
+  'unifunc' => 'content_69173d2a569145_88353597',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'cd2d5f2e0f252f15e00d15880b36d787e703d107' => 
     array (
       0 => 'anularInscripcion.tpl',
-      1 => 1749337190,
+      1 => 1763130372,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_6894c47d4f1005_48526650 (\Smarty\Template $_smarty_tpl) {
+function content_69173d2a569145_88353597 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -86,7 +86,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="dni">Ingrese el DNI del estudiante:</label>
             <input type="text" class="form-control" id="dni" name="dni" required pattern="\d+" title="Solo se permiten números" autocomplete="off">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar tabla o mensaje según los resultados -->
@@ -111,13 +111,13 @@ $foreach0DoElse = false;
                             <td><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
 </td>
                             <td>
-                                <form method="POST" action="">
+                                <form method="POST" class="d-inline">
                                     <input type="hidden" name="accion" value="anular">
                                     <input type="hidden" name="dniEstudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
                                     <input type="hidden" name="idCursoAnular" value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
 ">
-                                    <button type="submit" class="btn btn-danger">Anular Inscripción</button>
+                                    <button type="submit" class="btn-formal btn-formal-sm">Anular Inscripción</button>
                                 </form>
                             </td>
                         </tr>

@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 20:59:42
+/* Smarty version 5.4.0, created on 2025-11-14 16:02:27
   from 'file:bajaEstudiante.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d43f9e11ef40_11173147',
+  'unifunc' => 'content_69174483eef0f3_30614174',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'da2e51a250a592196e19197818bad3841086174b' => 
     array (
       0 => 'bajaEstudiante.tpl',
-      1 => 1758740163,
+      1 => 1763132533,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d43f9e11ef40_11173147 (\Smarty\Template $_smarty_tpl) {
+function content_69174483eef0f3_30614174 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -34,6 +34,14 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         .logo-small {
             max-width: 80px;
             margin-top: 10px;
+        }
+        .panel-form {
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        .panel-form .btn-formal {
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -64,39 +72,56 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 </nav>
 
 <div class="container text-center">
-    <!-- Formulario para buscar estudiante -->
-    <h3>Buscar por Número de Documento</h3>
-    <form action="bajaEstudiante.php" method="post">
+    <h3 class="mb-4">Buscar Estudiante por DNI</h3>
+    <form action="bajaEstudiante.php" method="post" class="panel-form text-left">
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group">
-            <label for="documento">Número de Documento:</label>
+            <label for="documento">DNI:</label>
             <input type="text" class="form-control" id="documento" name="documento" required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscarDocumento" class="btn-custom">Buscar Estudiante</button>
+        <button type="submit" name="buscarDocumento" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Mostrar mensaje -->
     <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
-        <div class="alert alert-warning mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+        <div class="alert alert-<?php echo (($tmp = $_smarty_tpl->getValue('mensaje_tipo') ?? null)===null||$tmp==='' ? 'info' ?? null : $tmp);?>
+ mt-3 mb-0"><?php echo $_smarty_tpl->getValue('mensaje');?>
 </div>
     <?php }?>
 
     <!-- Mostrar datos del estudiante encontrado -->
     <?php if ((null !== ($_smarty_tpl->getValue('estudiante') ?? null))) {?>
-        <h3>Datos del Estudiante</h3>
-        <p><strong>DNI:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['dni'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-</p>
-        <p><strong>Nombre:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['nombre'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-</p>
-        <p><strong>Apellido:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['apellido'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-</p>
-        <p><strong>Email:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['email'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
-</p>
-        <form action="bajaEstudiante.php" method="POST">
+        <h3 class="mt-4">Estudiantes Registrados</h3>
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th>DNI</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['dni'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+</td>
+                    <td><?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['nombre'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+</td>
+                    <td><?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['apellido'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+</td>
+                    <td><?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['email'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="alert alert-warning mt-3" role="alert">
+            Esta acción eliminará al estudiante y todas sus inscripciones asociadas.
+        </div>
+        <form action="bajaEstudiante.php" method="POST" class="text-center">
             <input type="hidden" name="accion" value="eliminar">
             <input type="hidden" name="dni_estudiante" value="<?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['dni'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
 ">
-            <button type="submit" class="btn-custom btn-custom-danger">Eliminar Estudiante</button>
+            <button type="submit" class="btn-formal">Confirmar Baja</button>
         </form>
     <?php }?>
 </div>
@@ -116,6 +141,5 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?>
 </body>
 </html>
-
 <?php }
 }

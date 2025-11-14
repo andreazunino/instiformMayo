@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-10-22 00:30:56
+/* Smarty version 5.4.0, created on 2025-11-14 15:16:00
   from 'file:boletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68f809a0bfedc3_08298214',
+  'unifunc' => 'content_691739a06ba818_13078533',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bd44bf459e10bf4f4968cbe4a58735a7916d0478' => 
     array (
       0 => 'boletin.tpl',
-      1 => 1761084512,
+      1 => 1763129723,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68f809a0bfedc3_08298214 (\Smarty\Template $_smarty_tpl) {
+function content_691739a06ba818_13078533 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -36,10 +36,18 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             max-width: 80px;
             margin-top: 10px;
         }
+        .tabla-calificaciones {
+            margin: 0 auto;
+        }
+        .tabla-calificaciones th:nth-child(2),
+        .tabla-calificaciones td:nth-child(2) {
+            text-align: center;
+        }
         .lista-calificaciones {
             margin: 0;
-            padding-left: 1rem;
-            text-align: left;
+            padding-left: 0;
+            text-align: center;
+            list-style-position: inside;
         }
         .lista-calificaciones li {
             list-style-type: disc;
@@ -96,7 +104,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     <?php if ((null !== ($_smarty_tpl->getValue('notas') ?? null))) {?>
         <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('notas')) > 0) {?>
             <h3 class="mt-4">Calificaciones</h3>
-            <table class="table table-striped mt-3">
+            <table class="table table-striped mt-3 tabla-calificaciones">
                 <thead>
                     <tr>
                         <th>Materia</th>

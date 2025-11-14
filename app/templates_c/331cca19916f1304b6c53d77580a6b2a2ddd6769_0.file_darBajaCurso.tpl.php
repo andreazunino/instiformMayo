@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 20:54:20
+/* Smarty version 5.4.0, created on 2025-11-14 16:04:20
   from 'file:darBajaCurso.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d43e5cd84853_27409585',
+  'unifunc' => 'content_691744f44b5f76_60917158',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '331cca19916f1304b6c53d77580a6b2a2ddd6769' => 
     array (
       0 => 'darBajaCurso.tpl',
-      1 => 1749337190,
+      1 => 1761084943,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d43e5cd84853_27409585 (\Smarty\Template $_smarty_tpl) {
+function content_691744f44b5f76_60917158 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -94,7 +94,7 @@ $foreach0DoElse = false;
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </select>
         </div>
-        <button type="submit" class="btn-custom">Dar de Baja</button>
+        <button type="submit" class="btn-formal">Dar de Baja</button>
     </form>
 </div>
 

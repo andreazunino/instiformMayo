@@ -76,11 +76,11 @@
                         <tr>
                             <td>{$curso.nombre}</td>
                             <td>
-                                <form method="POST" action="">
+                                <form method="POST" class="d-inline">
                                     <input type="hidden" name="accion" value="anular">
                                     <input type="hidden" name="dniEstudiante" value="{$dniEstudiante}">
                                     <input type="hidden" name="idCursoAnular" value="{$curso.id}">
-                                    <button type="submit" class="btn-formal btn-formal-danger">Anular Inscripción</button>
+                                    <button type="submit" class="btn-formal btn-formal-sm">Anular Inscripción</button>
                                 </form>
                             </td>
                         </tr>

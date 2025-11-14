@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-09-24 20:55:16
+/* Smarty version 5.4.0, created on 2025-11-14 20:10:17
   from 'file:borrarInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68d43e9427b651_93485687',
+  'unifunc' => 'content_69177e99ef72a0_80610827',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '28a102bdcad0ead095adc4769709375ade22d33d' => 
     array (
       0 => 'borrarInscripcion.tpl',
-      1 => 1749586863,
+      1 => 1763147339,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68d43e9427b651_93485687 (\Smarty\Template $_smarty_tpl) {
+function content_69177e99ef72a0_80610827 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -86,7 +86,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
             <label for="nombreMateria">Nombre de la Materia:</label>
             <input type="text" class="form-control" id="nombreMateria" name="nombreMateria" placeholder="Ej: Matemática">
         </div>
-        <button type="submit" class="btn-custom">Buscar</button>
+        <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
     <!-- Tabla de resultados -->
@@ -112,16 +112,17 @@ $foreach0DoElse = false;
                     <tr>
                         <td><?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
 </td>
-                        <td><?php echo (($tmp = $_smarty_tpl->getValue('inscripcion')['dni_estudiante'] ?? null)===null||$tmp==='' ? 'N/A' ?? null : $tmp);?>
+                        <td><?php echo (($tmp = (($tmp = $_smarty_tpl->getValue('inscripcion')['dni'] ?? null)===null||$tmp==='' ? $_smarty_tpl->getValue('inscripcion')['dni_estudiante'] ?? null : $tmp) ?? null)===null||$tmp==='' ? 'N/A' ?? null : $tmp);?>
 </td>
                         <td><?php echo $_smarty_tpl->getValue('inscripcion')['nombre'];?>
+ <?php echo $_smarty_tpl->getValue('inscripcion')['apellido'];?>
 </td>
-                        <td><?php echo $_smarty_tpl->getValue('inscripcion')['curso_nombre'];?>
+                        <td><?php echo (($tmp = (($tmp = $_smarty_tpl->getValue('inscripcion')['curso'] ?? null)===null||$tmp==='' ? $_smarty_tpl->getValue('inscripcion')['curso_nombre'] ?? null : $tmp) ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
 </td>
                         <td>
                             <a href="borrarInscripcion.php?id=<?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
 " 
-                               class="btn btn-danger btn-sm" 
+                               class="btn-formal btn-formal-danger btn-formal-sm" 
                                onclick="return confirm('¿Estás seguro de que deseas eliminar esta inscripción?');">
                                 Borrar
                             </a>

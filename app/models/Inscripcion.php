@@ -13,8 +13,37 @@ class Inscripcion
     // Inscribir a un estudiante en un curso
     public function inscribir($dniEstudiante, $idCurso)
     {
-        $stmt = $this->pdo->prepare("INSERT INTO inscripcion (dni_estudiante, id_curso) VALUES (?, ?)");
-        return $stmt->execute([$dniEstudiante, $idCurso]);
+        try {
+            $this->pdo->beginTransaction();
+
+            $stmt = $this->pdo->prepare("SELECT cupo FROM curso WHERE id = ? FOR UPDATE");
+            $stmt->execute([$idCurso]);
+            $curso = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$curso || (int) $curso['cupo'] <= 0) {
+                $this->pdo->rollBack();
+                return false;
+            }
+
+            $insert = $this->pdo->prepare("INSERT INTO inscripcion (dni_estudiante, id_curso) VALUES (?, ?)");
+            $resultado = $insert->execute([$dniEstudiante, $idCurso]);
+
+            if (!$resultado) {
+                $this->pdo->rollBack();
+                return false;
+            }
+
+            $updateCupo = $this->pdo->prepare("UPDATE curso SET cupo = cupo - 1 WHERE id = ?");
+            $updateCupo->execute([$idCurso]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            throw $e;
+        }
     }
 
     // Ver en qué cursos está inscrito un estudiante
@@ -48,8 +77,63 @@ class Inscripcion
     // Anular inscripción de un estudiante a un curso
     public function anular($dniEstudiante, $idCurso)
     {
-        $stmt = $this->pdo->prepare("DELETE FROM inscripcion WHERE dni_estudiante = ? AND id_curso = ?");
-        return $stmt->execute([$dniEstudiante, $idCurso]);
+        try {
+            $this->pdo->beginTransaction();
+
+            $stmt = $this->pdo->prepare("DELETE FROM inscripcion WHERE dni_estudiante = ? AND id_curso = ?");
+            $stmt->execute([$dniEstudiante, $idCurso]);
+
+            if ($stmt->rowCount() === 0) {
+                $this->pdo->rollBack();
+                return false;
+            }
+
+            $updateCupo = $this->pdo->prepare("UPDATE curso SET cupo = cupo + 1 WHERE id = ?");
+            $updateCupo->execute([$idCurso]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            throw $e;
+        }
+    }
+
+    public function eliminarPorId($inscripcionId)
+    {
+        try {
+            $this->pdo->beginTransaction();
+
+            $stmt = $this->pdo->prepare('SELECT id_curso FROM inscripcion WHERE id = ? FOR UPDATE');
+            $stmt->execute([$inscripcionId]);
+            $registro = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$registro) {
+                $this->pdo->rollBack();
+                return false;
+            }
+
+            $delete = $this->pdo->prepare('DELETE FROM inscripcion WHERE id = ?');
+            $delete->execute([$inscripcionId]);
+
+            if ($delete->rowCount() === 0) {
+                $this->pdo->rollBack();
+                return false;
+            }
+
+            $updateCupo = $this->pdo->prepare('UPDATE curso SET cupo = cupo + 1 WHERE id = ?');
+            $updateCupo->execute([$registro['id_curso']]);
+
+            $this->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            if ($this->pdo->inTransaction()) {
+                $this->pdo->rollBack();
+            }
+            throw $e;
+        }
     }
 
     // Listar todas las inscripciones (para el administrador)
@@ -244,7 +328,14 @@ class Inscripcion
     public function buscarInscripciones($dni, $materia)
     {
         $query = "
-            SELECT i.id, i.dni_estudiante as dni, e.nombre, e.apellido, c.nombre as curso
+            SELECT 
+                i.id, 
+                i.dni_estudiante AS dni, 
+                i.dni_estudiante AS dni_estudiante,
+                e.nombre, 
+                e.apellido, 
+                c.nombre AS curso,
+                c.nombre AS curso_nombre
             FROM inscripcion i
             INNER JOIN estudiante e ON i.dni_estudiante = e.dni
             INNER JOIN curso c ON i.id_curso = c.id
@@ -281,13 +372,33 @@ class Inscripcion
             $this->tablaCalificacionesDisponible = true;
         } catch (PDOException $e) {
             if ($e->getCode() === '42P01') {
-                $this->tablaCalificacionesDisponible = false;
+                $this->tablaCalificacionesDisponible = $this->crearTablaCalificaciones();
             } else {
                 throw $e;
             }
         }
 
         return $this->tablaCalificacionesDisponible;
+    }
+
+    private function crearTablaCalificaciones(): bool
+    {
+        try {
+            $this->pdo->exec("
+                CREATE TABLE IF NOT EXISTS inscripcion_calificaciones (
+                    id SERIAL PRIMARY KEY,
+                    inscripcion_id INTEGER NOT NULL REFERENCES inscripcion(id) ON DELETE CASCADE,
+                    calificacion NUMERIC(5,2) NOT NULL,
+                    fecha_registro TIMESTAMP WITHOUT TIME ZONE NOT NULL DEFAULT NOW()
+                );
+                CREATE INDEX IF NOT EXISTS idx_inscripcion_calificaciones_inscripcion_id
+                    ON inscripcion_calificaciones (inscripcion_id);
+            ");
+            return true;
+        } catch (PDOException $e) {
+            error_log('No se pudo crear la tabla inscripcion_calificaciones: ' . $e->getMessage());
+            return false;
+        }
     }
 
     private function obtenerIdInscripcion($dniEstudiante, $idCurso)

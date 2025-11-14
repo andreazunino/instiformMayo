@@ -52,4 +52,6 @@ if (!empty($mensaje_error)) {
     $smarty->assign('mensaje_error', $mensaje_error);
 }
 
+$smarty->assign('inscripciones', $inscripciones);
+
 $smarty->display('borrarInscripcion.tpl');

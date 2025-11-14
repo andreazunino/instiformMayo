@@ -9,10 +9,18 @@
             max-width: 80px;
             margin-top: 10px;
         }
+        .tabla-calificaciones {
+            margin: 0 auto;
+        }
+        .tabla-calificaciones th:nth-child(2),
+        .tabla-calificaciones td:nth-child(2) {
+            text-align: center;
+        }
         .lista-calificaciones {
             margin: 0;
-            padding-left: 1rem;
-            text-align: left;
+            padding-left: 0;
+            text-align: center;
+            list-style-position: inside;
         }
         .lista-calificaciones li {
             list-style-type: disc;
@@ -67,7 +75,7 @@
     {if isset($notas)}
         {if $notas|@count > 0}
             <h3 class="mt-4">Calificaciones</h3>
-            <table class="table table-striped mt-3">
+            <table class="table table-striped mt-3 tabla-calificaciones">
                 <thead>
                     <tr>
                         <th>Materia</th>

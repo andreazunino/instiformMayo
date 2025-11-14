@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-10-22 00:31:24
+/* Smarty version 5.4.0, created on 2025-11-14 19:28:16
   from 'file:notas.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_68f809bcb18a92_02502459',
+  'unifunc' => 'content_691774c04db6c8_04160179',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db99d7ba01dfd6a52a85715581db91cac0c7c69a' => 
     array (
       0 => 'notas.tpl',
-      1 => 1761084999,
+      1 => 1763144878,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_68f809bcb18a92_02502459 (\Smarty\Template $_smarty_tpl) {
+function content_691774c04db6c8_04160179 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -34,6 +34,47 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         .logo-small {
             max-width: 80px;
             margin-top: 10px;
+        }
+        .panel-card {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .panel-card .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .panel-table {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .panel-table .table th {
+            width: 35%;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .panel-table .table td {
+            vertical-align: middle;
+        }
+        .acciones-nota {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .acciones-nota form {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            margin: 0;
+        }
+        .acciones-nota .form-editar input[type="number"] {
+            width: 80px;
+        }
+        .historial-table thead {
+            background-color: #f5f5f5;
         }
     </style>
 </head>
@@ -76,60 +117,103 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
     <?php }?>
 
     <!-- Formulario de búsqueda por DNI -->
-    <form action="" method="POST" class="mb-4">
+    <h3 class="mb-4">Buscar Estudiante por DNI</h3>
+    <form action="" method="POST" class="panel-card text-left mb-4">
+        <input type="hidden" name="accion" value="buscar">
         <div class="form-group">
-            <label for="dni_estudiante">DNI del Estudiante:</label>
+            <label for="dni_estudiante">DNI:</label>
             <input type="text" class="form-control" id="dni_estudiante" name="dni_estudiante"
                    value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 " required pattern="\d+" autocomplete="off">
         </div>
-        <button type="submit" name="buscar_dni" class="btn-formal">Buscar</button>
+        <div class="text-center">
+            <button type="submit" name="buscar_dni" class="btn-formal">Buscar</button>
+        </div>
     </form>
 
+    <!-- Datos del estudiante -->
+    <?php if ($_smarty_tpl->getValue('estudiante')) {?>
+        <h3 class="mt-4">Datos del Estudiante</h3>
+        <div class="panel-table">
+            <table class="table table-striped mt-3 mb-0">
+                <thead>
+                    <tr>
+                        <th>DNI</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $_smarty_tpl->getValue('estudiante')['dni'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('estudiante')['nombre'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('estudiante')['apellido'];?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('estudiante')['email'];?>
+</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    <?php }?>
+
     <!-- Formulario para ingresar nota -->
-    <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('cursos')) > 0) {?>
-        <h2>Ingresar Nota</h2>
-        <form action="" method="POST" class="mb-4">
-            <div class="form-group">
-                <label for="id_curso">Curso:</label>
-                <select class="form-control" id="id_curso" name="id_curso" required>
-                    <?php
+    <?php if ($_smarty_tpl->getValue('estudiante') && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('cursos')) > 0) {?>
+        <h3 class="mt-4">Ingresar Nota</h3>
+        <form action="" method="POST" class="panel-table mb-4 text-left">
+            <table class="table table-striped mb-3">
+                <tbody>
+                    <tr>
+                        <th scope="row">Curso</th>
+                        <td>
+                            <select class="form-control" id="id_curso" name="id_curso" required>
+                                <?php
 $_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('cursos'), 'curso');
 $foreach0DoElse = true;
 foreach ($_from ?? [] as $_smarty_tpl->getVariable('curso')->value) {
 $foreach0DoElse = false;
 ?>
-                        <option value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
+                                    <option value="<?php echo $_smarty_tpl->getValue('curso')['id'];?>
 "><?php echo $_smarty_tpl->getValue('curso')['nombre'];?>
 </option>
-                    <?php
+                                <?php
 }
 $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="nota">Nota:</label>
-                <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10">
-            </div>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nota</th>
+                        <td>
+                            <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10" step="1">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
-        <button type="submit" name="ingresar_nota" class="btn-formal">Guardar Nota</button>
+            <div class="text-center">
+                <button type="submit" name="ingresar_nota" class="btn-formal">Guardar Nota</button>
+            </div>
         </form>
-    <?php } elseif ((null !== ($_smarty_tpl->getValue('dniEstudiante') ?? null))) {?>
+    <?php } elseif ($_smarty_tpl->getValue('estudiante') && (null !== ($_smarty_tpl->getValue('dniEstudiante') ?? null))) {?>
         <p class="mt-4 text-warning">El estudiante no está inscrito en ningún curso.</p>
     <?php }?>
 
     <!-- Historial de calificaciones -->
-    <?php if ((null !== ($_smarty_tpl->getValue('historial') ?? null))) {?>
-        <h2 class="mt-5">Historial de calificaciones</h2>
+    <?php if ($_smarty_tpl->getValue('estudiante')) {?>
+        <h3 class="mt-4">Historial de Calificaciones</h3>
         <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('historial')) > 0) {?>
-            <div class="table-responsive mt-3">
-                <table class="table table-bordered">
-                    <thead class="thead-light">
+            <div class="panel-table table-responsive">
+                <table class="table table-striped historial-table">
+                    <thead>
                         <tr>
                             <th>Materia</th>
-                            <th>Nota</th>
                             <th>Fecha</th>
+                            <th>Nota</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -143,28 +227,24 @@ $foreach1DoElse = false;
                             <tr>
                                 <td><?php echo $_smarty_tpl->getValue('registro')['materia'];?>
 </td>
-                                <td><?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
-</td>
                                 <td><?php if ($_smarty_tpl->getValue('registro')['fecha_formateada']) {
 echo $_smarty_tpl->getValue('registro')['fecha_formateada'];
 } else { ?>-<?php }?></td>
+                                <td><?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
+</td>
                                 <td>
-                                    <form action="" method="POST" class="d-inline-flex align-items-center mb-2 mb-lg-0">
-                                        <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
+                                    <div class="acciones-nota">
+                                        <form action="" method="POST" class="form-editar">
+                                            <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
 ">
-                                        <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
+                                            <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
 ">
-                                        <input type="number" name="nota" class="form-control form-control-sm mr-2" value="<?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
-" min="1" max="10" required>
-                                        <button type="submit" name="editar_calificacion" class="btn-formal btn-formal-sm">Actualizar</button>
-                                    </form>
-                                    <form action="" method="POST" class="d-inline">
-                                        <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
-">
-                                        <input type="hidden" name="calificacion_id" value="<?php echo $_smarty_tpl->getValue('registro')['id'];?>
-">
-                                        <button type="submit" name="eliminar_calificacion" class="btn-formal btn-formal-danger btn-formal-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
-                                    </form>
+                                            <input type="number" name="nota" class="form-control form-control-sm" value="<?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
+" min="1" max="10" step="1" required>
+                                            <button type="submit" name="editar_calificacion" class="btn-formal btn-formal-sm">Actualizar</button>
+                                            <button type="submit" name="eliminar_calificacion" class="btn-formal btn-formal-danger btn-formal-sm" onclick="return confirm('¿Eliminar esta calificación?');">Eliminar</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         <?php
@@ -174,7 +254,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                 </table>
             </div>
         <?php } else { ?>
-            <p class="mt-3">Este estudiante aún no tiene calificaciones registradas.</p>
+            <p class="mt-3 mb-0">Este estudiante aún no tiene calificaciones registradas.</p>
         <?php }?>
     <?php }?>
 </div>

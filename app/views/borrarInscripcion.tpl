@@ -77,9 +77,9 @@
                 {foreach $inscripciones as $inscripcion}
                     <tr>
                         <td>{$inscripcion.id}</td>
-                        <td>{$inscripcion.dni_estudiante|default:'N/A'}</td>
-                        <td>{$inscripcion.nombre}</td>
-                        <td>{$inscripcion.curso_nombre}</td>
+                        <td>{$inscripcion.dni|default:$inscripcion.dni_estudiante|default:'N/A'}</td>
+                        <td>{$inscripcion.nombre} {$inscripcion.apellido}</td>
+                        <td>{$inscripcion.curso|default:$inscripcion.curso_nombre|default:'-'}</td>
                         <td>
                             <a href="borrarInscripcion.php?id={$inscripcion.id}" 
                                class="btn-formal btn-formal-danger btn-formal-sm" 
