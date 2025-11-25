@@ -59,7 +59,7 @@ class Inscripcion
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Cursos disponibles para un estudiante (que no esté inscrito y con cupo)
+    // Cursos disponibles para un estudiante (que no este inscrito y con cupo)
     public function cursosDisponiblesParaEstudiante($dniEstudiante)
     {
         $stmt = $this->pdo->prepare("
@@ -74,7 +74,7 @@ class Inscripcion
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Anular inscripción de un estudiante a un curso
+    // Anular inscripcion de un estudiante a un curso
     public function anular($dniEstudiante, $idCurso)
     {
         try {
@@ -436,7 +436,15 @@ class Inscripcion
 
     private function formatearEntradaCalificacion($valor, $fecha)
     {
-        $valorCadena = is_numeric($valor) ? rtrim(rtrim((string) $valor, '0'), '.') : (string) $valor;
+        if (is_numeric($valor)) {
+            $valorCadena = (string) $valor;
+            if (strpos($valorCadena, '.') !== false) {
+                // Remove only trailing zeros from the decimal part, keep integer zeros intact
+                $valorCadena = rtrim(rtrim($valorCadena, '0'), '.');
+            }
+        } else {
+            $valorCadena = (string) $valor;
+        }
         $fechaOriginal = $fecha;
         $fechaFormateada = null;
 
