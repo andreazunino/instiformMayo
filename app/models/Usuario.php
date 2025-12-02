@@ -13,19 +13,19 @@ class Usuario
     public function obtenerPorUsername(string $username): ?array
     {
         $this->asegurarTabla();
-        $stmt = $this->pdo->prepare('SELECT id, username, password_hash, role, nombre, apellido, dni FROM usuarios WHERE username = ?');
+        $stmt = $this->pdo->prepare('SELECT id, username, password_hash, role, nombre, apellido, dni, email FROM usuarios WHERE username = ?');
         $stmt->execute([$username]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         return $user ?: null;
     }
 
-    public function crear(string $username, string $passwordPlano, string $role, ?string $nombre = null, ?string $apellido = null, ?string $dni = null): bool
+    public function crear(string $username, string $passwordPlano, string $role, ?string $nombre = null, ?string $apellido = null, ?string $dni = null, ?string $email = null): bool
     {
         $hash = $passwordPlano; // Guardar plano a pedido del usuario
-        $stmt = $this->pdo->prepare('INSERT INTO usuarios (username, password_hash, role, nombre, apellido, dni) VALUES (?, ?, ?, ?, ?, ?)');
+        $stmt = $this->pdo->prepare('INSERT INTO usuarios (username, password_hash, role, nombre, apellido, dni, email) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
-        return $stmt->execute([$username, $hash, $role, $nombre, $apellido, $dni]);
+        return $stmt->execute([$username, $hash, $role, $nombre, $apellido, $dni, $email]);
     }
 
     public function validarCredenciales(string $username, string $password): ?array
@@ -76,6 +76,7 @@ class Usuario
                 nombre VARCHAR(80),
                 apellido VARCHAR(80),
                 dni VARCHAR(20),
+                email VARCHAR(120),
                 creado_en TIMESTAMP WITHOUT TIME ZONE DEFAULT NOW()
             );
         ");
@@ -94,6 +95,7 @@ class Usuario
             $this->pdo->exec("ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS nombre VARCHAR(80);");
             $this->pdo->exec("ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS apellido VARCHAR(80);");
             $this->pdo->exec("ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS dni VARCHAR(20);");
+            $this->pdo->exec("ALTER TABLE usuarios ADD COLUMN IF NOT EXISTS email VARCHAR(120);");
 
             // Completar datos básicos para el admin por defecto si faltan
             $this->pdo->exec("
@@ -110,7 +112,7 @@ class Usuario
     public function listarTodos(): array
     {
         $this->asegurarTabla();
-        $stmt = $this->pdo->query('SELECT id, username, role, nombre, apellido, dni, creado_en FROM usuarios ORDER BY creado_en DESC');
+        $stmt = $this->pdo->query('SELECT id, username, role, nombre, apellido, dni, email, creado_en FROM usuarios ORDER BY creado_en DESC');
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

@@ -11,27 +11,5 @@ $smarty->setTemplateDir(__DIR__ . '/../views/');
 $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 requireLogin(['admin']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $dni = $_POST['dni'];
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $email = $_POST['email'];
-
-    if (!empty($dni) && !empty($nombre) && !empty($apellido) && !empty($email)) {
-        $exito = $estudianteModel->crear($dni, $nombre, $apellido, $email);
-        if ($exito) {
-            $smarty->assign('mensaje', 'Estudiante registrado con exito.');
-            $smarty->assign('mensaje_tipo', 'success');
-        } else {
-            $smarty->assign('mensaje', 'Hubo un error al registrar al estudiante.');
-            $smarty->assign('mensaje_tipo', 'danger');
-        }
-    } else {
-        $smarty->assign('mensaje', 'Todos los campos son obligatorios.');
-        $smarty->assign('mensaje_tipo', 'warning');
-    }
-}
-
-$smarty->display('altaEstudiante.tpl');
-
+header('Location: administrarUsuarios.php');
+exit;

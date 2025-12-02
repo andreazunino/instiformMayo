@@ -43,7 +43,7 @@ class BoletinPdf extends FPDF
     {
         $this->firmaNombre = $nombre;
         $this->firmaCargo = $cargo;
-        $this->firmaPath = $firmaPath;
+        $this->firmaPath = $this->resolveSignaturePath($firmaPath);
     }
 
     public function Header(): void
@@ -111,9 +111,24 @@ class BoletinPdf extends FPDF
 
             $materia = self::convertirTexto($nota['materia'] ?? '');
             $calificacionTexto = $this->formatearCalificacionesTexto($nota);
+            $calificacionTexto = $this->wrapText($calificacionTexto, $colNota);
 
-            $this->Cell($colMateria, 9, $materia, 'LR', 0, 'L', $fill);
-            $this->Cell($colNota, 9, $calificacionTexto, 'LR', 1, 'L', $fill);
+            $lineHeight = 8;
+            $lines = substr_count($calificacionTexto, "\n") + 1;
+            $rowHeight = $lines * $lineHeight;
+
+            $x = $this->GetX();
+            $y = $this->GetY();
+
+            // Materia celda
+            $this->MultiCell($colMateria, $rowHeight, $materia, 'LR', 'L', $fill);
+
+            // Calificaciones celda
+            $this->SetXY($x + $colMateria, $y);
+            $this->MultiCell($colNota, $lineHeight, $calificacionTexto, 'LR', 'L', $fill);
+
+            // Ajustar Y al final de la fila
+            $this->SetY($y + $rowHeight);
             $fill = !$fill;
         }
 
@@ -153,6 +168,9 @@ class BoletinPdf extends FPDF
             $this->SetFont('Arial', '', 10);
             $this->Cell(60, 6, self::convertirTexto($this->firmaCargo), 0, 1, 'L');
         }
+        $this->SetFont('Arial', 'I', 9);
+        $this->SetTextColor(120, 130, 140);
+        $this->Cell(60, 6, self::convertirTexto('Firma digital generada por Instiform'), 0, 1, 'L');
     }
 
     private function resolveLogoPath(?string $logoPath): string
@@ -161,6 +179,22 @@ class BoletinPdf extends FPDF
             $logoPath,
             defined('APP_LOGO_PATH') ? APP_LOGO_PATH : null,
             defined('APP_LOGO_FALLBACK_PATH') ? APP_LOGO_FALLBACK_PATH : null,
+        ]);
+
+        foreach ($candidates as $candidate) {
+            if ($candidate !== null && file_exists($candidate)) {
+                return $candidate;
+            }
+        }
+
+        return '';
+    }
+
+    private function resolveSignaturePath(?string $firmaPath): string
+    {
+        $candidates = array_filter([
+            $firmaPath,
+            defined('APP_SIGNATURE_PATH') ? APP_SIGNATURE_PATH : null,
         ]);
 
         foreach ($candidates as $candidate) {
@@ -203,7 +237,7 @@ class BoletinPdf extends FPDF
                 }
 
                 $segmentos = [];
-                if (!empty($detalle['actividad'])) {
+                if (!empty($detalle['actividad']) && strtolower($detalle['actividad']) !== 'carga manual') {
                     $segmentos[] = $detalle['actividad'];
                 }
 
@@ -236,5 +270,37 @@ class BoletinPdf extends FPDF
         }
 
         return '-';
+    }
+
+    /**
+     * Ajusta un texto para que no se desborde en el ancho indicado.
+     */
+    private function wrapText(string $texto, float $ancho): string
+    {
+        $palabras = preg_split('/\\s+/', $texto);
+        $linea = '';
+        $resultado = '';
+
+        foreach ($palabras as $palabra) {
+            $propuesta = ($linea === '') ? $palabra : $linea . ' ' . $palabra;
+            if ($this->GetStringWidth($propuesta) <= $ancho) {
+                $linea = $propuesta;
+            } else {
+                if ($resultado !== '') {
+                    $resultado .= "\n";
+                }
+                $resultado .= ($linea !== '') ? $linea : $palabra;
+                $linea = $palabra;
+            }
+        }
+
+        if ($linea !== '') {
+            if ($resultado !== '') {
+                $resultado .= "\n";
+            }
+            $resultado .= $linea;
+        }
+
+        return $resultado;
     }
 }

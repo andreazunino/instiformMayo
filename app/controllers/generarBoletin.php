@@ -20,8 +20,9 @@ if (!$estudiante) {
 }
 $desde = $_GET['desde'] ?? null;
 $hasta = $_GET['hasta'] ?? null;
-$firmaNombre = $_GET['firma'] ?? null;
-$firmaCargo = $_GET['cargo'] ?? null;
+$firmaNombre = $_GET['firma'] ?? 'Pedro Emith';
+$firmaCargo = $_GET['cargo'] ?? 'Director';
+$firmaPath = APP_SIGNATURE_PATH;
 
 $inscripcionModel = new Inscripcion($pdo);
 requireLogin(['admin', 'estudiante']);
@@ -30,7 +31,7 @@ $notas = $inscripcionModel->obtenerNotasPorDNI($dni, $desde, $hasta);
 
 $pdf = new BoletinPdf();
 $pdf->setPeriodo($desde, $hasta);
-$pdf->setFirma($firmaNombre, $firmaCargo);
+$pdf->setFirma($firmaNombre, $firmaCargo, $firmaPath);
 $pdf->AddPage();
 $pdf->renderEncabezadoEstudiante($estudiante, $dni);
 

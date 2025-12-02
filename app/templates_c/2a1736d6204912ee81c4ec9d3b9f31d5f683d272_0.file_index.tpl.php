@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-12-02 16:14:23
+/* Smarty version 5.4.0, created on 2025-12-02 16:39:33
   from 'file:index.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_692f024f6935e4_28044128',
+  'unifunc' => 'content_692f0835eac4b4_56920829',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '2a1736d6204912ee81c4ec9d3b9f31d5f683d272' => 
     array (
       0 => 'index.tpl',
-      1 => 1764687391,
+      1 => 1764689959,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   array (
   ),
 ))) {
-function content_692f024f6935e4_28044128 (\Smarty\Template $_smarty_tpl) {
+function content_692f0835eac4b4_56920829 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -90,6 +90,22 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         .modal-dialog {
             margin: 0 auto;
         }
+        /* Blur background when modal is open */
+        body.modal-open-blur .container-welcome {
+            filter: blur(6px);
+            transition: filter 0.2s ease;
+        }
+        body.modal-open-blur::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+            z-index: 1040;
+        }
     </style>
 </head>
 <body>
@@ -143,6 +159,17 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 >
 <?php echo '<script'; ?>
  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+>
+    // Add blur effect to the background when the login modal is open
+    $('#loginModal').on('show.bs.modal', function () {
+        $('body').addClass('modal-open-blur');
+    });
+    $('#loginModal').on('hidden.bs.modal', function () {
+        $('body').removeClass('modal-open-blur');
+    });
+<?php echo '</script'; ?>
 >
 
 </body>

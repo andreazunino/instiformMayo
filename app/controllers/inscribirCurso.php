@@ -3,7 +3,6 @@ require_once __DIR__ . '/../../sql/db.php';
 require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 require_once __DIR__ . '/../models/Inscripcion.php';
 require_once __DIR__ . '/../models/Estudiante.php';
-// Asegurate de tener este modelo
 require_once __DIR__ . '/../lib/auth.php';
 
 $smarty = new Smarty\Smarty;
@@ -12,8 +11,9 @@ $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 $inscripcionModel = new Inscripcion($pdo);
 $estudianteModel = new Estudiante($pdo);
-$usuario = currentUser();
+
 requireLogin(['estudiante']);
+$usuario = currentUser();
 $smarty->assign('usuario', $usuario);
 
 $dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? $_GET['dni'] ?? ($usuario['dni'] ?? null);
@@ -31,42 +31,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Inscripción del curso
     if ($estudianteValido && isset($_POST['idCurso'], $_POST['dniEstudiante'])) {
         $idCurso = $_POST['idCurso'];
         try {
-            $exito = $inscripcionModel->inscribir($dniEstudiante, $idCurso);
+            $inscripcionId = $inscripcionModel->inscribir($dniEstudiante, $idCurso);
         } catch (PDOException $e) {
-            $exito = false;
+            $inscripcionId = false;
+        }
+
+        $exito = $inscripcionId !== false;
+
+        if ($exito && $inscripcionId) {
+            $detalle = $inscripcionModel->obtenerInscripcionPorId((int) $inscripcionId);
+            $smarty->assign('comprobante_id', (int) $inscripcionId);
+            if ($detalle) {
+                $smarty->assign('comprobante_curso', $detalle['curso'] ?? null);
+            }
         }
 
         $smarty->assign('mensaje', $exito
             ? 'Te inscribiste correctamente al curso.'
-            : 'No se pudo realizar la inscripción.');
+            : 'No se pudo realizar la inscripcion.');
         $smarty->assign('mensaje_tipo', $exito ? 'success' : 'danger');
     }
 
-    // Buscar cursos disponibles para ese estudiante
     if ($dniEstudiante && $estudianteValido) {
         $cursos = $inscripcionModel->cursosDisponiblesParaEstudiante($dniEstudiante);
 
         if (!empty($cursos)) {
             $smarty->assign('cursos', $cursos);
-        } else {    
-            $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripción.');
+        } else {
+            $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripcion.');
             $smarty->assign('mensaje_tipo', 'warning');
         }
 
         $smarty->assign('dniEstudiante', $dniEstudiante);
     }
 }
-// Carga automática si hay DNI y no se envió formulario (estudiante logueado)
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $dniEstudiante) {
     $cursos = $inscripcionModel->cursosDisponiblesParaEstudiante($dniEstudiante);
     if (!empty($cursos)) {
         $smarty->assign('cursos', $cursos);
     } else {
-        $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripción.');
+        $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripcion.');
         $smarty->assign('mensaje_tipo', 'info');
     }
 }

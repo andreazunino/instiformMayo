@@ -25,10 +25,11 @@ class Inscripcion
                 return false;
             }
 
-            $insert = $this->pdo->prepare("INSERT INTO inscripcion (dni_estudiante, id_curso) VALUES (?, ?)");
-            $resultado = $insert->execute([$dniEstudiante, $idCurso]);
+            $insert = $this->pdo->prepare("INSERT INTO inscripcion (dni_estudiante, id_curso) VALUES (?, ?) RETURNING id");
+            $insert->execute([$dniEstudiante, $idCurso]);
+            $idInsertado = (int) $insert->fetchColumn();
 
-            if (!$resultado) {
+            if ($idInsertado === 0) {
                 $this->pdo->rollBack();
                 return false;
             }
@@ -37,7 +38,7 @@ class Inscripcion
             $updateCupo->execute([$idCurso]);
 
             $this->pdo->commit();
-            return true;
+            return $idInsertado;
         } catch (PDOException $e) {
             if ($this->pdo->inTransaction()) {
                 $this->pdo->rollBack();
@@ -146,6 +147,40 @@ class Inscripcion
             INNER JOIN curso c ON i.id_curso = c.id
             ORDER BY e.apellido, e.nombre
         ");
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function obtenerInscripcionPorId(int $inscripcionId): ?array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT 
+                i.id,
+                i.dni_estudiante AS dni,
+                i.id_curso,
+                e.nombre,
+                e.apellido,
+                c.nombre AS curso
+            FROM inscripcion i
+            INNER JOIN estudiante e ON i.dni_estudiante = e.dni
+            INNER JOIN curso c ON i.id_curso = c.id
+            WHERE i.id = ?
+        ");
+        $stmt->execute([$inscripcionId]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row !== false ? $row : null;
+    }
+
+    public function listarInscripcionesPorDni(string $dniEstudiante): array
+    {
+        $stmt = $this->pdo->prepare("
+            SELECT i.id, i.dni_estudiante as dni, e.nombre, e.apellido, c.nombre as curso
+            FROM inscripcion i
+            INNER JOIN estudiante e ON i.dni_estudiante = e.dni
+            INNER JOIN curso c ON i.id_curso = c.id
+            WHERE i.dni_estudiante = ?
+            ORDER BY c.nombre
+        ");
+        $stmt->execute([$dniEstudiante]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 

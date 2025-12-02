@@ -27,7 +27,11 @@ if (!defined('APP_LOGO_FALLBACK_PATH')) {
     define('APP_LOGO_FALLBACK_PATH', APP_IMAGE_PATH . '/logo-instiform.png');
 }
 
+if (!defined('APP_SIGNATURE_PATH')) {
+    define('APP_SIGNATURE_PATH', APP_IMAGE_PATH . '/firma.jpg');
+}
+
 if (!defined('APP_PDF_FOOTER_TEXT')) {
-    define('APP_PDF_FOOTER_TEXT', 'Documento generado por Instiform – Sistema de Gestión');
+    define('APP_PDF_FOOTER_TEXT', 'Documento generado por Instiform - Sistema de Gestion');
 }
 ?>

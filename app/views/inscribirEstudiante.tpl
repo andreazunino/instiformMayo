@@ -51,6 +51,11 @@
     {if $mensaje}
         <div class="alert alert-{$mensaje_tipo} mt-3">{$mensaje}</div>
     {/if}
+    {if isset($comprobante_id)}
+        <div class="alert alert-success mt-3">
+            Comprobante listo. <a class="alert-link" href="comprobanteInscripcion.php?id={$comprobante_id}" target="_blank" rel="noopener">Descargar comprobante{if $comprobante_curso} de {$comprobante_curso}{/if}{if $comprobante_dni} (DNI {$comprobante_dni}){/if}</a>
+        </div>
+    {/if}
 
     <!-- Mostrar cursos disponibles -->
     {if $cursos}

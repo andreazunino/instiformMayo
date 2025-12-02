@@ -21,15 +21,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombre = trim($_POST['nombre'] ?? '');
     $apellido = trim($_POST['apellido'] ?? '');
     $dni = trim($_POST['dni'] ?? '');
+    $email = trim($_POST['email'] ?? '');
 
     if ($username === '' || $password === '' || ($role !== 'admin' && $role !== 'estudiante')) {
-        $mensaje = 'Completá usuario, contraseña y rol válido.';
+        $mensaje = 'Completa usuario, contrasena y rol valido.';
         $mensaje_tipo = 'warning';
     } elseif ($usuarioModel->existeUsername($username)) {
         $mensaje = 'El usuario ya existe.';
         $mensaje_tipo = 'warning';
     } else {
-        $ok = $usuarioModel->crear($username, $password, $role, $nombre, $apellido, $dni);
+        $ok = $usuarioModel->crear($username, $password, $role, $nombre, $apellido, $dni, $email);
         if ($ok) {
             $mensaje = 'Usuario creado correctamente.';
             $mensaje_tipo = 'success';

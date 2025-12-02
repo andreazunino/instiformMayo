@@ -30,22 +30,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Si viene la solicitud de inscripción
+    // Si viene la solicitud de inscripcion
     if ($estudianteValido && isset($_POST['accion']) && $_POST['accion'] === 'inscribir' && isset($_POST['idCurso'], $_POST['dniEstudiante'])) {
         $idCurso = $_POST['idCurso'];
 
         try {
-            $exito = $inscripcionModel->inscribir($dniEstudiante, $idCurso);
+            $inscripcionId = $inscripcionModel->inscribir($dniEstudiante, $idCurso);
         } catch (PDOException $e) {
-            $exito = false;
+            $inscripcionId = false;
         }
-        if ($exito) {
-            $smarty->assign('mensaje', "Estudiante inscrito correctamente.");
-            $smarty->assign('mensaje_tipo', "success");
-        } else {
-            $smarty->assign('mensaje', "Error al inscribir. Posiblemente ya esté inscrito.");
-            $smarty->assign('mensaje_tipo', "danger");
+        $exito = $inscripcionId !== false;
+
+        if ($exito && $inscripcionId) {
+            $detalle = $inscripcionModel->obtenerInscripcionPorId((int) $inscripcionId);
+            $smarty->assign('comprobante_id', (int) $inscripcionId);
+            if ($detalle) {
+                $smarty->assign('comprobante_curso', $detalle['curso'] ?? null);
+                $smarty->assign('comprobante_dni', $detalle['dni'] ?? null);
+            }
         }
+        $smarty->assign('mensaje', $exito ? "Estudiante inscrito correctamente." : "Error al inscribir. Posiblemente ya esta inscrito.");
+        $smarty->assign('mensaje_tipo', $exito ? "success" : "danger");
     }
 
     // Si viene el DNI para buscar cursos

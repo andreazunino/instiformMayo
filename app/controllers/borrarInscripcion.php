@@ -17,10 +17,9 @@ $inscripciones = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['accion'] === 'buscar') {
     $dni = $_POST['dniAlumno'] ?? '';
-    $materia = $_POST['nombreMateria'] ?? '';
 
     if (!empty($dni)) {
-        $inscripciones = $inscripcionModel->buscarInscripciones($dni, $materia);
+        $inscripciones = $inscripcionModel->buscarInscripciones($dni, '');
 
         if (count($inscripciones) === 0) {
             $mensaje = 'No se encontraron inscripciones que coincidan con los criterios.';

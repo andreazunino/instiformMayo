@@ -44,6 +44,9 @@
                 <a class="nav-link" href="anularInscripcion.php{if isset($usuario.dni) && $usuario.dni ne ''}?dni={$usuario.dni|escape:'url'}{/if}">Inscripciones</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="exportarInscripciones.php">Descargar inscripciones</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="boletin.php{if isset($usuario.dni) && $usuario.dni ne ''}?dni={$usuario.dni|escape:'url'}{/if}">Boletín</a>
             </li>
         </ul>
@@ -63,4 +66,5 @@
 
 </body>
 </html>
+
 

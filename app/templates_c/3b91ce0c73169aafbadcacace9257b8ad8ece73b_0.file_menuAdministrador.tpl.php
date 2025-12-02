@@ -1,7 +1,34 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-12-02 20:13:30
+  from 'file:menuAdministrador.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_692f3a5a939ad2_03426512',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '3b91ce0c73169aafbadcacace9257b8ad8ece73b' => 
+    array (
+      0 => 'menuAdministrador.tpl',
+      1 => 1764702786,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_692f3a5a939ad2_03426512 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    {include 'head.tpl'}
+    <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 
 <style>
     .logo-small {
@@ -82,21 +109,33 @@
 </nav>
 
 <div class="container text-center mt-5">
-    <h2>Bienvenido{if $usuario.nombre} {$usuario.nombre}{/if}{if $usuario.apellido} {$usuario.apellido}{/if}</h2>
-    {if !$usuario.nombre && !$usuario.apellido}
+    <h2>Bienvenido<?php if ($_smarty_tpl->getValue('usuario')['nombre']) {?> <?php echo $_smarty_tpl->getValue('usuario')['nombre'];
+}
+if ($_smarty_tpl->getValue('usuario')['apellido']) {?> <?php echo $_smarty_tpl->getValue('usuario')['apellido'];
+}?></h2>
+    <?php if (!$_smarty_tpl->getValue('usuario')['nombre'] && !$_smarty_tpl->getValue('usuario')['apellido']) {?>
         <p class="text-muted">Administrador</p>
-    {/if}
+    <?php }?>
 </div>
 
 
 
 <!-- Footer -->
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 <!-- Scripts Bootstrap -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
 </body>
 </html>
 
+<?php }
+}

@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-12-02 20:34:27
+  from 'file:borrarInscripcion.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_692f3f4362c4e0_08770491',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '28a102bdcad0ead095adc4769709375ade22d33d' => 
+    array (
+      0 => 'borrarInscripcion.tpl',
+      1 => 1764704053,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_692f3f4362c4e0_08770491 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='head.tpl'}
+    <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
     <style>
         .logo-small {
             max-width: 80px;
@@ -39,12 +66,14 @@
 <!-- Contenedor principal -->
 <div class="container text-center">
     <!-- Mostrar mensajes de éxito o error -->
-    {if isset($mensaje)}
-        <div class="alert alert-success mt-3">{$mensaje}</div>
-    {/if}
-    {if isset($mensaje_error)}
-        <div class="alert alert-danger mt-3">{$mensaje_error}</div>
-    {/if}
+    <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
+        <div class="alert alert-success mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+</div>
+    <?php }?>
+    <?php if ((null !== ($_smarty_tpl->getValue('mensaje_error') ?? null))) {?>
+        <div class="alert alert-danger mt-3"><?php echo $_smarty_tpl->getValue('mensaje_error');?>
+</div>
+    <?php }?>
 
     <!-- Formulario de búsqueda -->
     <form method="POST" action="borrarInscripcion.php" class="mb-5">
@@ -57,7 +86,7 @@
     </form>
 
     <!-- Tabla de resultados -->
-    {if isset($inscripciones)}
+    <?php if ((null !== ($_smarty_tpl->getValue('inscripciones') ?? null))) {?>
         <h2 class="mb-4">Resultados</h2>
         <table class="table table-striped">
             <thead>
@@ -70,31 +99,50 @@
                 </tr>
             </thead>
             <tbody>
-                {foreach $inscripciones as $inscripcion}
+                <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('inscripciones'), 'inscripcion');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('inscripcion')->value) {
+$foreach0DoElse = false;
+?>
                     <tr>
-                        <td>{$inscripcion.id}</td>
-                        <td>{$inscripcion.dni|default:$inscripcion.dni_estudiante|default:'N/A'}</td>
-                        <td>{$inscripcion.nombre} {$inscripcion.apellido}</td>
-                        <td>{$inscripcion.curso|default:$inscripcion.curso_nombre|default:'-'}</td>
+                        <td><?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
+</td>
+                        <td><?php echo (($tmp = (($tmp = $_smarty_tpl->getValue('inscripcion')['dni'] ?? null)===null||$tmp==='' ? $_smarty_tpl->getValue('inscripcion')['dni_estudiante'] ?? null : $tmp) ?? null)===null||$tmp==='' ? 'N/A' ?? null : $tmp);?>
+</td>
+                        <td><?php echo $_smarty_tpl->getValue('inscripcion')['nombre'];?>
+ <?php echo $_smarty_tpl->getValue('inscripcion')['apellido'];?>
+</td>
+                        <td><?php echo (($tmp = (($tmp = $_smarty_tpl->getValue('inscripcion')['curso'] ?? null)===null||$tmp==='' ? $_smarty_tpl->getValue('inscripcion')['curso_nombre'] ?? null : $tmp) ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
+</td>
                         <td>
-                            <a href="borrarInscripcion.php?id={$inscripcion.id}"
+                            <a href="borrarInscripcion.php?id=<?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
+"
                                class="btn-formal btn-formal-danger btn-formal-sm delete-inscripcion">
                                 Borrar
                             </a>
                         </td>
                     </tr>
-                {/foreach}
+                <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
             </tbody>
         </table>
-    {elseif isset($mensaje) && $mensaje_tipo == 'warning'}
+    <?php } elseif ((null !== ($_smarty_tpl->getValue('mensaje') ?? null)) && $_smarty_tpl->getValue('mensaje_tipo') == 'warning') {?>
         <p class="mt-4 text-warning">No se encontraron inscripciones que coincidan con los criterios.</p>
-    {/if}
+    <?php }?>
 </div>
 
 <!-- Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 
 <!-- Modal de confirmación -->
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
@@ -117,7 +165,8 @@
   </div>
 </div>
 
-<script>
+<?php echo '<script'; ?>
+>
     (function() {
         var targetHref = null;
         $(document).on('click', '.delete-inscripcion', function (e) {
@@ -134,8 +183,12 @@
             targetHref = null;
         });
     })();
-</script>
+<?php echo '</script'; ?>
+>
 
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 </body>
 </html>
+<?php }
+}

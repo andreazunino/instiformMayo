@@ -66,6 +66,22 @@
         .modal-dialog {
             margin: 0 auto;
         }
+        /* Blur background when modal is open */
+        body.modal-open-blur .container-welcome {
+            filter: blur(6px);
+            transition: filter 0.2s ease;
+        }
+        body.modal-open-blur::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.25);
+            pointer-events: none;
+            z-index: 1040;
+        }
     </style>
 </head>
 <body>
@@ -115,6 +131,15 @@
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Add blur effect to the background when the login modal is open
+    $('#loginModal').on('show.bs.modal', function () {
+        $('body').addClass('modal-open-blur');
+    });
+    $('#loginModal').on('hidden.bs.modal', function () {
+        $('body').removeClass('modal-open-blur');
+    });
+</script>
 
 </body>
 </html>

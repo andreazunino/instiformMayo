@@ -1,8 +1,35 @@
-<!DOCTYPE html>
+<?php
+/* Smarty version 5.4.0, created on 2025-12-02 20:23:21
+  from 'file:administrarUsuarios.tpl' */
+
+/* @var \Smarty\Template $_smarty_tpl */
+if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
+  'version' => '5.4.0',
+  'unifunc' => 'content_692f3ca9586d25_74715004',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    'ceea86474a5e01296e5a84387e6e0c165328cbbc' => 
+    array (
+      0 => 'administrarUsuarios.tpl',
+      1 => 1764703056,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+    'file:head.tpl' => 1,
+    'file:footer.tpl' => 1,
+  ),
+))) {
+function content_692f3ca9586d25_74715004 (\Smarty\Template $_smarty_tpl) {
+$_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
+?><!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    {include file='head.tpl'}
+    <?php $_smarty_tpl->renderSubTemplate('file:head.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
     <style>
         .panel-card {
             max-width: 820px;
@@ -51,11 +78,13 @@
 </nav>
 
 <div class="container mt-4">
-    {if $mensaje}
-        <div class="alert alert-{$mensaje_tipo|default:'info'}" role="alert">
-            {$mensaje}
+    <?php if ($_smarty_tpl->getValue('mensaje')) {?>
+        <div class="alert alert-<?php echo (($tmp = $_smarty_tpl->getValue('mensaje_tipo') ?? null)===null||$tmp==='' ? 'info' ?? null : $tmp);?>
+" role="alert">
+            <?php echo $_smarty_tpl->getValue('mensaje');?>
+
         </div>
-    {/if}
+    <?php }?>
 
     <h3 class="mb-3 text-center section-title">Administrar Usuarios</h3>
 
@@ -121,32 +150,55 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach from=$usuarios item=u}
+                    <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('usuarios'), 'u');
+$foreach0DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('u')->value) {
+$foreach0DoElse = false;
+?>
                         <tr>
-                            <td>{$u.username}</td>
-                            <td>{$u.role}</td>
-                            <td>{$u.nombre}</td>
-                            <td>{$u.apellido}</td>
-                            <td>{$u.dni}</td>
-                            <td>{$u.email}</td>
-                            <td>{$u.creado_en}</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['username'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['role'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['nombre'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['apellido'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['dni'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['email'];?>
+</td>
+                            <td><?php echo $_smarty_tpl->getValue('u')['creado_en'];?>
+</td>
                         </tr>
-                    {/foreach}
-                    {if $usuarios|@count == 0}
+                    <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                    <?php if ($_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('usuarios')) == 0) {?>
                         <tr>
                             <td colspan="7" class="text-center text-muted">No hay usuarios registrados.</td>
                         </tr>
-                    {/if}
+                    <?php }?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
 
-{include file='footer.tpl'}
+<?php $_smarty_tpl->renderSubTemplate('file:footer.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), (int) 0, $_smarty_current_dir);
+?>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<?php echo '<script'; ?>
+ src="https://code.jquery.com/jquery-3.5.1.slim.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"><?php echo '</script'; ?>
+>
+<?php echo '<script'; ?>
+ src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"><?php echo '</script'; ?>
+>
 </body>
 </html>
+<?php }
+}
