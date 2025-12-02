@@ -70,6 +70,11 @@ $pdf->Cell(0, 8, ci_convert('Curso: ' . $cursoNombre), 0, 1);
 $pdf->Ln(8);
 $pdf->MultiCell(0, 8, ci_convert('Este comprobante acredita que la inscripcion fue registrada correctamente en el sistema Instiform.'));
 
+$pdf->Ln(14);
+$pdf->SetFont('Arial', 'I', 9);
+$pdf->SetTextColor(120, 130, 140);
+$pdf->Cell(0, 8, ci_convert('Documento generado por Instiform - Sistema de Gestion'), 0, 1, 'C');
+
 $fileName = 'comprobante_inscripcion_' . $inscripcion['id'] . '.pdf';
 header('Content-Type: application/pdf');
 header('Content-Disposition: inline; filename="' . $fileName . '"');
