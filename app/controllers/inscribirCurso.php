@@ -4,6 +4,7 @@ require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 require_once __DIR__ . '/../models/Inscripcion.php';
 require_once __DIR__ . '/../models/Estudiante.php';
 // Asegurate de tener este modelo
+require_once __DIR__ . '/../lib/auth.php';
 
 $smarty = new Smarty\Smarty;
 $smarty->setTemplateDir(__DIR__ . '/../views/');
@@ -11,8 +12,12 @@ $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 $inscripcionModel = new Inscripcion($pdo);
 $estudianteModel = new Estudiante($pdo);
+$usuario = currentUser();
+requireLogin(['estudiante']);
+$smarty->assign('usuario', $usuario);
 
-$dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? null;
+$dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? $_GET['dni'] ?? ($usuario['dni'] ?? null);
+$smarty->assign('dniEstudiante', $dniEstudiante);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estudianteValido = true;
@@ -53,6 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $smarty->assign('dniEstudiante', $dniEstudiante);
+    }
+}
+// Carga automática si hay DNI y no se envió formulario (estudiante logueado)
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $dniEstudiante) {
+    $cursos = $inscripcionModel->cursosDisponiblesParaEstudiante($dniEstudiante);
+    if (!empty($cursos)) {
+        $smarty->assign('cursos', $cursos);
+    } else {
+        $smarty->assign('mensaje', 'No hay cursos disponibles para tu inscripción.');
+        $smarty->assign('mensaje_tipo', 'info');
     }
 }
 

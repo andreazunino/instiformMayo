@@ -2,12 +2,18 @@
 require_once __DIR__ . '/../../sql/db.php';
 require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 require_once __DIR__ . '/../models/Inscripcion.php';
+require_once __DIR__ . '/../lib/auth.php';
 
 $smarty = new Smarty\Smarty;
 $inscripcionModel = new Inscripcion($pdo);
 $smarty->setTemplateDir(__DIR__ . '/../views/');
 $smarty->setCompileDir(__DIR__ . '/../templates_c/');
-$dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? null;
+$usuario = currentUser();
+$dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? $_GET['dni'] ?? ($usuario['dni'] ?? null);
+
+requireLogin(['estudiante']);
+$smarty->assign('usuario', $usuario);
+$smarty->assign('dniEstudiante', $dniEstudiante);
 
 // Si se quiere anular una inscripción
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCursoAnular'], $_POST['dniEstudiante'])) {
@@ -40,6 +46,18 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dni'])) {
     }
 
     $smarty->assign('dniEstudiante', $dniEstudiante);
+}
+
+// Carga automática para estudiante logueado con DNI
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $dniEstudiante) {
+    $cursos = $inscripcionModel->obtenerCursosPorDNI($dniEstudiante);
+    if (count($cursos) > 0) {
+        $smarty->assign('cursos', $cursos);
+        $smarty->assign('dniEstudiante', $dniEstudiante);
+    } else {
+        $smarty->assign('mensaje', 'No estás inscrito en ningún curso.');
+        $smarty->assign('mensaje_tipo', 'info');
+    }
 }
 
 $smarty->display('anularInscripcion.tpl');

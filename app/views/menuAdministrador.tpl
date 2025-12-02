@@ -14,7 +14,7 @@
 <body>
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='logout.php'">Cerrar sesión</button>
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
@@ -72,12 +72,20 @@
                 </div>
             </li>
 
+            <!-- Usuarios -->
+            <li class="nav-item">
+                <a class="nav-link" href="administrarUsuarios.php">Administración Usuarios</a>
+            </li>
+
         </ul>
     </div>
 </nav>
 
 <div class="container text-center mt-5">
-    <h2>Bienvenido Administrador</h2>
+    <h2>Bienvenido{if $usuario.nombre} {$usuario.nombre}{/if}{if $usuario.apellido} {$usuario.apellido}{/if}</h2>
+    {if !$usuario.nombre && !$usuario.apellido}
+        <p class="text-muted">Administrador</p>
+    {/if}
 </div>
 
 

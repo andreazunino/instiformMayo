@@ -3,6 +3,7 @@ require_once __DIR__ . '/../../config/constants.php';
 require_once APP_ROOT . '/sql/db.php';
 require_once APP_ROOT . '/app/models/Inscripcion.php';
 require_once APP_ROOT . '/app/services/BoletinPdf.php';
+require_once APP_ROOT . '/app/lib/auth.php';
 
 $dni = $_GET['dni'] ?? null;
 
@@ -17,11 +18,19 @@ $estudiante = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$estudiante) {
     die('Estudiante no encontrado.');
 }
+$desde = $_GET['desde'] ?? null;
+$hasta = $_GET['hasta'] ?? null;
+$firmaNombre = $_GET['firma'] ?? null;
+$firmaCargo = $_GET['cargo'] ?? null;
 
 $inscripcionModel = new Inscripcion($pdo);
-$notas = $inscripcionModel->obtenerNotasPorDNI($dni);
+requireLogin(['admin', 'estudiante']);
+
+$notas = $inscripcionModel->obtenerNotasPorDNI($dni, $desde, $hasta);
 
 $pdf = new BoletinPdf();
+$pdf->setPeriodo($desde, $hasta);
+$pdf->setFirma($firmaNombre, $firmaCargo);
 $pdf->AddPage();
 $pdf->renderEncabezadoEstudiante($estudiante, $dni);
 
@@ -32,5 +41,6 @@ if (!$notas) {
 }
 
 $pdf->renderTablaNotas($notas);
+$pdf->renderSeccionFirma();
 $pdf->Output('I', 'Boletin_' . $dni . '.pdf');
 exit;

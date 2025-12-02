@@ -15,7 +15,7 @@
 
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='logout.php'">Cerrar sesión</button>
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
@@ -42,11 +42,19 @@
     <h3>Buscar Cursos Disponibles</h3>
     <form method="POST">
         <input type="hidden" name="accion" value="buscar">
-        <div class="form-group">
-            <label for="dni">DNI del Estudiante:</label>
-            <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
-        </div>
-        <button type="submit" class="btn-formal">Buscar</button>
+        {if isset($usuario.role) && $usuario.role == 'estudiante' && $dniEstudiante}
+            <input type="hidden" name="dni" value="{$dniEstudiante}">
+            <div class="alert alert-info mt-2 mb-3" role="alert">
+                <strong>DNI detectado:</strong> <span style="font-size:1.1rem;">{$dniEstudiante}</span>
+            </div>
+            <noscript><button type="submit" class="btn-formal">Ver cursos disponibles</button></noscript>
+        {else}
+            <div class="form-group">
+                <label for="dni">DNI del Estudiante:</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
+            </div>
+            <button type="submit" class="btn-formal">Buscar</button>
+        {/if}
     </form>
 
     <!-- Mostrar mensaje -->

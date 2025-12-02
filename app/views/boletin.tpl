@@ -29,16 +29,13 @@
 </head>
 <body>
 
-<!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='logout.php'">Cerrar sesión</button>
 
-<!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">
     <img src="../../public/img/Logo Instiform.png" alt="Logo de Instiform" class="logo-small">
     <h1 class="welcome-heading">Instiform</h1>
 </div>
 
-<!-- Menú de navegación -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,25 +50,29 @@
     </div>
 </nav>
 
-<!-- Contenido principal -->
 <div class="container text-center">
-    <!-- Formulario para buscar boletín -->
     <h3>Consultar Boletín</h3>
     <form method="POST" action="">
         <input type="hidden" name="accion" value="buscar">
-        <div class="form-group">
-            <label for="dni">DNI del Estudiante:</label>
-            <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
-        </div>
-        <button type="submit" class="btn-formal">Buscar</button>
+        {if isset($usuario.role) && $usuario.role == 'estudiante' && $dniEstudiante}
+            <input type="hidden" name="dni" value="{$dniEstudiante}">
+            <div class="alert alert-info mt-2 mb-2" role="alert">
+                <strong>DNI detectado:</strong> <span style="font-size:1.1rem;">{$dniEstudiante}</span>
+            </div>
+            <button type="submit" class="btn-formal">Ver boletín</button>
+        {else}
+            <div class="form-group">
+                <label for="dni">DNI del Estudiante:</label>
+                <input type="text" class="form-control" id="dni" name="dni" placeholder="Ingrese el DNI del estudiante" required pattern="\d+" autocomplete="off">
+            </div>
+            <button type="submit" class="btn-formal">Buscar</button>
+        {/if}
     </form>
 
-    <!-- Mostrar mensaje -->
     {if isset($mensaje)}
         <div class="alert alert-{$mensaje_tipo|default:'info'} mt-3">{$mensaje}</div>
     {/if}
 
-    <!-- Mostrar tabla de notas -->
     {if isset($notas)}
         {if $notas|@count > 0}
             <h3 class="mt-4">Calificaciones</h3>
@@ -112,10 +113,8 @@
     {/if}
 </div>
 
-<!-- Footer -->
 {include file='footer.tpl'}
 
-<!-- Scripts necesarios -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

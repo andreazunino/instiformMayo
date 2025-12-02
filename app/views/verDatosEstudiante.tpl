@@ -15,7 +15,7 @@
 
 
 <!-- Botón de cerrar sesión -->
-<button class="btn btn-logout" onclick="window.location.href='../../index.php'">Cerrar sesión</button>
+<button class="btn btn-logout" onclick="window.location.href='logout.php'">Cerrar sesión</button>
 
 <!-- Encabezado con logo -->
 <div class="container-fluid text-center welcome-section">

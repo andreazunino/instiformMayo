@@ -4,6 +4,7 @@ require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 require_once __DIR__ . '/../models/Curso.php';
 require_once __DIR__ . '/../models/Inscripcion.php';
 require_once __DIR__ . '/../models/Estudiante.php';
+require_once __DIR__ . '/../lib/auth.php';
 
 $smarty = new Smarty\Smarty;
 $smarty->setTemplateDir(__DIR__ . '/../views/');
@@ -12,6 +13,8 @@ $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 $inscripcionModel = new Inscripcion($pdo);
 $estudianteModel = new Estudiante($pdo);
 $cursoModel = new Curso($pdo);
+
+requireLogin(['admin']);
 
 $dniEstudiante = $_POST['dni'] ?? $_POST['dniEstudiante'] ?? null;
 

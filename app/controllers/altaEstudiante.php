@@ -2,12 +2,15 @@
 require_once __DIR__ . '/../../sql/db.php';
 require_once __DIR__ . '/../lib/Smarty/libs/Smarty.class.php';
 require_once __DIR__ . '/../models/Inscripcion.php';
-require_once __DIR__ . '/../models/Estudiante.php'; // ✅ Agregado
+require_once __DIR__ . '/../models/Estudiante.php';
+require_once __DIR__ . '/../lib/auth.php';
 
 $smarty = new Smarty\Smarty;
 $estudianteModel = new Estudiante($pdo);
 $smarty->setTemplateDir(__DIR__ . '/../views/');
 $smarty->setCompileDir(__DIR__ . '/../templates_c/');
+
+requireLogin(['admin']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dni = $_POST['dni'];
@@ -18,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($dni) && !empty($nombre) && !empty($apellido) && !empty($email)) {
         $exito = $estudianteModel->crear($dni, $nombre, $apellido, $email);
         if ($exito) {
-            $smarty->assign('mensaje', 'Estudiante registrado con éxito.');
+            $smarty->assign('mensaje', 'Estudiante registrado con exito.');
             $smarty->assign('mensaje_tipo', 'success');
         } else {
             $smarty->assign('mensaje', 'Hubo un error al registrar al estudiante.');
@@ -31,3 +34,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $smarty->display('altaEstudiante.tpl');
+

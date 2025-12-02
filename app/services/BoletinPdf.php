@@ -12,6 +12,10 @@ class BoletinPdf extends FPDF
 
     private $logoPath;
     private $footerText;
+    private $periodoLabel = null;
+    private $firmaNombre = null;
+    private $firmaCargo = null;
+    private $firmaPath = null;
 
     public function __construct(?string $logoPath = null, ?string $footerText = null)
     {
@@ -26,6 +30,20 @@ class BoletinPdf extends FPDF
     {
         $convertido = iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $texto);
         return $convertido !== false ? $convertido : $texto;
+    }
+
+    public function setPeriodo(?string $desde, ?string $hasta): void
+    {
+        if ($desde || $hasta) {
+            $this->periodoLabel = trim(($desde ?? '') . ' - ' . ($hasta ?? ''), ' -');
+        }
+    }
+
+    public function setFirma(?string $nombre, ?string $cargo = null, ?string $firmaPath = null): void
+    {
+        $this->firmaNombre = $nombre;
+        $this->firmaCargo = $cargo;
+        $this->firmaPath = $firmaPath;
     }
 
     public function Header(): void
@@ -68,6 +86,9 @@ class BoletinPdf extends FPDF
         $this->Cell(0, 8, self::convertirTexto('Estudiante: ' . $nombreCompleto), 0, 1);
         $this->Cell(0, 8, self::convertirTexto('DNI: ' . $dni), 0, 1);
         $this->Cell(0, 8, self::convertirTexto('Fecha: ' . $fecha), 0, 1);
+        if ($this->periodoLabel) {
+            $this->Cell(0, 8, self::convertirTexto('Periodo: ' . $this->periodoLabel), 0, 1);
+        }
         $this->Ln(6);
     }
 
@@ -106,6 +127,32 @@ class BoletinPdf extends FPDF
         $this->SetFont('Arial', 'I', 12);
         $this->SetTextColor($rt, $gt, $bt);
         $this->MultiCell(0, 8, self::convertirTexto($mensaje));
+    }
+
+    public function renderSeccionFirma(): void
+    {
+        if (empty($this->firmaNombre)) {
+            return;
+        }
+
+        $this->Ln(14);
+        $y = $this->GetY();
+
+        if (!empty($this->firmaPath) && file_exists($this->firmaPath)) {
+            $this->Image($this->firmaPath, $this->GetX(), $y - 4, 40);
+        }
+
+        $this->SetDrawColor(180, 180, 180);
+        $this->Line($this->GetX(), $y + 14, $this->GetX() + 60, $y + 14);
+
+        $this->Ln(16);
+        $this->SetFont('Arial', 'B', 11);
+        $this->Cell(60, 7, self::convertirTexto($this->firmaNombre), 0, 1, 'L');
+
+        if (!empty($this->firmaCargo)) {
+            $this->SetFont('Arial', '', 10);
+            $this->Cell(60, 6, self::convertirTexto($this->firmaCargo), 0, 1, 'L');
+        }
     }
 
     private function resolveLogoPath(?string $logoPath): string
@@ -154,10 +201,29 @@ class BoletinPdf extends FPDF
                 if ($valor === '') {
                     continue;
                 }
-                if (!empty($detalle['fecha_formateada'])) {
-                    $valor .= ' (' . $detalle['fecha_formateada'] . ')';
+
+                $segmentos = [];
+                if (!empty($detalle['actividad'])) {
+                    $segmentos[] = $detalle['actividad'];
                 }
-                $partes[] = $valor;
+
+                $meta = [];
+                if (isset($detalle['peso']) && $detalle['peso'] !== '' && (float) $detalle['peso'] !== 1.0) {
+                    $meta[] = 'peso ' . $detalle['peso'];
+                }
+                if (!empty($detalle['fecha_formateada'])) {
+                    $meta[] = $detalle['fecha_formateada'];
+                }
+                if (!empty($meta)) {
+                    $valor .= ' (' . implode(' · ', $meta) . ')';
+                }
+
+                if (!empty($segmentos)) {
+                    $segmentos[] = $valor;
+                    $partes[] = implode(' - ', $segmentos);
+                } else {
+                    $partes[] = $valor;
+                }
             }
 
             if (!empty($partes)) {
