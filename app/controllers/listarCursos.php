@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion']) && $_POST['
         $mensaje_tipo = 'warning';
     }
 } else {
-    // Si no se hace búsqueda, mostrar todos los cursos
+    // Si no se hace busqueda, mostrar todos los cursos
     $cursos = $cursoModel->listarTodos();
 }
 

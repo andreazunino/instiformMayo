@@ -12,7 +12,7 @@ $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 $cursoModel = new Curso($pdo);
 
 requireLogin(['admin']);
-// Listar todos los cursos para el <select>
+// Listar todos los cursos para el select
 $cursos = $cursoModel->listarTodos();
 $smarty->assign('cursos', $cursos);
 

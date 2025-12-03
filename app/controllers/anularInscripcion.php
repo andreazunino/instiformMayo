@@ -15,7 +15,7 @@ requireLogin(['estudiante']);
 $smarty->assign('usuario', $usuario);
 $smarty->assign('dniEstudiante', $dniEstudiante);
 
-// Si se quiere anular una inscripción
+// Si se quiere anular una inscripcion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCursoAnular'], $_POST['dniEstudiante'])) {
     $idCurso = $_POST['idCursoAnular'];
 
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['idCursoAnular'], $_PO
     $smarty->assign('dniEstudiante', $dniEstudiante);
 }
 
-// Si viene solo la búsqueda por DNI
+// Si viene solo la busqueda por DNI
 elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dni'])) {
     $cursos = $inscripcionModel->obtenerCursosPorDNI($dniEstudiante);
 
@@ -48,7 +48,7 @@ elseif ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['dni'])) {
     $smarty->assign('dniEstudiante', $dniEstudiante);
 }
 
-// Carga automática para estudiante logueado con DNI
+// Carga automatica para estudiante logueado con DNI
 if ($_SERVER['REQUEST_METHOD'] !== 'POST' && $dniEstudiante) {
     $cursos = $inscripcionModel->obtenerCursosPorDNI($dniEstudiante);
     if (count($cursos) > 0) {

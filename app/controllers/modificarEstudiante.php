@@ -11,7 +11,7 @@ $smarty->setCompileDir(__DIR__ . '/../templates_c/');
 
 requireLogin(['admin']);
 
-// Si se está modificando
+// Si se esta modificando
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nombre'], $_POST['apellido'], $_POST['email'], $_POST['dni'])) {
     $dni = $_POST['dni'];
     $nombre = $_POST['nombre'];

@@ -15,7 +15,7 @@ requireLogin(['admin']);
 $cursos = $cursoModel->listarTodos();
 $smarty->assign('cursos', $cursos);
 
-// Si viene el formulario de modificación
+// Si viene el formulario de modificacion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['curso'], $_POST['nombreCurso'], $_POST['cupo'])) {
     $idCurso = $_POST['curso'];
     $nuevoNombre = $_POST['nombreCurso'];
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['curso'], $_POST['nomb
         $smarty->assign('mensaje_tipo', 'warning');
     }
 
-    // Para mantener la selección en el <select>
+    // Para mantener la selección en el select
     $smarty->assign('cursoSeleccionado', $idCurso);
 }
 
