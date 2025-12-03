@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-12-02 20:34:27
+/* Smarty version 5.4.0, created on 2025-12-03 22:41:07
   from 'file:borrarInscripcion.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_692f3f4362c4e0_08770491',
+  'unifunc' => 'content_6930ae735052e7_28508296',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '28a102bdcad0ead095adc4769709375ade22d33d' => 
     array (
       0 => 'borrarInscripcion.tpl',
-      1 => 1764704053,
+      1 => 1764797740,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_692f3f4362c4e0_08770491 (\Smarty\Template $_smarty_tpl) {
+function content_6930ae735052e7_28508296 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -34,6 +34,14 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         .logo-small {
             max-width: 80px;
             margin-top: 10px;
+        }
+        .student-summary {
+            max-width: 640px;
+            margin: 0 auto 24px auto;
+            text-align: left;
+        }
+        .student-summary .card-title {
+            margin-bottom: 0.35rem;
         }
     </style>
 </head>
@@ -67,7 +75,8 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 <div class="container text-center">
     <!-- Mostrar mensajes de éxito o error -->
     <?php if ((null !== ($_smarty_tpl->getValue('mensaje') ?? null))) {?>
-        <div class="alert alert-success mt-3"><?php echo $_smarty_tpl->getValue('mensaje');?>
+        <div class="alert alert-<?php echo (($tmp = $_smarty_tpl->getValue('mensaje_tipo') ?? null)===null||$tmp==='' ? 'success' ?? null : $tmp);?>
+ mt-3 mb-4"><?php echo $_smarty_tpl->getValue('mensaje');?>
 </div>
     <?php }?>
     <?php if ((null !== ($_smarty_tpl->getValue('mensaje_error') ?? null))) {?>
@@ -80,13 +89,29 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group mb-3">
             <label for="dniAlumno">DNI del Alumno:</label>
-            <input type="text" class="form-control" id="dniAlumno" name="dniAlumno" placeholder="Ej: 12345678" required pattern="\d+" autocomplete="off">
+            <input type="text" class="form-control" id="dniAlumno" name="dniAlumno" placeholder="Ej: 12345678" value="<?php echo (($tmp = $_smarty_tpl->getValue('dni_buscado') ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+" required pattern="\d+" autocomplete="off">
         </div>
         <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
+    <?php if ((null !== ($_smarty_tpl->getValue('estudiante') ?? null))) {?>
+        <div class="card shadow-sm student-summary">
+            <div class="card-body">
+                <h5 class="card-title">Datos del estudiante</h5>
+                <p class="mb-1"><strong>DNI:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['dni'] ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
+</p>
+                <p class="mb-1"><strong>Nombre:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['nombre'] ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
+ <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['apellido'] ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
+</p>
+                <p class="mb-0"><strong>Email:</strong> <?php echo (($tmp = $_smarty_tpl->getValue('estudiante')['email'] ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
+</p>
+            </div>
+        </div>
+    <?php }?>
+
     <!-- Tabla de resultados -->
-    <?php if ((null !== ($_smarty_tpl->getValue('inscripciones') ?? null))) {?>
+    <?php if ((null !== ($_smarty_tpl->getValue('inscripciones') ?? null)) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('inscripciones')) > 0) {?>
         <h2 class="mb-4">Resultados</h2>
         <table class="table table-striped">
             <thead>
@@ -117,6 +142,7 @@ $foreach0DoElse = false;
 </td>
                         <td>
                             <a href="borrarInscripcion.php?id=<?php echo $_smarty_tpl->getValue('inscripcion')['id'];?>
+&dni=<?php echo (($tmp = $_smarty_tpl->getValue('dni_buscado') ?? null)===null||$tmp==='' ? '' ?? null : $tmp);?>
 "
                                class="btn-formal btn-formal-danger btn-formal-sm delete-inscripcion">
                                 Borrar

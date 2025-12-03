@@ -8,6 +8,14 @@
             max-width: 80px;
             margin-top: 10px;
         }
+        .student-summary {
+            max-width: 640px;
+            margin: 0 auto 24px auto;
+            text-align: left;
+        }
+        .student-summary .card-title {
+            margin-bottom: 0.35rem;
+        }
     </style>
 </head>
 <body>
@@ -40,7 +48,7 @@
 <div class="container text-center">
     <!-- Mostrar mensajes de éxito o error -->
     {if isset($mensaje)}
-        <div class="alert alert-success mt-3">{$mensaje}</div>
+        <div class="alert alert-{$mensaje_tipo|default:'success'} mt-3 mb-4">{$mensaje}</div>
     {/if}
     {if isset($mensaje_error)}
         <div class="alert alert-danger mt-3">{$mensaje_error}</div>
@@ -51,13 +59,24 @@
         <input type="hidden" name="accion" value="buscar">
         <div class="form-group mb-3">
             <label for="dniAlumno">DNI del Alumno:</label>
-            <input type="text" class="form-control" id="dniAlumno" name="dniAlumno" placeholder="Ej: 12345678" required pattern="\d+" autocomplete="off">
+            <input type="text" class="form-control" id="dniAlumno" name="dniAlumno" placeholder="Ej: 12345678" value="{$dni_buscado|default:''}" required pattern="\d+" autocomplete="off">
         </div>
         <button type="submit" class="btn-formal">Buscar</button>
     </form>
 
+    {if isset($estudiante)}
+        <div class="card shadow-sm student-summary">
+            <div class="card-body">
+                <h5 class="card-title">Datos del estudiante</h5>
+                <p class="mb-1"><strong>DNI:</strong> {$estudiante.dni|default:'-'}</p>
+                <p class="mb-1"><strong>Nombre:</strong> {$estudiante.nombre|default:'-'} {$estudiante.apellido|default:''}</p>
+                <p class="mb-0"><strong>Email:</strong> {$estudiante.email|default:'-'}</p>
+            </div>
+        </div>
+    {/if}
+
     <!-- Tabla de resultados -->
-    {if isset($inscripciones)}
+    {if isset($inscripciones) && $inscripciones|@count > 0}
         <h2 class="mb-4">Resultados</h2>
         <table class="table table-striped">
             <thead>
@@ -77,7 +96,7 @@
                         <td>{$inscripcion.nombre} {$inscripcion.apellido}</td>
                         <td>{$inscripcion.curso|default:$inscripcion.curso_nombre|default:'-'}</td>
                         <td>
-                            <a href="borrarInscripcion.php?id={$inscripcion.id}"
+                            <a href="borrarInscripcion.php?id={$inscripcion.id}&dni={$dni_buscado|default:''}"
                                class="btn-formal btn-formal-danger btn-formal-sm delete-inscripcion">
                                 Borrar
                             </a>
