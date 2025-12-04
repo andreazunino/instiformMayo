@@ -148,6 +148,12 @@
                             <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10" step="1">
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">Observaciones</th>
+                        <td>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Texto optativo"></textarea>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <input type="hidden" name="dni_estudiante" value="{$dniEstudiante}">
@@ -170,6 +176,7 @@
                             <th>Materia</th>
                             <th>Fecha</th>
                             <th>Nota</th>
+                            <th>Observaciones</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -179,6 +186,7 @@
                                 <td>{$registro.materia}</td>
                                 <td>{if $registro.fecha_formateada}{$registro.fecha_formateada}{else}-{/if}</td>
                                 <td>{$registro.calificacion}</td>
+                                <td>{if $registro.observaciones}{$registro.observaciones}{else}-{/if}</td>
                                 <td>
                                     <div class="acciones-nota">
                                         <form action="" method="POST" class="form-editar">

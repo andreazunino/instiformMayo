@@ -81,6 +81,7 @@
                     <tr>
                         <th>Materia</th>
                         <th>Calificaciones</th>
+                        <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -101,6 +102,29 @@
                                     </ul>
                                 {else}
                                     {$nota.calificacion|default:'-'}
+                                {/if}
+                            </td>
+                            <td>
+                                {assign var=hayObs value=false}
+                                {if isset($nota.calificaciones) && $nota.calificaciones|@count > 0}
+                                    {foreach from=$nota.calificaciones item=detalle}
+                                        {if $detalle.observaciones && $detalle.observaciones ne ''}
+                                            {assign var=hayObs value=true}
+                                        {/if}
+                                    {/foreach}
+                                    {if $hayObs}
+                                        <ul class="lista-calificaciones">
+                                            {foreach from=$nota.calificaciones item=detalle}
+                                                {if $detalle.observaciones && $detalle.observaciones ne ''}
+                                                    <li>{$detalle.observaciones}</li>
+                                                {/if}
+                                            {/foreach}
+                                        </ul>
+                                    {else}
+                                        <span class="text-muted">-</span>
+                                    {/if}
+                                {else}
+                                    <span class="text-muted">-</span>
                                 {/if}
                             </td>
                         </tr>

@@ -24,27 +24,28 @@ $mensajeTipo = null;
 if ($dniEstudiante) {
     $estudiante = $estudianteModel->obtenerPorDNI($dniEstudiante);
     if (!$estudiante) {
-        $mensaje = 'No se encontró un estudiante con ese DNI.';
+        $mensaje = 'No se encontro un estudiante con ese DNI.';
         $mensajeTipo = 'warning';
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!$dniEstudiante) {
-        $mensaje = 'Ingresá un DNI válido para continuar.';
+        $mensaje = 'Ingresa un DNI valido para continuar.';
         $mensajeTipo = 'warning';
     } elseif (!$estudiante && !isset($_POST['buscar_dni'])) {
-        $mensaje = 'No se encontró un estudiante con ese DNI.';
+        $mensaje = 'No se encontro un estudiante con ese DNI.';
         $mensajeTipo = 'warning';
     } elseif (isset($_POST['ingresar_nota']) && $estudiante) {
         $idCurso = $_POST['id_curso'];
         $nota = $_POST['nota'];
+        $observaciones = trim($_POST['observaciones'] ?? '');
 
         if (!is_numeric($nota) || $nota < 1 || $nota > 10) {
-            $mensaje = 'La nota debe ser un número entre 1 y 10.';
+            $mensaje = 'La nota debe ser un numero entre 1 y 10.';
             $mensajeTipo = 'warning';
         } else {
-            $exito = $inscripcionModel->guardarNota($dniEstudiante, $idCurso, $nota);
+            $exito = $inscripcionModel->guardarNota($dniEstudiante, $idCurso, $nota, $observaciones !== '' ? $observaciones : null);
 
             if ($exito) {
                 $mensaje = 'Nota guardada correctamente.';
@@ -59,15 +60,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nuevoValor = $_POST['nota'] ?? null;
 
         if (!is_numeric($nuevoValor) || $nuevoValor < 1 || $nuevoValor > 10) {
-            $mensaje = 'La nota editada debe ser un número entre 1 y 10.';
+            $mensaje = 'La nota editada debe ser un numero entre 1 y 10.';
             $mensajeTipo = 'warning';
         } else {
             $exito = $inscripcionModel->editarCalificacion($calificacionId, $nuevoValor);
             if ($exito) {
-                $mensaje = 'Calificación actualizada.';
+                $mensaje = 'Calificacion actualizada.';
                 $mensajeTipo = 'success';
             } else {
-                $mensaje = 'No se pudo actualizar la calificación.';
+                $mensaje = 'No se pudo actualizar la calificacion.';
                 $mensajeTipo = 'danger';
             }
         }
@@ -75,10 +76,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $calificacionId = $_POST['calificacion_id'] ?? null;
         $exito = $inscripcionModel->eliminarCalificacion($calificacionId);
         if ($exito) {
-            $mensaje = 'Calificación eliminada.';
+            $mensaje = 'Calificacion eliminada.';
             $mensajeTipo = 'success';
         } else {
-            $mensaje = 'No se pudo eliminar la calificación.';
+            $mensaje = 'No se pudo eliminar la calificacion.';
             $mensajeTipo = 'danger';
         }
     }
@@ -97,7 +98,7 @@ if ($dniEstudiante && $estudiante) {
     }
 
     if (isset($_POST['buscar_dni']) && count($cursos) === 0 && $mensaje === null) {
-        $mensaje = 'Este estudiante no está inscrito en ningún curso.';
+        $mensaje = 'Este estudiante no esta inscrito en ningun curso.';
         $mensajeTipo = 'info';
     }
 }

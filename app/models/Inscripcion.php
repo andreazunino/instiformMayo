@@ -286,7 +286,7 @@ class Inscripcion
     }
 
     // Guardar o actualizar una nota
-    public function guardarNota($dniEstudiante, $idCurso, $nota)
+    public function guardarNota($dniEstudiante, $idCurso, $nota, ?string $observaciones = null)
     {
         $stmt = $this->pdo->prepare("
             UPDATE inscripcion
@@ -304,10 +304,12 @@ class Inscripcion
             if ($inscripcionId !== null) {
                 try {
                     $insert = $this->pdo->prepare("
-                        INSERT INTO inscripcion_calificaciones (inscripcion_id, calificacion, fecha_registro, peso, actividad, version)
-                        VALUES (?, ?, NOW(), COALESCE(?, 1), ?, COALESCE((SELECT COALESCE(MAX(version),0)+1 FROM inscripcion_calificaciones WHERE inscripcion_id = ?),1))
+                        INSERT INTO inscripcion_calificaciones (inscripcion_id, calificacion, fecha_registro, peso, actividad, version, observaciones)
+                        VALUES (
+                            ?, ?, NOW(), COALESCE(?, 1), ?, COALESCE((SELECT COALESCE(MAX(version),0)+1 FROM inscripcion_calificaciones WHERE inscripcion_id = ?),1), ?
+                        )
                     ");
-                    $insert->execute([$inscripcionId, $nota, 1, 'Carga manual', $inscripcionId]);
+                    $insert->execute([$inscripcionId, $nota, 1, 'Carga manual', $inscripcionId, $observaciones]);
                     $this->actualizarCalificacionActualPorInscripcion($inscripcionId);
                 } catch (PDOException $e) {
                     if ($e->getCode() === '42P01') {

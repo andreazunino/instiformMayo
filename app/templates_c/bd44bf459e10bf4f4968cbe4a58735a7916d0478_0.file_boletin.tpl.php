@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-12-02 19:55:29
+/* Smarty version 5.4.0, created on 2025-12-04 12:54:58
   from 'file:boletin.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_692f3621aa1e38_66374485',
+  'unifunc' => 'content_693176927aade9_71959762',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'bd44bf459e10bf4f4968cbe4a58735a7916d0478' => 
     array (
       0 => 'boletin.tpl',
-      1 => 1764685719,
+      1 => 1764849212,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_692f3621aa1e38_66374485 (\Smarty\Template $_smarty_tpl) {
+function content_693176927aade9_71959762 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -112,6 +112,7 @@ $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
                     <tr>
                         <th>Materia</th>
                         <th>Calificaciones</th>
+                        <th>Observaciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -148,6 +149,44 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                                 <?php } else { ?>
                                     <?php echo (($tmp = $_smarty_tpl->getValue('nota')['calificacion'] ?? null)===null||$tmp==='' ? '-' ?? null : $tmp);?>
 
+                                <?php }?>
+                            </td>
+                            <td>
+                                <?php $_smarty_tpl->assign('hayObs', false, false, NULL);?>
+                                <?php if ((null !== ($_smarty_tpl->getValue('nota')['calificaciones'] ?? null)) && $_smarty_tpl->getSmarty()->getModifierCallback('count')($_smarty_tpl->getValue('nota')['calificaciones']) > 0) {?>
+                                    <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('nota')['calificaciones'], 'detalle');
+$foreach2DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('detalle')->value) {
+$foreach2DoElse = false;
+?>
+                                        <?php if ($_smarty_tpl->getValue('detalle')['observaciones'] && $_smarty_tpl->getValue('detalle')['observaciones'] != '') {?>
+                                            <?php $_smarty_tpl->assign('hayObs', true, false, NULL);?>
+                                        <?php }?>
+                                    <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                                    <?php if ($_smarty_tpl->getValue('hayObs')) {?>
+                                        <ul class="lista-calificaciones">
+                                            <?php
+$_from = $_smarty_tpl->getSmarty()->getRuntime('Foreach')->init($_smarty_tpl, $_smarty_tpl->getValue('nota')['calificaciones'], 'detalle');
+$foreach3DoElse = true;
+foreach ($_from ?? [] as $_smarty_tpl->getVariable('detalle')->value) {
+$foreach3DoElse = false;
+?>
+                                                <?php if ($_smarty_tpl->getValue('detalle')['observaciones'] && $_smarty_tpl->getValue('detalle')['observaciones'] != '') {?>
+                                                    <li><?php echo $_smarty_tpl->getValue('detalle')['observaciones'];?>
+</li>
+                                                <?php }?>
+                                            <?php
+}
+$_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
+                                        </ul>
+                                    <?php } else { ?>
+                                        <span class="text-muted">-</span>
+                                    <?php }?>
+                                <?php } else { ?>
+                                    <span class="text-muted">-</span>
                                 <?php }?>
                             </td>
                         </tr>

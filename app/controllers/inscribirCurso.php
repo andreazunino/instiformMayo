@@ -24,6 +24,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($dniEstudiante) {
         $estudiante = $estudianteModel->obtenerPorDNI($dniEstudiante);
+        if (
+            !$estudiante &&
+            $usuario &&
+            ($usuario['role'] ?? null) === 'estudiante' &&
+            ($usuario['dni'] ?? null) === $dniEstudiante
+        ) {
+            // Auto-registra al estudiante con los datos de la cuenta si falta en la tabla
+            $estudianteModel->crear(
+                $dniEstudiante,
+                $usuario['nombre'] !== null && $usuario['nombre'] !== '' ? $usuario['nombre'] : ($usuario['username'] ?? 'Estudiante'),
+                $usuario['apellido'] !== null && $usuario['apellido'] !== '' ? $usuario['apellido'] : ' ',
+                $usuario['email'] ?? (($usuario['username'] ?? 'usuario') . '@example.com')
+            );
+            $estudiante = $estudianteModel->obtenerPorDNI($dniEstudiante);
+        }
         if (!$estudiante) {
             $estudianteValido = false;
             $smarty->assign('mensaje', 'El DNI ingresado no corresponde a un estudiante registrado.');

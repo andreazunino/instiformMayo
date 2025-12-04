@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 5.4.0, created on 2025-12-02 20:35:53
+/* Smarty version 5.4.0, created on 2025-12-04 12:48:35
   from 'file:notas.tpl' */
 
 /* @var \Smarty\Template $_smarty_tpl */
 if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
   'version' => '5.4.0',
-  'unifunc' => 'content_692f3f99402545_27193416',
+  'unifunc' => 'content_693175138193d2_74349856',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'db99d7ba01dfd6a52a85715581db91cac0c7c69a' => 
     array (
       0 => 'notas.tpl',
-      1 => 1764682741,
+      1 => 1764848882,
       2 => 'file',
     ),
   ),
@@ -22,7 +22,7 @@ if ($_smarty_tpl->getCompiled()->isFresh($_smarty_tpl, array (
     'file:footer.tpl' => 1,
   ),
 ))) {
-function content_692f3f99402545_27193416 (\Smarty\Template $_smarty_tpl) {
+function content_693175138193d2_74349856 (\Smarty\Template $_smarty_tpl) {
 $_smarty_current_dir = 'C:\\xampp\\htdocs\\InstiformMayo\\app\\views';
 ?><!DOCTYPE html>
 <html lang="es">
@@ -191,6 +191,12 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                             <input type="number" class="form-control" id="nota" name="nota" required min="1" max="10" step="1">
                         </td>
                     </tr>
+                    <tr>
+                        <th scope="row">Observaciones</th>
+                        <td>
+                            <textarea class="form-control" id="observaciones" name="observaciones" rows="2" placeholder="Texto optativo"></textarea>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <input type="hidden" name="dni_estudiante" value="<?php echo $_smarty_tpl->getValue('dniEstudiante');?>
@@ -214,6 +220,7 @@ $_smarty_tpl->getSmarty()->getRuntime('Foreach')->restore($_smarty_tpl, 1);?>
                             <th>Materia</th>
                             <th>Fecha</th>
                             <th>Nota</th>
+                            <th>Observaciones</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -232,6 +239,9 @@ echo $_smarty_tpl->getValue('registro')['fecha_formateada'];
 } else { ?>-<?php }?></td>
                                 <td><?php echo $_smarty_tpl->getValue('registro')['calificacion'];?>
 </td>
+                                <td><?php if ($_smarty_tpl->getValue('registro')['observaciones']) {
+echo $_smarty_tpl->getValue('registro')['observaciones'];
+} else { ?>-<?php }?></td>
                                 <td>
                                     <div class="acciones-nota">
                                         <form action="" method="POST" class="form-editar">
